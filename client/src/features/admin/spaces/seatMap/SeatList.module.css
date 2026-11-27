@@ -1,0 +1,222 @@
+/* The desks beside the map (Figma 1594:86785): 385px, a rule under the tabs and another 12px under
+   the search; the zones 16px below, 24px in, 20px apart, their desks 16px apart. */
+.list {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0;
+  border-left: 1px solid #e3e8ef;
+  background: var(--inverse);
+}
+.tabs {
+  display: flex;
+  flex: none;
+  padding: 12px 24px 0;
+  border-bottom: 1px solid #e3e8ef;
+}
+.tab {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 42px;
+  padding: 0 12px 2px;
+  border: none;
+  background: none;
+  color: #4b5565;
+  font-family: inherit;
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+  line-height: 18px;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: color 0.15s ease;
+}
+.tab:hover,
+.tabOn {
+  color: #121926;
+}
+.tabOn::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  bottom: -1.5px;
+  left: 0;
+  height: 3px;
+  background: #121926;
+}
+.count {
+  display: grid;
+  place-items: center;
+  min-width: 20px;
+  padding: 2px 5px;
+  border-radius: 360px;
+  background: #eef2f6;
+  color: #697586;
+  font-size: var(--fs-0);
+  font-weight: var(--fw-medium);
+  line-height: 16px;
+}
+.tabOn .count {
+  background: #364152;
+  color: #fff;
+}
+
+/* The admin search (the Users tab's pill), the list's full width. */
+.searchRow {
+  flex: none;
+  padding: 12px 24px;
+  border-bottom: 1px solid #e3e8ef;
+}
+.searchRow .search {
+  width: 100%;
+}
+.search input::-webkit-search-cancel-button {
+  cursor: pointer;
+}
+
+.scroll {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 20px;
+  min-height: 0;
+  padding: 16px 24px 24px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+.group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.zone {
+  margin: 0;
+  color: #9aa4b2;
+  font-size: var(--fs-0);
+  font-weight: var(--fw-bold);
+  line-height: 16px;
+}
+.rows {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.row {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  width: 100%;
+  padding: 0;
+  border: none;
+  background: none;
+  font-family: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+/* A soft band behind the row on hover, and for the desk open on the map. */
+.row::before {
+  content: '';
+  position: absolute;
+  inset: -6px -8px;
+  z-index: 0;
+  border-radius: 8px;
+  background: #f8fafc;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+.row:hover::before,
+.rowActive::before {
+  opacity: 1;
+}
+.rowActive::before {
+  background: #eef2f6;
+}
+.row > * {
+  position: relative;
+  z-index: 1;
+}
+.row:focus-visible {
+  outline: 2px solid #5b4fff;
+  outline-offset: 6px;
+  border-radius: 4px;
+}
+/* 40px tile: green with the label in white for a permanent seat, grey for a free one. */
+.tile {
+  display: grid;
+  flex: none;
+  place-items: center;
+  min-width: 40px;
+  height: 40px;
+  padding: 0 4px;
+  border: 1px solid #cdd5df;
+  border-radius: 4px;
+  background: #f8fafc;
+  color: #4b5565;
+  font-size: var(--fs-2);
+  font-weight: var(--fw-bold);
+  line-height: 20px;
+}
+.tileTaken {
+  border-color: #1dca40;
+  background: #12872a;
+  color: #fff;
+}
+.who {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+.name,
+.team {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.name {
+  color: #000;
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+  line-height: 18px;
+}
+.team {
+  color: #697586;
+  font-size: var(--fs-0);
+  font-weight: var(--fw-medium);
+  line-height: 16px;
+}
+.permanent,
+.available {
+  flex: none;
+  border-radius: 4px;
+  font-size: var(--fs-0);
+  font-weight: var(--fw-bold);
+  line-height: 16px;
+  white-space: nowrap;
+}
+.permanent {
+  padding: 4px 8px;
+  background: #eef2f6;
+  color: #4b5565;
+}
+.available {
+  padding: 4px 6px;
+  background: #dbfde1;
+  color: #125522;
+}
+.empty {
+  margin: 0;
+  color: #697586;
+  font-size: var(--fs-1);
+  line-height: 20px;
+}
+.tab:focus-visible {
+  outline: 2px solid #5b4fff;
+  outline-offset: -2px;
+}

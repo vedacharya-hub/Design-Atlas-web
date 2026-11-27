@@ -1,0 +1,11 @@
+/* Admin → Company Settings (Figma 7991:258087): the header's rule at 81px, the tabs 16px under it,
+   42px tall over a second full-width rule. */
+header.header {
+  padding-bottom: 15px;
+}
+.tabs {
+  display: flex;
+  margin-top: 16px;
+  padding-left: 19px;
+  border-bottom: 1px solid #eef2f6;
+}

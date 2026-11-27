@@ -1,0 +1,99 @@
+.stack {
+  position: relative;
+  width: 380px;
+  height: 380px;
+  margin-top: 32px;
+  flex: 0 0 auto;
+}
+
+.card {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 260px;
+  height: 260px;
+  padding: var(--sp-8);
+  border-radius: var(--radius-3);
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.45s cubic-bezier(0.22, 0.61, 0.36, 1), box-shadow 0.45s ease;
+}
+.card:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+}
+
+/* A solid white backing layer sits under each gradient so the semi-transparent
+   tones from the design don't let the card stacked behind bleed through. */
+
+.yellow {
+  background: linear-gradient(137deg, rgba(255, 253, 134, 0.8) 7%, rgba(255, 243, 65, 0.8) 90%), var(--inverse);
+}
+
+.green {
+  background: linear-gradient(137deg, rgba(219, 253, 225, 0.8) 7%, rgba(29, 202, 64, 0.8) 90%),
+    linear-gradient(0deg, rgba(29, 202, 64, 0.24), rgba(29, 202, 64, 0.24)), var(--inverse);
+}
+
+.lilac {
+  background: linear-gradient(137deg, rgba(188, 175, 239, 0.6) 7%, rgba(95, 55, 160, 0.6) 90%), var(--inverse);
+}
+
+.cardInner {
+  display: flex;
+  flex-direction: column;
+  gap: 59px;
+  width: 100%;
+  height: 100%;
+}
+
+.cardTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--ink);
+}
+
+.cardLabel {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  font-size: 12px;
+  font-weight: var(--fw-medium);
+  color: var(--ink);
+}
+
+.cardText {
+  margin: 0;
+  font-size: 22px;
+  line-height: 26px;
+  font-weight: var(--fw-regular);
+  color: var(--gray-800);
+}
+
+.indicator {
+  position: absolute;
+  left: 50%;
+  bottom: 14px;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  width: 61px;
+}
+
+.dot {
+  flex: 1;
+  height: 3px;
+  padding: 0;
+  border: none;
+  border-radius: 4px;
+  background: var(--fg-secondary);
+  cursor: pointer;
+}
+
+.dotActive {
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(20px);
+  border: 0.5px solid rgba(255, 255, 255, 0.4);
+}

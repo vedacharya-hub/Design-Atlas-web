@@ -1,0 +1,291 @@
+/* Controls shared by the admin canvases (Figma "[Core] Button", "Input - Size", "Badge Core"):
+   40px pill buttons, the search field, the filter menu, 36px round icon buttons, badges and the
+   fields used in admin dialogs. */
+/* Every canvas's search, as on Users: fully rounded, 14px regular text. */
+.search {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-6);
+  width: 245px;
+  height: 40px;
+  padding: 6px var(--sp-6) 6px var(--sp-8);
+  border: 1px solid rgba(0, 0, 0, 0.24);
+  border-radius: 999px;
+  background: var(--inverse);
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.04));
+  cursor: text;
+}
+.search:focus-within {
+  border-color: #121212;
+}
+.search input {
+  flex: 1;
+  min-width: 0;
+  padding: 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: #000;
+  font-family: inherit;
+  font-size: var(--fs-1);
+  font-weight: var(--fw-regular);
+  line-height: 18px;
+}
+.search input::placeholder {
+  color: #6d6d6d;
+}
+.search img {
+  flex: none;
+}
+/* "[Core] Button": 40px pills with 24px side padding. */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-4);
+  height: 40px;
+  /* 24px in Figma, where the 1px stroke sits inside the padding. */
+  padding: 0 23px;
+  border: 1px solid transparent;
+  border-radius: 92px;
+  font-family: inherit;
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+  line-height: 18px;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+.btn:disabled {
+  cursor: default;
+  opacity: 0.5;
+}
+.btnSecondary {
+  border-color: #e3e8ef;
+  background: #f8fafc;
+  color: #000;
+}
+.btnSecondary:hover:not(:disabled) {
+  background: #eef2f6;
+}
+.btnSecondaryOn {
+  border-color: #121212;
+}
+.btnPrimary {
+  background: #000;
+  color: var(--inverse);
+}
+.btnPrimary:hover:not(:disabled) {
+  background: #202939;
+}
+.btnDanger {
+  background: #e5484d;
+  color: var(--inverse);
+}
+.btnDanger:hover:not(:disabled) {
+  background: #cf3b40;
+}
+
+.filterWrap {
+  position: relative;
+}
+.filterCount {
+  display: grid;
+  place-items: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: 9px;
+  background: #121212;
+  color: var(--inverse);
+  font-size: 11px;
+  font-weight: var(--fw-bold);
+  line-height: 1;
+}
+.filterMenu {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+  width: 220px;
+  padding: var(--sp-6);
+  border: 1px solid #e3e8ef;
+  border-radius: 8px;
+  background: var(--inverse);
+  box-shadow: 0 12px 32px rgba(13, 18, 28, 0.12);
+}
+.filterTitle {
+  color: #697586;
+  font-size: var(--fs-0);
+  font-weight: var(--fw-medium);
+  line-height: 16px;
+}
+.filterOption {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-4);
+  cursor: pointer;
+}
+.filterOption input {
+  width: 16px;
+  height: 16px;
+  margin: 0;
+  accent-color: #121212;
+}
+.filterClear {
+  align-self: flex-start;
+  margin-top: var(--sp-2);
+  padding: 0;
+  border: none;
+  background: none;
+  color: #4b5565;
+  font-family: inherit;
+  font-size: var(--fs-0);
+  text-decoration: underline;
+  cursor: pointer;
+}
+.filterClear:disabled {
+  color: #9aa4b2;
+  text-decoration: none;
+  cursor: default;
+}
+/* "Badge Core": 24px tall, 12px bold caps. */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  height: 24px;
+  padding: var(--sp-2) var(--sp-3);
+  border-radius: 4px;
+  font-size: var(--fs-0);
+  font-weight: var(--fw-bold);
+  line-height: 16px;
+  white-space: nowrap;
+}
+.iconBtn {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 1px solid #e3e8ef;
+  border-radius: 360px;
+  background: #f8fafc;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.iconBtn:hover {
+  background: #eef2f6;
+}
+.iconBtn:focus-visible {
+  outline: 2px solid #5b4fff;
+  outline-offset: 2px;
+}
+.iconBtnOn {
+  background: #e3e8ef;
+}
+
+.empty {
+  margin: 0;
+  padding: 48px var(--sp-12);
+  color: #697586;
+  font-size: var(--fs-1);
+  text-align: center;
+}
+/* ---------- dialogs ---------- */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-8);
+}
+.field {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: var(--sp-3);
+  min-width: 0;
+}
+.field > span {
+  color: #4b5565;
+  font-size: var(--fs-0);
+  font-weight: var(--fw-medium);
+  line-height: 16px;
+}
+.field input,
+.field textarea,
+.field select {
+  width: 100%;
+  padding: 10px var(--sp-6);
+  border: 1px solid rgba(0, 0, 0, 0.24);
+  border-radius: 6px;
+  background: var(--inverse);
+  color: #000;
+  font-family: inherit;
+  font-size: var(--fs-1);
+  line-height: 18px;
+  outline: none;
+}
+.field textarea {
+  resize: vertical;
+}
+.field input:focus,
+.field textarea:focus,
+.field select:focus {
+  border-color: #121212;
+}
+.fieldRow {
+  display: flex;
+  gap: var(--sp-6);
+}
+.error {
+  margin: 0;
+  color: #b10303;
+  font-size: var(--fs-0);
+}
+
+.details {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--sp-8);
+  margin: 0;
+}
+.details dt {
+  margin-bottom: var(--sp-2);
+  color: #697586;
+  font-size: var(--fs-0);
+  line-height: 16px;
+}
+.details dd {
+  margin: 0;
+  color: #000;
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+  line-height: 18px;
+}
+.message {
+  margin: 0;
+  padding: var(--sp-6);
+  border-radius: 8px;
+  background: #f8fafc;
+  color: #3d3d3d;
+  font-size: var(--fs-1);
+  line-height: 20px;
+  white-space: pre-wrap;
+}
+.confirm {
+  margin: 0;
+  color: #3d3d3d;
+  font-size: var(--fs-1);
+  line-height: 20px;
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}

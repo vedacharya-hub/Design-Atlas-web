@@ -1,0 +1,58 @@
+.seat {
+  position: absolute;
+  width: 11px;
+  height: 11px;
+  padding: 0;
+  transform: translate(-50%, -50%);
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.seat:disabled {
+  cursor: not-allowed;
+}
+
+.available {
+  background: var(--seat-available);
+}
+.unavailable {
+  background: var(--seat-unavailable);
+}
+.partial {
+  background: var(--seat-partial);
+}
+
+.available:not(:disabled):hover {
+  transform: translate(-50%, -50%) scale(1.5);
+}
+
+.selected {
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.85);
+  transform: translate(-50%, -50%) scale(1.6);
+  z-index: 5;
+}
+
+.assigned {
+  width: 16px;
+  height: 16px;
+  z-index: 4;
+}
+
+.initial {
+  font-size: 8px;
+  font-weight: var(--fw-bold);
+  color: var(--inverse);
+  line-height: 1;
+}
+
+/* In a zone that isn't yours: grey and not bookable; the zone underneath takes the hover. */
+.restricted {
+  background: var(--gray-300);
+  border-color: var(--gray-400);
+  pointer-events: none;
+}

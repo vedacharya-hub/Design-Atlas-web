@@ -1,0 +1,94 @@
+.step {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-6);
+}
+
+.sectionLabel {
+  font-size: var(--fs-0);
+  font-weight: var(--fw-medium);
+  letter-spacing: 0.3px;
+  color: var(--fg-tertiary);
+}
+
+.option {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sp-6);
+  padding: var(--sp-8);
+  border: 1px solid var(--stroke);
+  border-radius: var(--radius-4);
+  background: var(--inverse);
+  cursor: pointer;
+  text-align: left;
+}
+.optionActive {
+  border-color: var(--ink);
+  box-shadow: 0 0 0 1px var(--ink);
+}
+
+.radio {
+  width: 18px;
+  height: 18px;
+  margin-top: 2px;
+  border: 2px solid var(--gray-300);
+  border-radius: 50%;
+  flex: 0 0 auto;
+}
+.optionActive .radio {
+  border-color: var(--ink);
+  background:
+    radial-gradient(circle, var(--ink) 0 4px, transparent 5px);
+}
+
+.optionBody {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+}
+.optionTitle {
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+}
+.optionSub {
+  font-size: var(--fs-0);
+  color: var(--fg-tertiary);
+}
+
+.memberList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.memberRow {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-6);
+  padding: var(--sp-6);
+  border: 1px solid var(--stroke);
+  border-radius: var(--radius-4);
+  cursor: pointer;
+}
+.memberActive {
+  border-color: var(--ink);
+  box-shadow: 0 0 0 1px var(--ink);
+}
+.memberInfo {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.memberName {
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+}
+.memberSeat {
+  font-size: var(--fs-0);
+  color: var(--fg-tertiary);
+}
+.seated {
+  color: var(--seat-available);
+}

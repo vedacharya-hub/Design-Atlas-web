@@ -1,0 +1,82 @@
+/* Admin → Company Bookings (Figma 10124:215973). The day cards, rows, badges and lines come from My
+   Bookings; this sheet has the canvas's layout and where the admin rows differ. */
+
+/* Search 240px, Filter and ⋮, 20px apart. */
+.controls {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-10);
+}
+.search.search {
+  width: 240px;
+}
+
+/* The months under the header: the first label 24px down, 16px in from the sides. They keep the
+   design's widths; a narrower canvas scrolls them sideways under a pinned status column. */
+.list {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 24px;
+  min-height: 0;
+  padding: 22px 16px 24px;
+  overflow: auto;
+}
+.listFits {
+  overflow-x: hidden;
+}
+/* A month: its label, 16px, then the day cards 12px apart. */
+.month {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 1000px;
+}
+.monthLabel.monthLabel {
+  margin: 0 0 4px;
+}
+
+/* A booking: the space (230), Booked for (240) and Booked by (139), 20px apart and level at the top. */
+.row {
+  align-items: center;
+}
+.rowMain {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  min-width: 0;
+}
+.col {
+  display: flex;
+  flex: none;
+  flex-direction: column;
+  gap: 12px;
+}
+.colWhen {
+  width: 240px;
+}
+.colSide {
+  width: 139px;
+}
+.name {
+  max-width: 111px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* The status and the eye, 24px apart. */
+.rowEnd {
+  position: sticky;
+  right: 0;
+  z-index: 1;
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: 24px;
+}
+.list:not(.listFits) .rowEnd {
+  margin: -16px -16px -16px 0;
+  padding: 16px 16px 16px 24px;
+  align-self: stretch;
+  background: linear-gradient(to right, rgba(255, 255, 255, 0), var(--inverse) 20px);
+}

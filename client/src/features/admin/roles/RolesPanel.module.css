@@ -1,0 +1,13 @@
+/* Admin → Roles (Figma 1607:200614): a 240px search beside Add Role, then the table straight under
+   the header: ID, role, permissions, users and status, 32px apart, the eye and archive on the right. */
+.search {
+  width: 240px;
+}
+.cols {
+  grid-template-columns: 120px 160px 168px 124px 148px minmax(86px, 1fr);
+}
+/* Permissions the company turned off, after the count. */
+.locked {
+  color: #697586;
+  font-size: var(--fs-0);
+}

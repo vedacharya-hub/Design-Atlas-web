@@ -1,0 +1,6 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Checkbox">
+<path id="Vector" d="M1.99998 6C1.99998 3.79086 3.79085 2 5.99998 2H14C16.2091 2 18 3.79086 18 6V14C18 16.2091 16.2091 18 14 18H5.99998C3.79085 18 1.99998 16.2091 1.99998 14V6Z" fill="black"/>
+<path id="check_small" d="M8.22827 14L4.99998 11.064L5.92504 10.2227L8.22827 12.3174L14.0749 7L15 7.84131L8.22827 14Z" fill="white"/>
+</g>
+</svg>

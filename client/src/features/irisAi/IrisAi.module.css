@@ -1,0 +1,376 @@
+/* Iris AI (Figma 11414:282110): a white 583px panel 12px in from the right, top and bottom, radius 8;
+   the close button 26px down and 24px in; a #eef2f6 glow (745px circle, 22px blur) rising from the
+   bottom. Content sits over the glow. */
+.panel {
+  position: fixed;
+  top: 12px;
+  right: 12px;
+  bottom: 12px;
+  z-index: 450;
+  display: flex;
+  flex-direction: column;
+  width: min(583px, calc(100vw - 24px));
+  overflow: hidden;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow:
+    0 16px 48px rgba(16, 24, 40, 0.16),
+    0 0 0 1px rgba(16, 24, 40, 0.04);
+  animation: panelIn 0.34s cubic-bezier(0.22, 0.8, 0.24, 1) backwards;
+}
+.panelOut {
+  animation: panelOut 0.26s cubic-bezier(0.4, 0, 1, 1) forwards;
+}
+@keyframes panelIn {
+  from {
+    opacity: 0.6;
+    transform: translateX(calc(100% + 12px));
+  }
+}
+@keyframes panelOut {
+  to {
+    opacity: 0.6;
+    transform: translateX(calc(100% + 12px));
+  }
+}
+/* The glow: the 745px circle sits 384px up from the bottom; its SVG has 44px of blur around it. */
+.glow {
+  position: absolute;
+  top: calc(100% - 384px - 44px);
+  left: 50%;
+  z-index: 0;
+  width: 833px;
+  max-width: none;
+  height: 833px;
+  transform: translateX(-50%);
+  pointer-events: none;
+  user-select: none;
+}
+
+/* The top: Iris Bot centred (46px wide, about 40px tall) and level with the close button, 26px down
+   and 24px in. */
+.head {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex: none;
+  justify-content: center;
+  height: 78px;
+}
+/* The bot stands on this line: 26px to 66px down, centred on the close button. */
+.botAnchor {
+  width: 52px;
+  height: 0;
+  margin-top: 66px;
+}
+.close {
+  position: absolute;
+  top: 26px;
+  right: 24px;
+}
+/* "[Core] Button": a 40px white circle with a #cdd5df edge. */
+.roundBtn {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid #cdd5df;
+  border-radius: 92px;
+  background: #fff;
+  color: #121926;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.roundBtn:hover {
+  background: #f8fafc;
+}
+.roundBtn:focus-visible {
+  outline: 2px solid #5b4fff;
+  outline-offset: 2px;
+}
+
+.log {
+  z-index: 1;
+}
+/* The greeting, centred. */
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  min-height: 260px;
+  padding-bottom: 12px;
+  text-align: center;
+}
+.greeting {
+  margin: 0;
+  color: #000;
+  font-family: var(--font-title);
+  font-size: 32px;
+  font-weight: 400;
+  line-height: 38px;
+}
+.ask {
+  margin: 6px 0 0;
+  color: #4b5565;
+  font-size: 18px;
+  font-weight: var(--fw-medium);
+  line-height: 24px;
+}
+
+/* ---------- answers ---------- */
+.answer {
+  --tw-prose-body: #121926;
+  --tw-prose-headings: #000;
+  --tw-prose-bold: #000;
+  --tw-prose-links: #3659f5;
+  --tw-prose-bullets: #9aa4b2;
+  --tw-prose-counters: #697586;
+  --tw-prose-code: #121926;
+}
+.answer :global(p),
+.answer :global(ul),
+.answer :global(ol) {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+.answer :global(li) {
+  margin: 0.35em 0;
+}
+.answer > :first-child,
+.answer > :first-child > :first-child {
+  margin-top: 0;
+}
+.source {
+  display: inline-flex;
+  align-items: center;
+  height: 24px;
+  padding: 0 10px;
+  border: 1px solid #e3e8ef;
+  border-radius: 999px;
+  background: #f8fafc;
+  color: #4b5565;
+  font-size: 12px;
+  line-height: 16px;
+}
+.stopped {
+  color: #697586;
+  font-size: 12px;
+}
+.error {
+  display: flex;
+  gap: 10px;
+  max-width: 90%;
+  padding: 12px 14px;
+  border: 1px solid #fecdca;
+  border-radius: 16px;
+  background: #fef3f2;
+  color: #b42318;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+/* ---------- the prompt box, over the glow ---------- */
+.composer {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex: none;
+  flex-direction: column;
+  gap: 12px;
+  padding: 8px 24px 16px;
+}
+.suggestions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+}
+.inputWrap {
+  position: relative;
+}
+/* Files waiting to go with the next question, above the prompt box. */
+.attachments {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 0 4px 8px;
+}
+.fileChip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  max-width: 100%;
+  height: 32px;
+  padding: 0 8px 0 10px;
+  border: 1px solid #e3e8ef;
+  border-radius: 10px;
+  background: #fff;
+  color: #4b5565;
+  font-size: 13px;
+  line-height: 16px;
+}
+.fileName {
+  min-width: 0;
+  max-width: 180px;
+  overflow: hidden;
+  color: #121926;
+  font-weight: var(--fw-medium);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.fileSize {
+  flex: none;
+  color: #697586;
+  font-size: 12px;
+}
+.fileRemove {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  color: #697586;
+  cursor: pointer;
+}
+.fileRemove:hover {
+  background: #eef2f6;
+  color: #121926;
+}
+.fileRemove:focus-visible {
+  outline: 2px solid #5b4fff;
+  outline-offset: 1px;
+}
+/* The mic while it listens: red, with a soft pulse. */
+.micOn,
+.micOn:hover {
+  background: #fef3f2;
+  color: #d92d20;
+  box-shadow: 0 0 0 0 rgba(217, 45, 32, 0.35);
+  animation: micPulse 1.4s ease-out infinite;
+}
+@keyframes micPulse {
+  to {
+    box-shadow: 0 0 0 8px rgba(217, 45, 32, 0);
+  }
+}
+.notice {
+  margin: -4px 0 0;
+  color: #b42318;
+  font-size: 12px;
+  line-height: 16px;
+  text-align: center;
+}
+/* Dropping files: a card in the middle of the screen. */
+.drop {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 28px 40px;
+  border: 1.5px dashed #9aa4b2;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 16px 48px rgba(16, 24, 40, 0.12);
+  color: #121926;
+  text-align: center;
+}
+.drop p {
+  margin: 0;
+  font-size: 16px;
+  font-weight: var(--fw-medium);
+  line-height: 22px;
+}
+.drop span {
+  color: #697586;
+  font-size: 13px;
+  line-height: 18px;
+}
+.footnote {
+  margin: 0;
+  color: #697586;
+  font-size: 12px;
+  line-height: 16px;
+  text-align: center;
+}
+
+/* ---------- the launcher, bottom right, while Iris is closed ---------- */
+.launcher {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 300;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  height: 48px;
+  padding: 0 10px 0 8px;
+  border: none;
+  border-radius: 999px;
+  background: radial-gradient(140% 120% at 30% 16%, #38383b 0%, #232325 38%, #161617 75%, #0d0d0e 100%);
+  box-shadow:
+    0 10px 28px rgba(0, 0, 0, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  color: #fff;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: var(--fw-medium);
+  line-height: 18px;
+  cursor: pointer;
+  animation: launcherIn 0.3s ease backwards;
+  transition: transform 0.15s ease;
+}
+.launcher:hover {
+  transform: translateY(-1px);
+}
+.launcher:focus-visible {
+  outline: 2px solid #5b4fff;
+  outline-offset: 3px;
+}
+@keyframes launcherIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+/* A tiny screen with two lit eyes, like Iris Bot's. */
+.launcherDots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 36px;
+  height: 32px;
+  border-radius: 14px;
+  background: #060607;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+}
+.launcherDots i {
+  width: 6px;
+  height: 9px;
+  border-radius: 3px;
+  background: #f6f4ec;
+  box-shadow: 0 0 6px rgba(220, 255, 236, 0.6);
+}
+.kbd {
+  padding: 3px 7px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.8);
+  font-family: inherit;
+  font-size: 12px;
+  line-height: 16px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .panel,
+  .panelOut,
+  .launcher {
+    animation-duration: 0.15s;
+  }
+  .micOn {
+    animation: none;
+  }
+}

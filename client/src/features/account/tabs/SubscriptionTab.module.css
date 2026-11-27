@@ -1,0 +1,64 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-10);
+  max-width: 640px;
+  padding: var(--sp-10) var(--sp-12);
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-4);
+}
+
+.head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--sp-8);
+}
+
+.planName {
+  margin: 0 0 var(--sp-3);
+  font-size: var(--fs-2);
+  font-weight: var(--fw-medium);
+}
+
+.status {
+  display: inline-flex;
+  padding: var(--sp-2) var(--sp-6);
+  border-radius: var(--radius-pill);
+  font-size: var(--fs-0);
+  font-weight: var(--fw-medium);
+}
+
+.active {
+  background: rgba(29, 202, 64, 0.14);
+  color: #128a2b;
+}
+
+.expired {
+  background: rgba(255, 0, 0, 0.1);
+  color: var(--seat-unavailable-strong);
+}
+
+.rows {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-6);
+  padding-top: var(--sp-8);
+  border-top: 1px solid var(--gray-200);
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.rowLabel {
+  font-size: var(--fs-1);
+  color: var(--fg-tertiary);
+}
+
+.rowValue {
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+}

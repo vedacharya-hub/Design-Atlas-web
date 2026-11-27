@@ -1,0 +1,53 @@
+.rail {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.segment {
+  display: flex;
+  align-items: center;
+}
+
+.segment:first-child {
+  flex: 0 0 auto;
+}
+
+.segment:not(:last-child) {
+  flex: 1;
+}
+
+.dot {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  font-size: var(--fs-0);
+  font-weight: var(--fw-medium);
+  background: var(--gray-200);
+  color: var(--fg-tertiary);
+  flex: 0 0 auto;
+}
+
+.dot.active {
+  background: var(--seat-available);
+  color: var(--inverse);
+}
+
+.dot.done {
+  background: var(--seat-available);
+  color: var(--inverse);
+}
+
+.line {
+  flex: 1;
+  height: 2px;
+  margin: 0 var(--sp-3);
+  background: var(--gray-200);
+}
+
+.lineDone {
+  background: var(--seat-available);
+}

@@ -1,0 +1,240 @@
+import type { SVGProps } from 'react';
+
+const base = (props: SVGProps<SVGSVGElement>) => ({
+  width: 16,
+  height: 16,
+  viewBox: '0 0 16 16',
+  fill: 'none',
+  xmlns: 'http://www.w3.org/2000/svg',
+  ...props,
+});
+
+export const ChevronDown = (p: SVGProps<SVGSVGElement>) => (
+  <svg {...base(p)}>
+    <path d="M4 6l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
+
+export const ChevronLeft = (p: SVGProps<SVGSVGElement>) => (
+  <svg {...base(p)}>
+    <path d="M10 4L6 8l4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
+
+export const ChevronRight = (p: SVGProps<SVGSVGElement>) => (
+  <svg {...base(p)}>
+    <path d="M6 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
+
+export const Search = (p: SVGProps<SVGSVGElement>) => (
+  <svg {...base(p)}>
+    <circle cx="7" cy="7" r="4.5" stroke="currentColor" strokeWidth="1.5" />
+    <path d="M13.5 13.5L10.5 10.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+  </svg>
+);
+
+export const Plus = (p: SVGProps<SVGSVGElement>) => (
+  <svg {...base(p)}>
+    <path d="M8 3.5v9M3.5 8h9" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+  </svg>
+);
+
+export const Minus = (p: SVGProps<SVGSVGElement>) => (
+  <svg {...base(p)}>
+    <path d="M3.5 8h9" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+  </svg>
+);
+
+export const Check = (p: SVGProps<SVGSVGElement>) => (
+  <svg {...base(p)}>
+    <path d="M3.5 8.5l3 3 6-6.5" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
+
+export const Close = (p: SVGProps<SVGSVGElement>) => (
+  <svg {...base(p)}>
+    <path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+  </svg>
+);
+
+export const Wifi = (p: SVGProps<SVGSVGElement>) => (
+  <svg {...base(p)}>
+    <path d="M2 6c3.5-3 8.5-3 12 0" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
+    <path d="M4.5 8.5c2-1.7 5-1.7 7 0" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
+    <circle cx="8" cy="11.5" r="1" fill="currentColor" />
+  </svg>
+);
+
+export const Keycard = (p: SVGProps<SVGSVGElement>) => (
+  <svg {...base(p)}>
+    <rect x="2.5" y="4" width="11" height="8" rx="1.5" stroke="currentColor" strokeWidth="1.4" />
+    <path d="M5 7.5h2.5M5 9.5h4" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
+  </svg>
+);
+
+export const Bell = (p: SVGProps<SVGSVGElement>) => (
+  <svg {...base(p)}>
+    <path d="M4.5 6.5a3.5 3.5 0 017 0c0 3 1 4 1 4H3.5s1-1 1-4z" stroke="currentColor" strokeWidth="1.3" strokeLinejoin="round" />
+    <path d="M7 13a1 1 0 002 0" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
+  </svg>
+);
+
+export const Pin = (p: SVGProps<SVGSVGElement>) => (
+  <svg {...base(p)}>
+    <path d="M8 14s4.5-4 4.5-7A4.5 4.5 0 008 2.5 4.5 4.5 0 003.5 7c0 3 4.5 7 4.5 7z" stroke="currentColor" strokeWidth="1.3" strokeLinejoin="round" />
+    <circle cx="8" cy="7" r="1.5" stroke="currentColor" strokeWidth="1.3" />
+  </svg>
+);
+
+export const Edit = (p: SVGProps<SVGSVGElement>) => (
+  <svg {...base(p)}>
+    <path d="M10.5 2.5l3 3-8 8-3.5.5.5-3.5 8-8z" stroke="currentColor" strokeWidth="1.3" strokeLinejoin="round" strokeLinecap="round" />
+  </svg>
+);
+
+export const Trash = (p: SVGProps<SVGSVGElement>) => (
+  <svg {...base(p)}>
+    <path d="M3 4.5h10M6 4.5V3a1 1 0 011-1h2a1 1 0 011 1v1.5M4.5 4.5l.6 8.1a1 1 0 001 .9h3.8a1 1 0 001-.9l.6-8.1" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
+
+export const Clock = (p: SVGProps<SVGSVGElement>) => (
+  <svg {...base(p)}>
+    <circle cx="8" cy="8" r="5.5" stroke="currentColor" strokeWidth="1.3" />
+    <path d="M8 5v3.2l2.2 1.3" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
+
+export const Layers = (p: SVGProps<SVGSVGElement>) => (
+  <svg {...base(p)}>
+    <path d="M8 2.5l5.5 3-5.5 3-5.5-3 5.5-3z" stroke="currentColor" strokeWidth="1.3" strokeLinejoin="round" />
+    <path d="M2.5 8.5L8 11.5l5.5-3M2.5 11L8 14l5.5-3" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
+
+export const Warning = (p: SVGProps<SVGSVGElement>) => (
+  <svg {...base(p)}>
+    <path
+      d="M8 2.75l6.25 10.83a1 1 0 01-.87 1.5H2.62a1 1 0 01-.87-1.5L8 2.75z"
+      stroke="currentColor"
+      strokeWidth="1.3"
+      strokeLinejoin="round"
+    />
+    <path d="M8 6.5v3.4" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
+    <circle cx="8" cy="12" r="0.9" fill="currentColor" />
+  </svg>
+);
+
+export const Info = (p: SVGProps<SVGSVGElement>) => (
+  <svg {...base(p)}>
+    <circle cx="8" cy="8" r="5.5" stroke="currentColor" strokeWidth="1.3" />
+    <path d="M8 7.3v3.7" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
+    <circle cx="8" cy="5.2" r="0.9" fill="currentColor" />
+  </svg>
+);
+
+export const ChartPie = (p: SVGProps<SVGSVGElement>) => (
+  <svg {...base(p)}>
+    <path d="M8 2v6l5.2 3A6 6 0 118 2z" stroke="currentColor" strokeWidth="1.3" strokeLinejoin="round" />
+  </svg>
+);
+
+export const RadioLine = (p: SVGProps<SVGSVGElement>) => (
+  <svg {...base(p)}>
+    <circle cx="8" cy="8" r="5.5" stroke="currentColor" strokeWidth="1.3" />
+    <circle cx="8" cy="8" r="2" fill="currentColor" />
+  </svg>
+);
+
+export const Calendar = (p: SVGProps<SVGSVGElement>) => (
+  <svg {...base(p)}>
+    <rect x="2.5" y="3.5" width="11" height="10" rx="1.5" stroke="currentColor" strokeWidth="1.3" />
+    <path d="M2.5 6.5h11M5.5 2v3M10.5 2v3" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
+  </svg>
+);
+
+export const UsersAlt = (p: SVGProps<SVGSVGElement>) => (
+  <svg {...base(p)}>
+    <circle cx="6" cy="6.3" r="2.3" stroke="currentColor" strokeWidth="1.3" />
+    <path d="M2 13c0-2.2 1.8-3.5 4-3.5s4 1.3 4 3.5" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
+    <circle cx="11.5" cy="6.7" r="1.8" stroke="currentColor" strokeWidth="1.2" />
+    <path d="M9.8 9.9c.5-.2 1.1-.3 1.7-.3 1.8 0 3.2 1 3.2 2.8" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
+  </svg>
+);
+
+export const LightbulbFlash = (p: SVGProps<SVGSVGElement>) => (
+  <svg {...base(p)}>
+    <path
+      d="M8 1.5a4.5 4.5 0 00-2.5 8.25c.4.28.6.72.6 1.2v.55h3.8v-.55c0-.48.2-.92.6-1.2A4.5 4.5 0 008 1.5z"
+      fill="currentColor"
+    />
+    <rect x="6.2" y="12.5" width="3.6" height="1.2" rx="0.6" fill="currentColor" />
+    <rect x="6.6" y="14" width="2.8" height="1" rx="0.5" fill="currentColor" />
+  </svg>
+);
+
+export const ArrowUpRight = (p: SVGProps<SVGSVGElement>) => (
+  <svg {...base(p)}>
+    <path d="M4.5 11.5L11.5 4.5M5.5 4.5h6v6" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
+
+export const Coin = (p: SVGProps<SVGSVGElement>) => (
+  <svg {...base(p)}>
+    <circle cx="8" cy="8" r="5.5" stroke="currentColor" strokeWidth="1.3" />
+    <circle cx="8" cy="8" r="3.4" stroke="currentColor" strokeWidth="1" />
+    <path d="M8 6.3v3.4M6.9 7v.1a1.1 1.1 0 001.1.9c.6 0 1.1.4 1.1.9v.1a1.1 1.1 0 01-1.1.9 1.1 1.1 0 01-1.1-.7" stroke="currentColor" strokeWidth="0.8" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
+
+export const Ticket = (p: SVGProps<SVGSVGElement>) => (
+  <svg {...base(p)}>
+    <path
+      d="M2 6.5a1.5 1.5 0 000 3v1.5a1 1 0 001 1h10a1 1 0 001-1V9.5a1.5 1.5 0 000-3V5a1 1 0 00-1-1H3a1 1 0 00-1 1v1.5z"
+      stroke="currentColor"
+      strokeWidth="1.3"
+      strokeLinejoin="round"
+    />
+    <path d="M6.5 4.5v7" stroke="currentColor" strokeWidth="1.2" strokeDasharray="1.5 1.5" strokeLinecap="round" />
+  </svg>
+);
+
+export const IrisMark = (p: SVGProps<SVGSVGElement>) => (
+  <svg width={16} height={16} viewBox="4 4 29.04 26" fill="currentColor" xmlns="http://www.w3.org/2000/svg" {...p}>
+    <path d="M11.9596 4.00074C11.9497 4.01563 11.9645 4.34811 11.9844 4.74015C12.0836 6.37776 12.4062 7.44966 12.9817 8.0253C13.2348 8.28335 13.8005 8.57614 14.4306 8.78952C14.907 8.94832 16.1128 9.16171 18.1075 9.43464C20.385 9.74728 21.8041 10.0301 23.0843 10.4172L23.6401 10.5859L23.4019 10.3329C23.0298 9.93585 22.8015 9.61329 21.8438 8.10966C20.2907 5.67309 19.6407 4.80466 19.3083 4.7203C19.1048 4.66571 11.9745 3.97096 11.9596 4.00074Z" />
+    <path d="M26.0266 5.08813C24.5877 6.02108 23.7838 6.85477 23.5308 7.6835C23.4365 8.00607 23.4315 8.06561 23.4861 8.60652C23.5754 9.48984 23.764 10.1102 24.4587 11.8371C24.6323 12.2589 24.9598 13.0727 25.193 13.6484C25.6793 14.8543 26.1854 16.3827 26.4484 17.4298C26.5477 17.8367 26.637 18.1692 26.6419 18.1791C26.6519 18.1891 26.6916 18.065 26.7362 17.9062C26.8801 17.405 27.0984 16.9336 27.8725 15.4448C29.1279 13.038 29.5348 12.1249 29.5546 11.6981C29.5596 11.5493 29.2519 10.8297 28.0611 8.18968C27.2374 6.35852 26.5477 4.84993 26.5278 4.83008C26.503 4.81023 26.2797 4.92437 26.0266 5.08813Z" />
+    <path d="M15.1798 9.43935C14.7432 9.56342 14.2718 9.60312 12.4755 9.68251C9.92508 9.79169 9.00711 9.88101 8.53076 10.0597C8.28266 10.1539 8.2777 10.1589 6.15397 13.1215C4.97798 14.7542 4.0104 16.1188 4.00047 16.1486C3.9707 16.2479 5.35013 16.9079 6.07954 17.1411C7.33493 17.5381 7.98991 17.4736 8.83344 16.8731C9.53308 16.3719 10.1037 15.7318 11.7312 13.6277C13.066 11.9007 14.0286 10.7941 14.9962 9.87109C15.289 9.58823 15.5073 9.36492 15.4775 9.36492C15.4527 9.36492 15.3188 9.39965 15.1798 9.43935Z" />
+    <path d="M10.3222 16.0902C10.1833 16.5864 9.99972 16.9784 9.18595 18.5367C7.98515 20.8393 7.52369 21.8714 7.50384 22.2982C7.49888 22.4421 7.81148 23.1766 8.9974 25.8067C9.82605 27.6378 10.5158 29.1464 10.5356 29.1712C10.5852 29.2209 11.5925 28.546 12.1582 28.0845C12.8876 27.4939 13.3441 26.8984 13.5277 26.3079C13.622 25.9903 13.6269 25.9307 13.5723 25.3749C13.4731 24.3973 13.2895 23.8366 12.1681 21.0923C11.4585 19.3604 10.9028 17.7377 10.615 16.5765C10.5108 16.1646 10.4215 15.8272 10.4165 15.8172C10.4066 15.8073 10.3669 15.9314 10.3222 16.0902Z" />
+    <path d="M29.0486 16.6752C28.8947 16.7198 28.597 16.8687 28.3737 17.0225C27.555 17.5734 27.1233 18.0547 25.2229 20.4963C24.027 22.0396 23.1885 23.0023 22.2109 23.97C21.8537 24.3223 21.5659 24.6201 21.5758 24.625C21.5808 24.635 21.6999 24.6052 21.8338 24.5655C22.2606 24.4414 22.6923 24.3968 23.9377 24.3422C26.8802 24.2181 28.0611 24.1189 28.5127 23.9452L28.7756 23.8459L30.9093 20.8684C32.0853 19.2308 33.0429 17.8661 33.0429 17.8364C33.0429 17.6925 31.4253 16.953 30.6612 16.7496C30.1352 16.6106 29.4108 16.5759 29.0486 16.6752Z" />
+    <path d="M13.6765 23.6888C14.0586 24.0907 14.2323 24.3438 15.2445 25.9368C16.619 28.1004 17.2591 28.9887 17.6014 29.1971C17.7404 29.2815 18.2564 29.346 21.4172 29.6586C23.4318 29.8571 25.0841 30.011 25.094 29.9961C25.1337 29.9514 25.0295 28.5222 24.9501 28.0706C24.7963 27.1377 24.4738 26.3586 24.0719 25.9417C23.8833 25.7432 23.0844 25.3462 22.5237 25.1726C22.0424 25.0237 20.7722 24.8053 18.8271 24.5423C16.5445 24.2346 15.1453 23.9419 13.5475 23.4506C13.4185 23.4109 13.4334 23.4307 13.6765 23.6888Z" />
+  </svg>
+);
+
+export const AudioLines = (p: SVGProps<SVGSVGElement>) => (
+  <svg width={16} height={16} viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" {...p}>
+    <path
+      d="M1.66667 8.33333V10.8333M5 5V14.1667M8.33333 2.5V17.5M11.6667 6.66667V12.5M15 4.16667V15M18.3333 8.33333V10.8333"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
+
+export const ArrowUp = (p: SVGProps<SVGSVGElement>) => (
+  <svg {...base(p)}>
+    <path d="M8 13V3M4 7l4-4 4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
+
+export const VerifiedBadge = (p: SVGProps<SVGSVGElement>) => (
+  <svg {...base(p)}>
+    <path
+      d="M8 1.5l1.6 1 1.9-.2 1 1.7 1.7 1-.2 1.9 1 1.6-1 1.6.2 1.9-1.7 1-1 1.7-1.9-.2-1.6 1-1.6-1-1.9.2-1-1.7-1.7-1 .2-1.9-1-1.6 1-1.6-.2-1.9 1.7-1 1-1.7 1.9.2z"
+      fill="#2E6BFF"
+    />
+    <path d="M5.3 8.2l1.9 1.9 3.5-3.9" stroke="white" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);

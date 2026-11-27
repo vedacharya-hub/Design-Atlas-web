@@ -1,0 +1,345 @@
+/* Space Details (Figma 1592:143530) and its edit view (1592:153563 / 1592:154141), on the user
+   details panel's shell, covering 80% of the screen (never under 800px unless the screen is smaller):
+   the 146px #f8fafc band with the building, location, status and tabs, then Space Details and the
+   Booking Settings card. */
+.panel {
+  width: clamp(min(800px, calc(100vw - 24px)), 80vw, calc(100vw - 24px));
+}
+
+/* ---------- band: 24px in, the 54px rule between the name and the location; tabs 24px under ---------- */
+.hero {
+  padding-bottom: 2px;
+}
+.heroRow {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-12);
+  margin: 24px 40px 0 24px;
+}
+.heroName {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+  width: 300px;
+  min-width: 0;
+}
+.name {
+  margin: 0;
+  overflow: hidden;
+  color: #000;
+  font-family: var(--font-title);
+  font-size: 20px;
+  font-weight: var(--fw-regular);
+  line-height: 24px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.place {
+  margin: 0;
+  color: #4b5565;
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+  line-height: 18px;
+}
+.heroRule {
+  flex: none;
+  align-self: stretch;
+  width: 1px;
+  min-height: 54px;
+  background: #cdd5df;
+}
+.heroFact {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+  width: 200px;
+  min-width: 0;
+}
+.heroLabel {
+  color: #697586;
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+  line-height: 18px;
+}
+.heroValue {
+  color: #4b5565;
+  font-size: var(--fs-2);
+  font-weight: var(--fw-medium);
+  line-height: 20px;
+}
+/* The status sits top right, level with the name. */
+.heroStatus {
+  align-self: flex-start;
+  margin-left: auto;
+}
+.badge {
+  font-weight: var(--fw-bold);
+}
+.tabs {
+  margin-top: 24px;
+  padding-left: 24px;
+}
+.tab {
+  width: 110px;
+}
+
+.error {
+  margin: 20px 24px 0;
+}
+
+/* ---------- General: Booking Settings 62px under the details (40px under the edit form) ---------- */
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 62px;
+  padding: 20px 24px 40px;
+}
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+/* The title over a full-width rule: 20 + 19 + 1 = 40px. */
+.sectionTitle {
+  margin: 0;
+  padding-bottom: 19px;
+  border-bottom: 1px solid #e3e8ef;
+  color: #000;
+  font-size: var(--fs-2);
+  font-weight: var(--fw-medium);
+  line-height: 20px;
+}
+/* Four columns 32px apart (248px at the design's 1164px; they grow with the panel), rows 24px apart. */
+.facts {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 24px 32px;
+  margin: 0;
+}
+.fact {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--sp-3);
+  min-width: 0;
+}
+.factLabel {
+  color: #697586;
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+  line-height: 18px;
+}
+.factValue {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+  margin: 0;
+  color: #202939;
+  font-size: var(--fs-2);
+  font-weight: var(--fw-medium);
+  line-height: 20px;
+  overflow-wrap: anywhere;
+}
+.factMap {
+  grid-column: 1 / -1;
+  margin: 0;
+}
+.none {
+  color: #697586;
+  font-size: var(--fs-1);
+  line-height: 18px;
+}
+.list {
+  margin: 0;
+  padding-left: 24px;
+}
+.days {
+  color: #697586;
+  font-size: var(--fs-1);
+  line-height: 18px;
+}
+
+/* ---------- edit: four equal columns 24px apart; the text inside the fields is 14px ---------- */
+.formGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 24px;
+}
+.formGrid input,
+.formGrid select,
+.cardBodyEdit input {
+  font-size: var(--fs-1);
+  line-height: 18px;
+}
+.fieldLabel {
+  color: #000;
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+  line-height: 18px;
+  text-box: trim-both cap alphabetic;
+}
+.mapField {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  min-width: 0;
+}
+.upload {
+  gap: var(--sp-4);
+}
+
+/* ---------- Booking Settings: a #eef2f6 card with a 44px #f8fafc title bar ---------- */
+.card {
+  overflow: hidden;
+  border: 1px solid #eef2f6;
+  border-radius: 8px;
+}
+.cardTitle {
+  display: flex;
+  align-items: center;
+  height: 44px;
+  margin: 0;
+  padding: 0 15px;
+  border-bottom: 1px solid #eef2f6;
+  background: #f8fafc;
+  color: #000;
+  font-size: var(--fs-2);
+  font-weight: var(--fw-medium);
+  line-height: 20px;
+}
+/* 248px, then two columns, 64px apart, across the design's 1053px (19px in from the left, 44px from the right). */
+.cardBody {
+  display: grid;
+  grid-template-columns: 248px minmax(0, 1fr) minmax(0, 1fr);
+  gap: 64px;
+  padding: 18px 42px 66px 18px;
+}
+.cardBodyEdit {
+  grid-template-columns: 248px minmax(0, 1fr) 336px;
+  padding-bottom: 40px;
+}
+.contentEdit {
+  gap: 40px;
+}
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-width: 0;
+  margin: 0;
+}
+.instructionsField {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+}
+/* "Service-card", 124px. */
+.instructions {
+  height: 124px;
+  padding: 10px 12px;
+  border: 1px solid #cdd5df;
+  border-radius: 8px;
+  background: var(--inverse);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+  color: #202939;
+  font-family: inherit;
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+  line-height: 18px;
+  resize: vertical;
+  outline: none;
+  transition: border-color 0.15s ease;
+}
+.instructions:focus {
+  border-color: #121212;
+}
+.instructions::placeholder {
+  color: #9aa4b2;
+}
+
+/* ---------- Restrict bookings: the switch and ON / OFF, then the dates and days ---------- */
+.restrict {
+  display: flex;
+  flex-direction: column;
+  gap: 23px;
+  min-width: 0;
+}
+.switchRow {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-4);
+  margin: 0;
+  color: #000;
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+  line-height: 18px;
+}
+.day:focus-visible {
+  outline: 2px solid #5b4fff;
+  outline-offset: 2px;
+}
+.note {
+  width: 250px;
+  color: #697586;
+  font-size: var(--fs-0);
+  line-height: 16px;
+}
+.window {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.smallLabel {
+  color: #000;
+  font-size: var(--fs-0);
+  font-weight: var(--fw-medium);
+  line-height: 16px;
+}
+.weekField {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+}
+.week {
+  display: flex;
+  gap: var(--sp-4);
+}
+/* 40px circles; black when picked. */
+.day {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 1px solid #cdd5df;
+  border-radius: 50%;
+  background: var(--inverse);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+  color: #000;
+  font-family: inherit;
+  font-size: var(--fs-2);
+  font-weight: var(--fw-medium);
+  line-height: 20px;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.day:hover:not(.dayOn) {
+  background: #f8fafc;
+}
+.dayOn {
+  background: #000;
+  color: #fff;
+}
+
+/* ---------- Space Map, Space Zones ---------- */
+.tabBody {
+  padding: 20px 24px 24px;
+}
+.mapImage {
+  display: block;
+  max-width: 100%;
+  border: 1px solid #eef2f6;
+  border-radius: 8px;
+}

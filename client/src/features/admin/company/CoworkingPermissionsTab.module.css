@@ -1,0 +1,236 @@
+/* Company Settings → Co-working Permissions (Figma 8413:199754, 11667:306310): 19px in from the
+   canvas, the bar 20px under the tabs' rule, the sections 16px under it and 24px apart. */
+.tab {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 19px 19px 32px;
+}
+.tab > .bar {
+  margin-bottom: -8px;
+}
+
+/* "Co-working Locations", then the count, search and ⋮ (or Save) 14px apart. */
+.bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-6) var(--sp-8);
+}
+.title {
+  margin: 0;
+  color: #000;
+  font-family: var(--font-title);
+  font-size: 20px;
+  font-weight: var(--fw-regular);
+  line-height: 24px;
+}
+.controls {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-7);
+}
+.count {
+  color: #4b5565;
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+  line-height: 18px;
+  white-space: nowrap;
+}
+.search {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-4);
+  width: 232px;
+  height: 36px;
+  padding: 0 12px;
+  border: 1px solid #cdd5df;
+  border-radius: 32px;
+  background: var(--inverse);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+}
+.search:focus-within {
+  border-color: #121212;
+}
+.search input {
+  flex: 1;
+  min-width: 0;
+  padding: 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: #202939;
+  font-family: inherit;
+  font-size: var(--fs-1);
+  line-height: 18px;
+}
+.search input::placeholder {
+  color: #697586;
+}
+.save {
+  padding: 0 16px;
+}
+.menu {
+  width: 200px;
+}
+
+/* A section: its label over a rule that runs to the right, 14px above the card. */
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.sectionHead {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-4);
+}
+.sectionTitle {
+  margin: 0;
+  color: #697586;
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+  line-height: 18px;
+  white-space: nowrap;
+}
+.rule {
+  flex: 1;
+  height: 1px;
+  background: #e3e8ef;
+}
+
+.card {
+  overflow: hidden;
+  border: 1px solid #e3e8ef;
+  border-radius: 8px;
+  background: var(--inverse);
+}
+
+/* INDIA / GLOBAL LOCATIONS: 12px in, on #f8fafc. */
+.regionRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-6);
+  padding: 12px;
+  border-bottom: 1px solid #e3e8ef;
+  background: #f8fafc;
+}
+/* On its own: the card's border is its border. */
+.globalRow {
+  border-bottom-color: #e3e8ef;
+}
+.regionName,
+.centres {
+  color: #697586;
+  font-size: var(--fs-0);
+  font-weight: var(--fw-medium);
+  line-height: 16px;
+  white-space: nowrap;
+}
+.end {
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: 12px;
+}
+
+/* A city: the chevron and name, then its buildings when open; 48px rows between #eef2f6 rules (the
+   first city sits on India's own rule). */
+.cityRow,
+.centreRow {
+  border-top: 1px solid #eef2f6;
+}
+.regionRow + .city .cityRow {
+  border-top: none;
+}
+.cityRow,
+.centreRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-6);
+  min-height: 48px;
+  padding: 0 12px;
+}
+.cityToggle {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  min-width: 0;
+  padding: 4px 8px 4px 0;
+  border: none;
+  border-radius: 6px;
+  background: none;
+  font-family: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.cityToggle:focus-visible {
+  outline: 2px solid #5b4fff;
+  outline-offset: 2px;
+}
+.cityToggle img {
+  flex: none;
+  transition: transform 0.15s ease;
+}
+.chevronClosed {
+  transform: rotate(-90deg);
+}
+.cityName {
+  overflow: hidden;
+  color: #121926;
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+  line-height: 18px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.centre {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-4);
+  min-width: 0;
+  font-size: var(--fs-1);
+  line-height: 18px;
+  white-space: nowrap;
+}
+.code {
+  flex: none;
+  color: #697586;
+  font-weight: var(--fw-medium);
+}
+.centreName {
+  overflow: hidden;
+  color: #09121f;
+  font-weight: var(--fw-regular);
+  text-overflow: ellipsis;
+}
+.centreOff .centreName {
+  color: #697586;
+}
+.empty {
+  margin: 0;
+  padding: 20px 12px;
+  color: #697586;
+  font-size: var(--fs-1);
+  line-height: 18px;
+  text-align: center;
+}
+
+/* A saved switch: it shows the setting, can't be flipped, and says so on hover. */
+.locked {
+  display: inline-flex;
+  border-radius: 100px;
+  cursor: not-allowed;
+  transition: opacity 0.15s ease;
+}
+.locked:hover,
+.locked:focus-visible {
+  opacity: 0.55;
+}
+.locked:focus-visible {
+  outline: 2px solid #5b4fff;
+  outline-offset: 2px;
+}

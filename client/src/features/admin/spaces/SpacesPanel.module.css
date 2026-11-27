@@ -1,0 +1,147 @@
+/* Admin → Spaces: All Spaces (Figma 1588:138055), Building (1588:138969) and Space types
+   (1588:140226). The header's tabs are 400px; each tab has its bar 19px under the rule and 20px
+   above a table whose columns sit 32px apart, 12px in from the canvas edges. */
+.segmented {
+  width: 400px;
+}
+
+/* ---------- bar: title and description, then search, Filter and the Add button ---------- */
+.bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-8);
+  min-height: 40px;
+  margin: 20px 20px 20px 18px;
+}
+.barText {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+  min-width: 0;
+}
+.barTitle {
+  margin: 0;
+  color: #000;
+  font-size: var(--fs-2);
+  font-weight: var(--fw-bold);
+  line-height: 20px;
+}
+.barDescription {
+  margin: 0;
+  color: #4b5565;
+  font-size: var(--fs-0);
+  line-height: 16px;
+}
+.controls {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-12);
+}
+.searchFilter {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-10);
+}
+.search {
+  width: 277px;
+}
+
+/* ---------- tables ---------- */
+.table {
+  overflow-x: auto;
+}
+.headRow,
+.row {
+  display: grid;
+  column-gap: 32px;
+  align-items: center;
+  min-width: max-content;
+  /* The design's table starts under the canvas border: 11px in on the left, 12px on the right. */
+  padding: 0 12px 0 10px;
+}
+/* The last column holds the round buttons, against the right edge. */
+.spaceCols {
+  grid-template-columns: 120px 192px 80px 100px 128px 88px minmax(86px, 1fr);
+}
+.buildingCols {
+  grid-template-columns: 100px 164px 200px 80px 148px 88px minmax(86px, 1fr);
+}
+.typeCols {
+  grid-template-columns: 100px 300px 128px minmax(86px, 1fr);
+}
+.headRow {
+  height: 32px;
+  border-top: 1px solid #e3e8ef;
+  border-bottom: 1px solid #e3e8ef;
+  background: #f8fafc;
+  color: #697586;
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+  line-height: 18px;
+  white-space: nowrap;
+}
+.headInfo {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+}
+.headInfo img {
+  cursor: help;
+}
+/* 16px above, 16px below with the rule: 74px for a two-line row, 68px beside the round buttons. */
+.row {
+  padding-top: var(--sp-8);
+  padding-bottom: 15px;
+  border-bottom: 1px solid #eef2f6;
+}
+.rowLink {
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+.rowLink:hover {
+  background-color: #f8fafc;
+}
+.rowLink:focus-visible {
+  outline: 2px solid #5b4fff;
+  outline-offset: -2px;
+}
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--sp-2);
+  min-width: 0;
+  min-height: 42px;
+}
+.strong,
+.cell {
+  min-width: 0;
+  color: #000;
+  font-size: var(--fs-1);
+  line-height: 18px;
+}
+.strong {
+  font-weight: var(--fw-bold);
+}
+.cell {
+  font-weight: var(--fw-medium);
+}
+.nowrap {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.muted {
+  color: #697586;
+  font-size: var(--fs-0);
+  font-weight: var(--fw-medium);
+  line-height: 16px;
+}
+.actions {
+  display: flex;
+  justify-self: end;
+  gap: 14px;
+}

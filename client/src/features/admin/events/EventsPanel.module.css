@@ -1,0 +1,95 @@
+/* Admin → Events → List (Figma 8825:276822). Columns are 52 / 188 / 140 / 180 / status / 86 (the
+   eye and ⋯) with 32px gaps, inset 24px from the canvas edge; rows are 74px. */
+
+/* ---------- header controls ---------- */
+.searchFilter {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+/* ---------- table ---------- */
+.table {
+  overflow-x: auto;
+}
+.headRow,
+.row {
+  display: grid;
+  grid-template-columns: 52px 188px 140px 180px minmax(120px, 1fr) 86px;
+  column-gap: 32px;
+  align-items: center;
+  min-width: 1049px;
+  padding: 0 24px;
+}
+.headRow {
+  height: 30px;
+  border-top: 1px solid #e3e8ef;
+  border-bottom: 1px solid #e3e8ef;
+  background: #f8fafc;
+  color: #697586;
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+  line-height: 18px;
+}
+/* 16 + 42 + 15, then the 1px rule: 74px. */
+.row {
+  min-height: 74px;
+  padding-top: 16px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #eef2f6;
+}
+.row:hover {
+  background: #fcfcfd;
+}
+.id {
+  color: #4b5565;
+  font-size: var(--fs-2);
+  font-weight: var(--fw-medium);
+  line-height: 20px;
+}
+.title,
+.cell {
+  overflow: hidden;
+  font-size: var(--fs-1);
+  line-height: 18px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.title {
+  color: #000;
+  font-weight: var(--fw-bold);
+}
+.cell {
+  color: #3d3d3d;
+  font-weight: var(--fw-medium);
+}
+/* Archived: faded, as the members no longer see it. */
+.rowArchived .title,
+.rowArchived .cell,
+.rowArchived .id {
+  opacity: 0.6;
+}
+
+.badge_active {
+  background: #dbfde1;
+  color: #125522;
+}
+.badge_scheduled {
+  background: #ffffe7;
+  color: #125522;
+}
+.badge_archived {
+  background: #fdd;
+  color: #b10303;
+}
+.badge_completed {
+  padding: var(--sp-2) var(--sp-4);
+  background: #eef2f6;
+  color: #4b5565;
+}
+
+.actions {
+  display: flex;
+  gap: 14px;
+  justify-self: end;
+}

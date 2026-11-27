@@ -1,0 +1,14 @@
+/* Admin → Credits (Figma 1607:206217): the header's rule at 81px, the tabs 12px under it (at least
+   110px each), 42px tall over a second full-width rule at 135px. */
+header.header {
+  padding-bottom: 15px;
+}
+.tabs {
+  display: flex;
+  margin-top: 12px;
+  padding-left: 19px;
+  border-bottom: 1px solid #eef2f6;
+}
+.tab {
+  min-width: 110px;
+}

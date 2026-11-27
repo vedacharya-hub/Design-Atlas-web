@@ -1,0 +1,85 @@
+.calendar {
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-4);
+  padding: var(--sp-4);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--sp-2) var(--sp-2) var(--sp-6);
+}
+
+.title {
+  font-size: var(--fs-2);
+  font-weight: var(--fw-medium);
+}
+
+.nav {
+  display: flex;
+  gap: var(--sp-4);
+}
+
+.chevron {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-3);
+  background: var(--inverse);
+  color: var(--fg-secondary);
+  cursor: pointer;
+}
+.chevron:hover {
+  background: var(--gray-50);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
+
+.weekday {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 36px;
+  font-size: var(--fs-0);
+  font-weight: var(--fw-medium);
+  color: var(--fg-tertiary);
+}
+
+.cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  font-size: var(--fs-1);
+  color: var(--fg-primary);
+  cursor: pointer;
+}
+
+.cell:not(:disabled):hover {
+  background: var(--gray-100);
+}
+
+.outside {
+  color: var(--gray-300);
+}
+
+.cell:disabled {
+  color: var(--gray-300);
+  cursor: not-allowed;
+}
+
+.selected,
+.selected:hover {
+  background: var(--ink);
+  color: var(--inverse);
+}

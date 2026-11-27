@@ -1,0 +1,182 @@
+/* Iris Bot: drawn at its native 200 × 172 (plus the ears, 12 px past each side) and scaled to its size.
+   Matte black: soft shading and grain, no glossy highlight; a near-black screen behind a thin rim. */
+.layer {
+  position: fixed;
+  inset: 0;
+  z-index: var(--iris-z);
+  pointer-events: none;
+}
+.bot {
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  will-change: transform;
+}
+.interactive {
+  pointer-events: auto;
+  cursor: pointer;
+}
+.draggable {
+  cursor: grab;
+  touch-action: none;
+}
+.draggable:active {
+  cursor: grabbing;
+}
+.interactive:focus-visible {
+  outline: 2px solid #5b4fff;
+  outline-offset: 4px;
+  border-radius: 40%;
+}
+.fade {
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+}
+.stage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 224px;
+  height: 172px;
+  transform: scale(var(--iris-scale, 0.48));
+  transform-origin: 0 0;
+}
+.body {
+  position: absolute;
+  inset: 0;
+  transform-origin: 50% 100%;
+  will-change: transform;
+}
+
+/* ---------- ears: matte pills with the state light ---------- */
+.ear {
+  position: absolute;
+  top: 54px;
+  width: 22px;
+  height: 60px;
+  border-radius: 11px;
+  background: linear-gradient(90deg, #0f0f10 0%, #1c1c1e 55%, #262628 100%);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.22);
+}
+.earLeft {
+  left: 0;
+}
+.earRight {
+  right: 0;
+  transform: scaleX(-1);
+}
+.slot {
+  position: absolute;
+  top: 24px;
+  left: 6px;
+  width: 6px;
+  height: 12px;
+  border-radius: 3px;
+  background: #2a2a2d;
+}
+.light {
+  position: absolute;
+  inset: 0;
+  border-radius: 3px;
+  opacity: 0;
+}
+
+/* ---------- head ---------- */
+.head {
+  position: absolute;
+  top: 0;
+  left: 12px;
+  width: 200px;
+  height: 172px;
+  border-radius: 74px;
+  background: radial-gradient(140% 120% at 30% 16%, var(--iris-body-0) 0%, var(--iris-body-1) 38%, var(--iris-body-2) 75%, var(--iris-body-3) 100%);
+  box-shadow:
+    inset -12px -16px 28px rgba(0, 0, 0, 0.5),
+    inset 10px 12px 22px rgba(255, 255, 255, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    0 12px 32px rgba(0, 0, 0, 0.28),
+    0 2px 6px rgba(0, 0, 0, 0.2);
+}
+/* Matte grain: fractal noise, overlaid at about 5%. */
+.grain {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='172'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  background-size: 200px 172px;
+  opacity: 0.05;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+}
+/* One wide, diffuse sheen at the top left, so the shape reads in 3D without looking glossy. */
+.sheen {
+  position: absolute;
+  top: 3px;
+  left: 34px;
+  width: 84px;
+  height: 22px;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0));
+  filter: blur(4px);
+  pointer-events: none;
+}
+.bezel {
+  position: absolute;
+  top: 16px;
+  left: 14px;
+  width: 172px;
+  height: 132px;
+  border-radius: 56px;
+  background: var(--iris-bezel);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.07);
+}
+.screen {
+  position: absolute;
+  top: 20px;
+  left: 18px;
+  width: 164px;
+  height: 124px;
+  overflow: hidden;
+  border-radius: 52px;
+  background: radial-gradient(120% 120% at 50% 40%, #111214 0%, var(--iris-screen) 70%);
+}
+.glow,
+.led {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 164px;
+  height: 124px;
+}
+.glow {
+  filter: blur(4px);
+  opacity: 0.75;
+}
+.glass {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(120% 80% at 30% -10%, rgba(255, 255, 255, 0.1), transparent 45%);
+  pointer-events: none;
+}
+.arc {
+  position: absolute;
+  top: 8px;
+  left: 22px;
+  width: 96px;
+  height: 30px;
+  border-top: 2px solid rgba(255, 255, 255, 0.12);
+  border-radius: 50%;
+  transform: rotate(-8deg);
+  pointer-events: none;
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}

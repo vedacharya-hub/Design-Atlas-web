@@ -1,0 +1,152 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: var(--gray-50);
+}
+
+.pageMargin {
+  flex: 1;
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sp-8);
+  padding: var(--sp-12) 64px 40px;
+}
+
+/* Sidebar — "Admin-Menu" — sits directly on the gray page background, no card. */
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-8);
+  flex: 0 0 199px;
+  width: 199px;
+}
+
+.sidebarLabel {
+  display: block;
+  width: 100%;
+  padding: 0 var(--sp-4) var(--sp-4);
+  border-bottom: 1px solid var(--gray-200);
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+  color: var(--gray-500);
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+  width: 100%;
+}
+
+.menuItem {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-4);
+  height: 40px;
+  padding: 0 var(--sp-4);
+  border: none;
+  border-radius: 5px;
+  background: transparent;
+  font-size: var(--fs-2);
+  font-weight: var(--fw-bold);
+  color: var(--gray-500);
+  cursor: pointer;
+  text-align: left;
+}
+.menuItem:hover {
+  background: var(--gray-100);
+}
+
+.menuItemActive {
+  background: #121212;
+  color: var(--inverse);
+}
+.menuItemActive:hover {
+  background: #121212;
+}
+
+/* Main content — the white "canvas" card */
+
+.content {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  background: var(--inverse);
+  border: 1px solid var(--gray-100);
+  border-radius: var(--radius-3);
+  padding: 0 var(--sp-10) var(--sp-10);
+}
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--sp-8);
+  height: 280px;
+}
+
+.greeting {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+  margin-top: 197px;
+}
+
+.hello {
+  margin: 0;
+  font-size: 20px;
+  font-weight: var(--fw-regular);
+  line-height: 24px;
+}
+
+.pageTitle {
+  margin: 0;
+  font-family: var(--font-title);
+  font-size: 28px;
+  font-weight: var(--fw-regular);
+  line-height: 32px;
+  letter-spacing: -0.5px;
+}
+
+/* Stats row */
+
+.stats {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  align-items: stretch;
+  gap: var(--sp-6);
+  margin-top: var(--sp-10);
+}
+
+.statCard {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-6);
+  flex: 1;
+  min-width: 0;
+  padding: var(--sp-4) var(--sp-8);
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-3);
+  background: var(--inverse);
+}
+
+.statLabel {
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+  color: var(--gray-600);
+}
+
+.statValue {
+  font-size: 20px;
+  font-weight: var(--fw-medium);
+  line-height: 24px;
+  color: var(--ink);
+}
+
+.placeholder {
+  margin-top: var(--sp-12);
+  color: var(--fg-tertiary);
+}

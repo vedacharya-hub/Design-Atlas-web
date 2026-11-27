@@ -1,0 +1,67 @@
+/* A details panel's members (Role Details 3120:194062, Access Control 3145:644337): a 284px search
+   with the count across from it, then a card 12px under: a 32px #f8fafc header and 74px rows. */
+.members {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.membersBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-8);
+}
+.count {
+  color: #000;
+  font-size: var(--fs-2);
+  font-weight: var(--fw-medium);
+  line-height: 20px;
+  white-space: nowrap;
+}
+.card {
+  overflow: hidden;
+  border: 1px solid #eef2f6;
+  border-radius: 8px;
+  background: var(--inverse);
+}
+/* ID, user, status 24px apart and 12px in; the ⋯ on the right. */
+.headRow,
+.row {
+  display: grid;
+  grid-template-columns: 120px 280px 100px minmax(36px, 1fr);
+  column-gap: 24px;
+  align-items: center;
+  padding: 0 11px;
+}
+.headRow {
+  height: 32px;
+  border-bottom: 1px solid #e3e8ef;
+  background: #f8fafc;
+  color: #697586;
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+  line-height: 18px;
+}
+/* 16 + 42 + 16: 74px with the rule. */
+.row {
+  padding-top: 16px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #eef2f6;
+}
+.card:not(:has(nav)) .row:last-child {
+  border-bottom: none;
+}
+.actions {
+  justify-self: end;
+}
+.empty {
+  margin: 0;
+  padding: 40px 24px;
+  color: #697586;
+  font-size: var(--fs-1);
+  text-align: center;
+}
+.pagination {
+  margin-top: 0;
+  padding: 20px 11px 22px;
+}

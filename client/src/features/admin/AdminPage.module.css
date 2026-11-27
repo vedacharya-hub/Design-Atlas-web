@@ -1,0 +1,33 @@
+/* Figma 1580:128785 at 1440: menu at x 64 (199 wide), canvas 16px to its right, 24px below the nav
+   and 29px above the bottom of the page. */
+.page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: var(--gray-50, #f8fafc);
+}
+
+.layout {
+  display: flex;
+  flex: 1;
+  gap: var(--sp-8);
+  padding: var(--sp-12) 64px 29px;
+}
+
+.canvas {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid #eef2f6;
+  border-radius: 8px;
+  background: var(--inverse);
+}
+
+@media (max-width: 900px) {
+  .layout {
+    flex-direction: column;
+    padding: var(--sp-8);
+  }
+}

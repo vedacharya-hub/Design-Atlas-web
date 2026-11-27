@@ -1,0 +1,471 @@
+/* Admin → Users → All Users (Figma 1578:126778), plus a MEMBERSHIP column. Columns keep their
+   content widths and share the spare room equally between them; the ⋯ action sits 80px after
+   the last column, at the right. */
+
+/* ---------- segmented tabs (Figma "Tabs", 590 × 40) ---------- */
+.segmented {
+  display: flex;
+  gap: var(--sp-2);
+  width: 590px;
+  height: 40px;
+  padding: var(--sp-2);
+  border-radius: 12px;
+  background: #eef2f6;
+}
+.segment {
+  position: relative;
+  flex: 1 1 0;
+  min-width: 0;
+  height: 32px;
+  padding: var(--sp-2) var(--sp-6) var(--sp-2) var(--sp-4);
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  color: #454545;
+  font-family: inherit;
+  font-size: var(--fs-1);
+  font-weight: var(--fw-regular);
+  line-height: 18px;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.segment:hover:not(.segmentActive) {
+  background: rgba(255, 255, 255, 0.6);
+}
+.segmentActive {
+  background: #000;
+  box-shadow: 0 6px 3px rgba(0, 0, 0, 0.08);
+  color: var(--inverse);
+  font-weight: var(--fw-bold);
+}
+/* 25px separator, centred in the 4px gap to the previous tab. */
+.segmentDivided::before {
+  content: '';
+  position: absolute;
+  top: 3.5px;
+  left: -3px;
+  width: 1px;
+  height: 25px;
+  background: rgba(0, 0, 0, 0.12);
+}
+
+/* ---------- "All Users" bar: 22px below the rule, 20px above the table ---------- */
+.subHeader {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-8);
+  min-height: 40px;
+  /* The Users frame insets its content 20px on the right (Announcement uses 24px). */
+  margin: 22px 19px var(--sp-10) 19px;
+}
+.subText {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+}
+.subTitle {
+  margin: 0;
+  color: #000;
+  font-size: var(--fs-2);
+  font-weight: var(--fw-bold);
+  line-height: 20px;
+}
+.subDescription {
+  margin: 0;
+  color: #4b5565;
+  font-size: var(--fs-0);
+  line-height: 16px;
+}
+.controls {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-10);
+}
+/* The PO and ATLAS licence counts, 16px apart. */
+.licences {
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: var(--sp-8);
+}
+.search {
+  width: 220px;
+}
+/* Filter is 12px tighter each side than the standard button (11px, with the 1px stroke inside). */
+.filterBtn {
+  padding: 0 11px;
+}
+/* Search, Filter and ⋯ sit 20px apart; the Add button 24px after them. */
+.addBtn {
+  margin-left: var(--sp-2);
+}
+/* ---------- table ---------- */
+.table {
+  overflow-x: auto;
+}
+/* Each row is the data columns, then the ⋯ action in the right-hand corner. Every value stays on
+   one line. Columns are their content widths, at least 18px apart; role and team ("Super Admin",
+   "Asset management") get as much of their full width as there's room for, shortening with "…"
+   only when the window is too narrow. On wide screens the spare room is spread equally between the
+   columns, and what's left goes before the ⋯. Header and rows share the same widths, so headings
+   line up with their data. */
+.headRow,
+.row {
+  display: flex;
+  align-items: center;
+  min-width: 1047px;
+  padding-left: 15px;
+}
+.cols {
+  /* Full-width columns (842px) + 7 × 18px gaps; below that, role and team give way first. */
+  --cols-full: 968px;
+  --cols-min: 921px;
+  /* Wide screens: gaps 1.2× the previous spread of (100% − 1253px) / 7, i.e. 842 + 1.2 × (100% − 1253px). */
+  --cols-spread: calc(120% - 661.6px);
+  /* Never into the ⋯ column (44 + 16 + 36 + 15 = 111). */
+  --cols-max: calc(100% - 111px);
+  display: grid;
+  flex: 0 1 auto;
+  margin-right: 44px;
+  grid-template-columns: 111px 207px minmax(62px, 81px) minmax(90px, 118px) 84px 93px 84px 64px;
+  column-gap: 18px;
+  justify-content: space-between;
+  align-items: center;
+  width: clamp(var(--cols-full), var(--cols-spread), var(--cols-max));
+  min-width: var(--cols-min);
+}
+.headRow {
+  height: 32px;
+  border-top: 1px solid #e3e8ef;
+  border-bottom: 1px solid #e3e8ef;
+  background: #f8fafc;
+  color: #697586;
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+  line-height: 18px;
+  white-space: nowrap;
+}
+/* 16 + 42 + 16 = 74px, the last pixel being the rule. A row opens the user's details. */
+.row {
+  padding-top: var(--sp-8);
+  padding-bottom: 15px;
+  border-bottom: 1px solid #eef2f6;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+.row:hover {
+  background-color: #f8fafc;
+}
+.row:focus-visible {
+  outline: 2px solid #5b4fff;
+  outline-offset: -2px;
+}
+/* Inactive: the design's striped row — #e3e8ef bands, 21.39px every 40px at 62°, at 40%
+   (measured off the Figma render). */
+.rowInactive {
+  background-image: repeating-linear-gradient(62deg, rgba(227, 232, 239, 0.4) 0 21.39px, transparent 21.39px 40px);
+}
+.code {
+  display: inline-flex;
+  padding: var(--sp-2) var(--sp-4);
+  border-radius: 4px;
+  background: #f8fafc;
+  color: #4b5565;
+  font-size: var(--fs-2);
+  font-weight: var(--fw-medium);
+  line-height: 20px;
+  white-space: nowrap;
+}
+.user {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  /* Figma's name/email block is 42px tall, which sets the 74px row. */
+  height: 42px;
+  min-width: 0;
+}
+.avatar {
+  flex: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 40px;
+  object-fit: cover;
+  transition: filter 0.2s ease;
+}
+.rowInactive .avatar {
+  filter: grayscale(1);
+}
+.userText {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+  min-width: 0;
+}
+.name {
+  overflow: hidden;
+  color: #000;
+  font-size: var(--fs-1);
+  font-weight: var(--fw-bold);
+  line-height: 18px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.email {
+  overflow: hidden;
+  color: #697586;
+  font-size: var(--fs-0);
+  font-weight: var(--fw-medium);
+  line-height: 16px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.cell {
+  overflow: hidden;
+  color: #000;
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+  line-height: 18px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ---------- Bulk Action: a tick box before each row, and the bar at the bottom ---------- */
+/* The 20px TickBox, 16px before the ID. */
+.pick {
+  display: flex;
+  flex: none;
+  align-items: center;
+  margin-right: var(--sp-8);
+}
+/* The box takes 36px of the columns' room; the same spread, with that 36px out of it. Room at the
+   bottom so the last rows can scroll clear of the bar. */
+.tableBulk {
+  padding-bottom: 64px;
+}
+.tableBulk .headRow,
+.tableBulk .row {
+  min-width: 1083px;
+}
+.tableBulk .cols {
+  --cols-spread: calc(120% - 704.8px);
+  --cols-max: calc(100% - 147px);
+}
+/* A ticked row: modern gray 50. */
+.rowPicked,
+.tableScrolls .rowPicked .actions {
+  background-color: var(--gray-50);
+}
+/* Floats 24px above the bottom of the window, centred, while Bulk Action is on. */
+.bulkBar {
+  position: fixed;
+  bottom: var(--sp-12);
+  left: 50%;
+  z-index: 250;
+  display: flex;
+  align-items: center;
+  gap: var(--sp-6);
+  max-width: calc(100vw - 32px);
+  padding: var(--sp-4) var(--sp-4) var(--sp-4) var(--sp-10);
+  border: 1px solid #e3e8ef;
+  border-radius: 12px;
+  background: var(--inverse);
+  box-shadow: 0 12px 32px rgba(13, 18, 28, 0.16);
+  transform: translateX(-50%);
+  animation: bulkIn 0.24s cubic-bezier(0.22, 0.8, 0.24, 1) backwards;
+}
+@keyframes bulkIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 12px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .bulkBar {
+    animation: none;
+  }
+}
+.bulkCount {
+  margin: 0;
+  color: #4b5565;
+  font-size: var(--fs-1);
+  line-height: 18px;
+  white-space: nowrap;
+}
+.bulkCount strong {
+  color: #000;
+  font-weight: var(--fw-bold);
+}
+.bulkClear {
+  padding: 0;
+  border: none;
+  background: none;
+  color: #4b5565;
+  font-family: inherit;
+  font-size: var(--fs-1);
+  line-height: 18px;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.bulkClear:disabled {
+  color: #9aa4b2;
+  cursor: default;
+}
+.bulkDivider {
+  flex: none;
+  width: 1px;
+  height: 24px;
+  margin: 0 var(--sp-2);
+  background: #e3e8ef;
+}
+.bulkBtn {
+  padding: 0 var(--sp-8);
+  white-space: nowrap;
+}
+
+/* Status badges (Figma "Badge Core"): inactive takes the design's red, non-active badge. */
+.status_active {
+  background: #dbfde1;
+  color: #125522;
+}
+.status_inactive {
+  background: #ffdddd;
+  color: #b10303;
+}
+
+/* Membership: PO and ATLAS always appear together; AA alone. Neutral "Badge Core" (Figma 10095:343802). */
+.tags {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2);
+}
+.tag {
+  background: #eef2f6;
+  color: #4b5565;
+}
+
+/* The ⋯ column hugs the right edge. When the table is narrower than its columns it stays put
+   while the columns scroll underneath, on a solid backing with a soft edge so they slide under it. */
+.actions {
+  position: sticky;
+  right: 0;
+  z-index: 1;
+  display: flex;
+  flex: none;
+  justify-content: flex-end;
+  align-self: stretch;
+  align-items: center;
+  /* Fixed (16 + 36 + 15), so the header's empty cell matches the rows and the columns line up. */
+  width: 67px;
+  margin-left: auto;
+  padding: 0 15px 0 16px;
+  transition: box-shadow 0.15s ease;
+}
+/* Reach over the row's 16px / 15px vertical padding so the backing fills the row top to bottom. */
+.row .actions {
+  margin-top: calc(-1 * var(--sp-8));
+  margin-bottom: -15px;
+}
+.tableScrolls .actions {
+  background: var(--inverse);
+  box-shadow: -10px 0 12px -10px rgba(13, 18, 28, 0.18);
+}
+.tableScrolls .headRow .actions {
+  background: #f8fafc;
+}
+.tableScrolls .rowInactive .actions {
+  background: repeating-linear-gradient(62deg, rgba(227, 232, 239, 0.4) 0 21.39px, transparent 21.39px 40px), var(--inverse);
+}
+.tableScrolls .row:hover .actions {
+  background-color: #f8fafc;
+}
+
+/* ---------- menus (row ⋯, then the header ⋯) ---------- */
+.menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  min-width: 200px;
+  padding: var(--sp-2);
+  border: 1px solid #e3e8ef;
+  border-radius: 8px;
+  background: var(--inverse);
+  box-shadow: 0 12px 32px rgba(13, 18, 28, 0.12);
+}
+.menuItem {
+  padding: var(--sp-4) var(--sp-5);
+  border: none;
+  border-radius: 6px;
+  background: transparent;
+  color: #121926;
+  font-family: inherit;
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+  line-height: 18px;
+  text-align: left;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.menuItem:hover,
+.menuItem:focus-visible {
+  outline: none;
+  background: #f8fafc;
+}
+.menuItemDanger {
+  color: #b10303;
+}
+/* The header ⋯ (Figma 3170:169488): a 248px list of 44px icon rows split by #e7e7e7 lines. */
+.moreMenu {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  width: 248px;
+  overflow: hidden;
+  border: 1px solid #e7e7e7;
+  border-radius: 8px;
+  background: var(--inverse);
+  box-shadow: 0 -12px 24px rgba(0, 0, 0, 0.09);
+}
+.moreItem {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-4);
+  /* 44px with the divider inside, as Figma strokes it. */
+  padding: 12px 12px 11px;
+  border: none;
+  border-bottom: 1px solid #e7e7e7;
+  background: var(--inverse);
+  color: #000;
+  font-family: inherit;
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+  line-height: 18px;
+  text-align: left;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.moreItem:last-child {
+  padding-bottom: 12px;
+  border-bottom: none;
+}
+.moreItem img {
+  flex: none;
+}
+.moreItem:hover:not(:disabled),
+.moreItem:focus-visible {
+  outline: none;
+  background: #f8fafc;
+}
+.moreItem:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+

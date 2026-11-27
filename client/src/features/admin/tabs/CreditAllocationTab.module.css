@@ -1,0 +1,413 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-10);
+}
+
+.configBox {
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-4);
+  overflow: hidden;
+}
+
+.enableRow {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--sp-12);
+  padding: var(--sp-10) var(--sp-12);
+}
+
+.enableTitle {
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+  margin-bottom: var(--sp-2);
+}
+
+.enableDesc {
+  margin: 0;
+  max-width: 560px;
+  font-size: var(--fs-0);
+  color: var(--fg-tertiary);
+}
+
+.configBody {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.25s ease;
+}
+
+.configBodyOpen {
+  max-height: 2400px;
+}
+
+.configBodyInner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-10);
+  padding: var(--sp-10) var(--sp-12) var(--sp-12);
+  border-top: 1px solid var(--gray-200);
+}
+
+.poolSettings {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-8);
+  padding: var(--sp-8) var(--sp-10);
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-4);
+  background: var(--gray-50);
+}
+
+.poolSettingsHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-8);
+}
+
+.poolSettingsHeadActions {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-4);
+  flex: none;
+}
+
+.poolSettingsTitle {
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+}
+
+.poolFields {
+  display: flex;
+  gap: var(--sp-8);
+}
+.poolFields .field {
+  flex: 1;
+  margin-bottom: 0;
+}
+.poolFields input {
+  background: var(--inverse);
+}
+
+.treeHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-8);
+}
+
+.treeHeadTitle {
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+}
+
+.tree {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-8);
+}
+
+.buCard {
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-3);
+  overflow: hidden;
+}
+
+.buHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-8);
+  padding: var(--sp-6) var(--sp-8);
+  background: var(--gray-50);
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.buHeaderMain {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-4);
+  min-width: 0;
+  padding: 0;
+  border: none;
+  background: none;
+  text-align: left;
+  cursor: pointer;
+}
+
+.buEyebrow {
+  display: block;
+  font-size: 10px;
+  font-weight: var(--fw-medium);
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  color: var(--fg-tertiary);
+}
+
+.buName {
+  display: block;
+  font-size: var(--fs-2);
+  font-weight: var(--fw-bold);
+  color: var(--fg-primary);
+}
+
+.buHeaderRight {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-4);
+  flex: none;
+}
+
+.buCredits {
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+  color: var(--fg-secondary);
+  white-space: nowrap;
+}
+
+.buSubBar {
+  padding: var(--sp-6) var(--sp-8) 0;
+}
+
+.buBody {
+  padding: 0 var(--sp-8) var(--sp-2);
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-8);
+  padding: var(--sp-6) 0;
+  border-bottom: 1px solid var(--gray-100);
+}
+
+.rowMain {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-4);
+  width: 260px;
+  flex: none;
+  min-width: 0;
+}
+
+.chevronBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: var(--fg-secondary);
+  cursor: pointer;
+}
+.chevronBtn:hover {
+  color: var(--fg-primary);
+}
+
+.chevronSpacer {
+  flex: none;
+  width: 20px;
+}
+
+.chevron {
+  transform: rotate(-90deg);
+  transition: transform 0.15s ease;
+}
+.chevronOpen {
+  transform: rotate(0deg);
+}
+
+.typeBadge {
+  flex: none;
+  padding: var(--sp-2) var(--sp-4);
+  border-radius: var(--radius-pill);
+  background: var(--inactive);
+  color: var(--fg-secondary);
+  font-size: 10px;
+  font-weight: var(--fw-medium);
+  white-space: nowrap;
+}
+
+.unitName {
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.rowBody {
+  flex: 1;
+  min-width: 0;
+  max-width: 320px;
+}
+
+.noAllocation {
+  font-size: var(--fs-0);
+  color: var(--fg-tertiary);
+}
+
+.overflowHint {
+  display: block;
+  margin-top: var(--sp-2);
+  font-size: var(--fs-0);
+  color: #c2410c;
+}
+
+.rowActions {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-4);
+  flex: none;
+}
+
+.overageBadge {
+  padding: var(--sp-2) var(--sp-4);
+  border-radius: var(--radius-pill);
+  font-size: var(--fs-0);
+  font-weight: var(--fw-medium);
+  white-space: nowrap;
+}
+
+.overageAllowed {
+  background: rgba(29, 202, 64, 0.12);
+  color: #148a2c;
+}
+
+.iconBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--fg-secondary);
+  cursor: pointer;
+}
+.iconBtn:hover {
+  background: var(--gray-100);
+  color: var(--fg-primary);
+}
+
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-3);
+  padding: var(--sp-12) var(--sp-8);
+  border: 1px dashed var(--gray-300);
+  border-radius: var(--radius-4);
+  color: var(--fg-tertiary);
+  text-align: center;
+}
+.emptyState p {
+  margin: 0;
+  color: var(--fg-primary);
+  font-weight: var(--fw-medium);
+}
+.emptyState span {
+  font-size: var(--fs-0);
+}
+
+.formTitle {
+  margin: 0 0 var(--sp-8);
+  font-size: var(--fs-2);
+  font-weight: var(--fw-medium);
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+  margin-bottom: var(--sp-8);
+  font-size: var(--fs-0);
+  color: var(--fg-tertiary);
+}
+.field input {
+  height: 40px;
+  padding: 0 var(--sp-6);
+  border: 1px solid var(--stroke);
+  border-radius: var(--radius-3);
+  font-size: var(--fs-1);
+  font-family: inherit;
+  color: var(--fg-primary);
+}
+
+.cascade {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+}
+
+.remainingHint {
+  margin: var(--sp-2) 0 0;
+  font-size: var(--fs-0);
+  color: var(--fg-tertiary);
+}
+.remainingHintError {
+  color: var(--seat-unavailable-strong);
+  font-weight: var(--fw-medium);
+}
+
+.readonlyField {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  padding: 0 var(--sp-6);
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-3);
+  background: var(--gray-50);
+  font-size: var(--fs-1);
+  color: var(--fg-primary);
+}
+
+.overageRow {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--sp-8);
+  margin-bottom: var(--sp-10);
+}
+
+.overageTitle {
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+}
+
+.overageDesc {
+  margin: var(--sp-2) 0 0;
+  max-width: 340px;
+  font-size: var(--fs-0);
+  color: var(--fg-tertiary);
+}
+
+.confirmHead {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-4);
+  margin-bottom: var(--sp-4);
+}
+
+.confirmIcon {
+  display: inline-flex;
+  flex: none;
+  color: var(--seat-unavailable-strong);
+}
+
+.confirmBody {
+  margin: 0 0 var(--sp-8);
+  font-size: var(--fs-1);
+  color: var(--fg-secondary);
+}
+
+.formActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--sp-4);
+}

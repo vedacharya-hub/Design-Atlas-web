@@ -1,0 +1,986 @@
+@keyframes irisPopIn {
+  from { opacity: 0; transform: scale(0.6); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes irisFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes irisPanelIn {
+  from { opacity: 0; transform: scale(0.85) translateY(24px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+@keyframes irisPanelOut {
+  from { opacity: 1; transform: scale(1) translateY(0); }
+  to { opacity: 0; transform: scale(0.85) translateY(24px); }
+}
+
+@keyframes irisBarIn {
+  from { opacity: 0; transform: translateY(16px) scale(0.95); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes irisBarOut {
+  from { opacity: 1; transform: translateY(0) scale(1); }
+  to { opacity: 0; transform: translateY(16px) scale(0.95); }
+}
+
+@keyframes irisFadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+@keyframes irisDissolveIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes irisSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes irisGlowPulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+@keyframes irisMarkGlow {
+  0%, 100% { filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.35)); }
+  50% { filter: drop-shadow(0 0 14px rgba(255, 255, 255, 0.7)); }
+}
+
+/* Loader lines from Figma sit 44px apart; hold each one, then roll up to the next. */
+@keyframes irisThinkingCycle {
+  0%, 27% { transform: translateY(0); }
+  33%, 60% { transform: translateY(-44px); }
+  66%, 93% { transform: translateY(-88px); }
+  100% { transform: translateY(-132px); }
+}
+
+@keyframes irisShimmer {
+  from { background-position: -88px 0; }
+  to { background-position: calc(100% + 88px) 0; }
+}
+
+@keyframes irisSuggestIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fab {
+  position: fixed;
+  right: var(--sp-12);
+  bottom: var(--sp-12);
+  z-index: 300;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border: none;
+  border-radius: 50%;
+  background: var(--ink);
+  color: var(--inverse);
+  box-shadow: var(--shadow-card);
+  cursor: pointer;
+  transition: transform 0.15s ease;
+  animation: irisPopIn 0.2s ease;
+}
+.fab:hover {
+  transform: scale(1.06);
+}
+.fab svg {
+  animation: irisSpin 6s linear infinite;
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: var(--sp-12);
+  /* No dimming: the page stays fully visible behind Iris; the layer only catches outside clicks. */
+  background: transparent;
+  animation: irisFadeIn 0.2s ease;
+}
+.overlayOut {
+  animation: irisFadeOut 0.22s ease forwards;
+  pointer-events: none;
+}
+
+.panel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: min(838px, 100%);
+  height: min(660px, calc(100dvh - 48px));
+  padding: 0 var(--sp-8) var(--sp-8);
+  border-radius: 32px;
+  background: var(--ink);
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.5);
+  color: var(--inverse);
+  outline: none;
+  transform-origin: bottom center;
+  animation: irisPanelIn 0.25s ease forwards;
+  overflow: hidden;
+  transition: height 0.35s ease;
+}
+/* Chat layout (Figma 9702:311093) is taller than the intro. */
+.panelChat {
+  height: min(900px, calc(100dvh - 48px));
+}
+/* Same dot grid as the quick bar; the mask reproduces the Figma "Box Blur" fade measured off the frame. */
+.panel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background-image: radial-gradient(circle at 2.265px 2.265px, rgba(227, 232, 242, 0.2) 2.265px, transparent 2.765px);
+  background-size: 28.88px 29.81px;
+  background-position: 1.52px 1.41px;
+  -webkit-mask-image: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.62) 90px,
+    rgba(0, 0, 0, 0.56) 210px,
+    rgba(0, 0, 0, 0.36) 330px,
+    rgba(0, 0, 0, 0.16) 450px,
+    rgba(0, 0, 0, 0.07) 660px
+  );
+  mask-image: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.62) 90px,
+    rgba(0, 0, 0, 0.56) 210px,
+    rgba(0, 0, 0, 0.36) 330px,
+    rgba(0, 0, 0, 0.16) 450px,
+    rgba(0, 0, 0, 0.07) 660px
+  );
+  pointer-events: none;
+}
+.panel::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: radial-gradient(ellipse 70% 55% at 12% 100%, rgba(255, 255, 255, 0.1), transparent 70%);
+  animation: irisGlowPulse 4s ease-in-out infinite;
+}
+/* In the chat the grid is even all the way up; the header fade (.chatFade) darkens the top. */
+.panelChat::before {
+  -webkit-mask-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6));
+  mask-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6));
+}
+.panelOut {
+  animation: irisPanelOut 0.22s ease forwards;
+}
+
+.panelHeader {
+  position: absolute;
+  top: var(--sp-8);
+  right: var(--sp-8);
+  left: var(--sp-8);
+  /* Above the history drawer, so the list button also closes it. */
+  z-index: 3;
+  display: flex;
+  justify-content: space-between;
+  opacity: 0;
+  animation: irisDissolveIn 0.35s ease 0.2s forwards;
+  pointer-events: none;
+}
+.panelIconBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: var(--sp-5);
+  border: none;
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.08);
+  cursor: pointer;
+  pointer-events: auto;
+  transition: background 0.15s ease;
+}
+.panelIconBtn:hover {
+  background: rgba(255, 255, 255, 0.16);
+}
+.panelChat .panelIconBtn {
+  background: rgba(0, 0, 0, 0.08);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.07);
+}
+.panelChat .panelIconBtn:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+.panelIconBtn.panelIconBtnOn {
+  background: rgba(255, 255, 255, 0.16);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.16);
+}
+
+/* ---------- previous chats drawer ---------- */
+.historyScrim {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: rgba(0, 0, 0, 0.45);
+  animation: irisFadeIn 0.2s ease;
+}
+/* Slides in from the left under the list button; same frosted glass and rim as the chat cards. */
+.history {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-10);
+  width: min(340px, 86%);
+  padding: 72px var(--sp-8) var(--sp-8);
+  border-radius: 32px 0 0 32px;
+  background: rgba(16, 17, 22, 0.86);
+  -webkit-backdrop-filter: blur(24px) saturate(140%);
+  backdrop-filter: blur(24px) saturate(140%);
+  box-shadow:
+    inset -1px 0 0 rgba(255, 255, 255, 0.08),
+    16px 0 48px rgba(0, 0, 0, 0.45);
+  outline: none;
+  animation: irisHistoryIn 0.28s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+@keyframes irisHistoryIn {
+  from { opacity: 0; transform: translateX(-24px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+.historyHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-6);
+}
+.historyTitle {
+  margin: 0;
+  font-family: var(--font-title);
+  font-size: 20px;
+  font-weight: var(--fw-regular);
+  line-height: 24px;
+}
+.historyNew {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  gap: var(--sp-3);
+  height: 32px;
+  padding: 0 var(--sp-6) 0 var(--sp-5);
+  border: 1px solid #cdd5df;
+  border-radius: 92px;
+  background: var(--inverse);
+  color: var(--ink);
+  font-family: inherit;
+  font-size: var(--fs-0);
+  font-weight: var(--fw-medium);
+  line-height: 16px;
+  cursor: pointer;
+}
+/* add.svg is drawn white for the composer. */
+.historyNew img {
+  filter: invert(1);
+}
+.historyEmpty {
+  margin: 0;
+  color: #9aa4b2;
+  font-size: var(--fs-1);
+  line-height: 20px;
+}
+.historyGroups {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: var(--sp-10);
+  min-height: 0;
+  margin: 0 calc(-1 * var(--sp-4));
+  padding: 0 var(--sp-4);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.12) transparent;
+}
+.historyGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+}
+.historyGroupLabel {
+  margin: 0;
+  padding: 0 var(--sp-5);
+  color: #697586;
+  font-size: var(--fs-0);
+  font-weight: var(--fw-bold);
+  letter-spacing: 0.04em;
+  line-height: 16px;
+  text-transform: uppercase;
+}
+.historyList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.historyItem {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+  width: 100%;
+  padding: var(--sp-5);
+  border: none;
+  border-radius: 12px;
+  background: transparent;
+  color: var(--inverse);
+  font-family: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.historyItem:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+.historyItemCurrent {
+  background: rgba(255, 255, 255, 0.04);
+  box-shadow:
+    inset 1px 1px 0 rgba(255, 255, 255, 0.08),
+    inset -1px -1px 0 rgba(255, 255, 255, 0.06),
+    inset 2px 0 0 #6f4fbf;
+}
+.historyItemTop {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--sp-6);
+  min-width: 0;
+}
+.historyItemTitle,
+.historyItemPreview {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.historyItemTitle {
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+  line-height: 18px;
+}
+.historyItemTime {
+  flex: none;
+  color: #697586;
+  font-size: 11px;
+  line-height: 14px;
+}
+.historyItemPreview {
+  color: #9aa4b2;
+  font-size: var(--fs-0);
+  line-height: 16px;
+}
+
+/* Figma "Box Blur" behind the chat header: messages fade out as they scroll beneath it. */
+.chatFade {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 1;
+  height: 116px;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.95) 0,
+    rgba(0, 0, 0, 0.85) 30px,
+    rgba(0, 0, 0, 0.6) 60px,
+    rgba(0, 0, 0, 0.2) 90px,
+    transparent 116px
+  );
+  pointer-events: none;
+}
+.headerMark {
+  margin-top: var(--sp-2);
+  animation: irisDissolveIn 0.35s ease;
+}
+/* The mark breathes while Iris is working on an answer. */
+.headerMarkThinking {
+  animation: irisDissolveIn 0.35s ease, irisMarkGlow 1.5s ease-in-out infinite;
+}
+
+.thread {
+  position: relative;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: var(--sp-8);
+  min-height: 0;
+  margin: 0 calc(-1 * var(--sp-8));
+  padding: 88px var(--sp-8) var(--sp-12);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.12) transparent;
+}
+/* Anchor a short conversation to the bottom, next to the composer. */
+.thread > :first-child {
+  margin-top: auto;
+}
+
+/* Chat bubbles: user 9693:237860, Iris 9693:310673. */
+.bubble {
+  flex: none;
+  max-width: min(562px, 85%);
+  margin: 0;
+  padding: var(--sp-5) var(--sp-6);
+  border-radius: 14px;
+  color: var(--inverse);
+  font-size: var(--fs-2);
+  line-height: 20px;
+  overflow-wrap: anywhere;
+  animation: irisSuggestIn 0.25s ease;
+}
+.bubbleUser {
+  align-self: flex-end;
+  background: #502f83;
+  line-height: 24px;
+  text-align: right;
+}
+/* Figma "Glass" effect (frost 7, light -45° at 0.24, no refraction): frosted backdrop, a rim lit
+   from the top-left and a faint glow along the far edges, all measured off the Figma render. */
+.bubbleAi {
+  align-self: flex-start;
+  background: rgba(255, 255, 255, 0.04);
+  -webkit-backdrop-filter: blur(3.5px);
+  backdrop-filter: blur(3.5px);
+  box-shadow:
+    inset 1px 1px 0 rgba(255, 255, 255, 0.08),
+    inset -1px -1px 0 rgba(255, 255, 255, 0.06),
+    inset -2px -4px 6px -2px rgba(255, 255, 255, 0.025);
+}
+
+/* Thinking loader (9702:312168): grey text with a light band sweeping across, cycling three lines. */
+.thinking {
+  flex: none;
+  align-self: flex-start;
+  height: 40px;
+  padding-left: 19px;
+  overflow: hidden;
+  animation: irisSuggestIn 0.25s ease;
+}
+.thinkingTrack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-8);
+  padding-top: var(--sp-3);
+  animation: irisThinkingCycle 4.5s ease-in-out infinite;
+}
+.thinkingLine {
+  width: fit-content;
+  height: 28px;
+  background-color: #7c7c7c;
+  background-image: linear-gradient(90deg, #737373, #d9d9d9, #737373);
+  background-repeat: no-repeat;
+  background-size: 88px 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-size: var(--fs-2);
+  font-weight: var(--fw-medium);
+  line-height: 28px;
+  white-space: nowrap;
+  animation: irisShimmer 1.5s linear infinite;
+}
+
+/* Quick replies above the composer (9702:312276); same glass pill as the intro suggestions. */
+.chips {
+  position: relative;
+  display: flex;
+  flex: none;
+  gap: var(--sp-6);
+  margin-bottom: var(--sp-7);
+  overflow-x: auto;
+  scrollbar-width: none;
+  animation: irisSuggestIn 0.25s ease;
+}
+.chips::-webkit-scrollbar {
+  display: none;
+}
+.chip {
+  flex: none;
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .thinkingTrack,
+  .thinkingLine {
+    animation: none;
+  }
+  .flipIn,
+  .flipOut,
+  .history {
+    animation-name: irisFadeIn;
+  }
+  .flipOut {
+    animation-name: irisFadeOut;
+  }
+}
+
+.panelBody {
+  position: relative;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  width: 100%;
+  max-width: 569px;
+  min-height: 0;
+  margin: 0 auto var(--sp-8);
+}
+.panelIntro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-6);
+  width: 416px;
+  max-width: 100%;
+}
+
+.panelMark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  opacity: 0;
+  animation: irisDissolveIn 0.35s ease 0.2s forwards, irisMarkGlow 3s ease-in-out 0.55s infinite;
+}
+.panelMarkGlyph {
+  position: relative;
+  width: 35.75px;
+  height: 32px;
+}
+.panelMarkFallback,
+.panelMarkShader {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.panelMarkFallback {
+  color: var(--inverse);
+}
+
+.panelGreeting {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-2);
+  width: 100%;
+  text-align: center;
+  opacity: 0;
+  animation: irisDissolveIn 0.35s ease 0.27s forwards;
+}
+.greeting {
+  margin: 0;
+  color: var(--inverse);
+  font-size: 22px;
+  font-weight: var(--fw-medium);
+  line-height: 28px;
+}
+.greetingSub {
+  margin: 0;
+  color: var(--gray-200);
+  font-size: 18px;
+  line-height: 24px;
+  white-space: nowrap;
+}
+
+.suggestions {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: center;
+  gap: var(--sp-6);
+  width: 100%;
+  opacity: 0;
+  animation: irisDissolveIn 0.35s ease 0.34s forwards;
+}
+
+/* Glass pill: the Figma 4% white fill as a top-lit sheen, frosted backdrop and a hairline rim. */
+.suggestionBtn {
+  padding: var(--sp-4) var(--sp-5);
+  border: none;
+  border-radius: 22px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.02));
+  backdrop-filter: blur(12px) saturate(160%);
+  -webkit-backdrop-filter: blur(12px) saturate(160%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+  color: var(--inverse);
+  font-family: inherit;
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+  line-height: 18px;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background 0.15s ease, box-shadow 0.15s ease;
+}
+.suggestionBtn:hover {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.05));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.16), inset 0 0 0 1px rgba(255, 255, 255, 0.12);
+}
+
+/* Text box from Figma (9693:230458 inactive / 9693:230457 active): the gradient
+   outline sits at half opacity until the input is focused. */
+.composerWrap {
+  position: relative;
+  width: 100%;
+  border-radius: var(--radius-pill);
+  background: rgba(9, 10, 14, 0.3);
+  backdrop-filter: blur(16px) saturate(160%);
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
+  transition: box-shadow 0.2s ease;
+}
+.composerDissolve {
+  opacity: 0;
+  animation: irisDissolveIn 0.35s ease 0.4s forwards;
+}
+.composerWrap::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(90deg, #ff5757, #2f45ff);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  opacity: 0.5;
+  transition: opacity 0.2s ease;
+  pointer-events: none;
+}
+.composerWrap:focus-within {
+  box-shadow: 0 0 6px #5b4fff;
+}
+.composerWrap:focus-within::before {
+  opacity: 1;
+}
+
+.composer {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  height: 100%;
+  padding: 12px;
+}
+
+.composerPlus {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--inverse);
+  cursor: pointer;
+}
+.composerPlus:hover {
+  background: rgba(255, 255, 255, 0.16);
+}
+
+.composerInput {
+  position: relative;
+  flex: 1;
+  width: 100%;
+  min-width: 0;
+  height: 24px;
+  padding: 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: var(--inverse);
+  font-size: 18px;
+  font-family: inherit;
+  line-height: 24px;
+}
+/* The visible placeholder is .flipPlaceholder; the native one stays for assistive tech. */
+.composerInput::placeholder {
+  color: transparent;
+}
+/* Placeholder lines flip like a split-flap: the old line rolls up and away as the next rolls in. */
+.flipPlaceholder {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  color: #9aa4b2;
+  font-size: 18px;
+  line-height: 24px;
+  perspective: 300px;
+  pointer-events: none;
+}
+.flipLine {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  gap: var(--sp-4);
+  min-width: 0;
+  transform-origin: 50% 50% -12px;
+  backface-visibility: hidden;
+}
+.flipText {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.flipIn {
+  animation: irisFlipIn 0.55s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+.flipOut {
+  animation: irisFlipOut 0.55s cubic-bezier(0.4, 0, 0.6, 1) both;
+}
+@keyframes irisFlipIn {
+  from { opacity: 0; transform: rotateX(-90deg); }
+  to { opacity: 1; transform: rotateX(0); }
+}
+@keyframes irisFlipOut {
+  from { opacity: 1; transform: rotateX(0); }
+  to { opacity: 0; transform: rotateX(90deg); }
+}
+/* Shown once the composer is active on a prompt idea: Tab takes it. */
+.flipKey {
+  flex: none;
+  padding: 1px var(--sp-3);
+  border: 1px solid #4b5565;
+  border-radius: 6px;
+  color: #9aa4b2;
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: var(--fw-medium);
+  line-height: 14px;
+}
+
+.composerSend {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.08);
+  background-image: url('/iris/composer-button.png');
+  background-size: cover;
+  background-position: center;
+  color: var(--inverse);
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+.composerSend:active {
+  transform: scale(0.92);
+}
+
+.quickField {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex: 1;
+  min-width: 0;
+}
+.quickGhost {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  max-width: 100%;
+  overflow: hidden;
+  transform: translateY(-50%);
+  color: #9aa4b2;
+  font-size: 18px;
+  line-height: 24px;
+  white-space: pre;
+  pointer-events: none;
+}
+.quickGhostTyped {
+  color: transparent;
+}
+
+.quickCatcher {
+  position: fixed;
+  inset: 0;
+  z-index: 299;
+}
+
+/* Three frames from Figma: idle text box (9721:314683, no padding) → 12px padding on every
+   side (9721:314682) → suggestions layout (9693:235626). The component steps through them. */
+.quickBar {
+  position: fixed;
+  right: 0;
+  bottom: var(--sp-12);
+  left: 0;
+  z-index: 300;
+  display: flex;
+  flex-direction: column;
+  width: min(830px, calc(100vw - 32px));
+  margin: 0 auto;
+  padding: 0;
+  border-radius: 32px;
+  background: var(--ink);
+  box-shadow: 0 0 16px 2px rgba(255, 87, 87, 0.25), 0 0 16px 2px rgba(47, 69, 255, 0.25);
+  transform-origin: bottom center;
+  animation: irisBarIn 0.22s ease;
+  transition: width 0.3s ease, border-radius 0.3s ease, padding 0.2s ease;
+}
+/* Dot grid from the Figma "Dotted Wave Loading" layer; the mask stands in for its "Box Blur" fade at the top. */
+.quickBar::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border-radius: inherit;
+  background-image: radial-gradient(circle at 2.265px 2.265px, rgba(227, 232, 242, 0.2) 2.265px, transparent 2.765px);
+  background-size: 28.88px 29.82px;
+  background-position: -2.5px -4.2px;
+  -webkit-mask-image: linear-gradient(to top, #000 70px, transparent 320px);
+  mask-image: linear-gradient(to top, #000 70px, transparent 320px);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+.quickBarPadded {
+  padding: 12px;
+  border-radius: 44px;
+}
+.quickBarExpanded {
+  width: min(838px, calc(100vw - 24px));
+  padding: var(--sp-8);
+  border-radius: 32px;
+}
+.quickBarExpanded::before {
+  opacity: 1;
+}
+.quickBarOut {
+  animation: irisBarOut 0.22s ease forwards;
+  pointer-events: none;
+}
+
+.quickBarComposer {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+}
+.quickBarComposer .composerWrap {
+  background: rgba(0, 0, 0, 0.64);
+}
+
+/* Grows from zero height so the bar opens upward smoothly instead of jumping. */
+.quickSuggestionsWrap {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  /* Collapse fits inside the 240ms padded frame before the list unmounts. */
+  transition: grid-template-rows 0.2s ease, opacity 0.15s ease;
+}
+.quickBarExpanded .quickSuggestionsWrap {
+  grid-template-rows: 1fr;
+  opacity: 1;
+  transition: grid-template-rows 0.3s ease, opacity 0.2s ease;
+}
+.quickSuggestionsInner {
+  min-height: 0;
+  overflow: hidden;
+}
+.quickSuggestions {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  width: 100%;
+  max-height: calc(100vh - 200px);
+  margin: 0 0 var(--sp-8);
+  padding: 0;
+  overflow-y: auto;
+  list-style: none;
+}
+.quickSuggestion {
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: var(--sp-10);
+  height: 86px;
+  padding: 0 32px 0 var(--sp-12);
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.04);
+  cursor: pointer;
+  opacity: 0;
+  animation: irisSuggestIn 0.25s ease forwards;
+  animation-delay: calc(var(--i) * 30ms);
+  transition: background 0.15s ease;
+}
+.quickSuggestionActive {
+  background: rgba(255, 255, 255, 0.08);
+}
+.quickSuggestionTitle {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  color: #9aa4b2;
+  font-size: 20px;
+  font-weight: var(--fw-medium);
+  line-height: 24px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.quickSuggestionMatch,
+.quickSuggestionActive .quickSuggestionTitle {
+  color: var(--inverse);
+}
+.quickSuggestionMeta {
+  flex: none;
+  color: #9aa4b2;
+  font-size: var(--fs-2);
+  line-height: 20px;
+  white-space: nowrap;
+}
+.quickSuggestionArrow {
+  flex: none;
+}
+
+@media (max-width: 640px) {
+  .quickSuggestion {
+    height: 64px;
+    padding: 0 var(--sp-10) 0 var(--sp-8);
+    border-radius: 18px;
+  }
+  .quickSuggestionTitle {
+    font-size: var(--fs-2);
+  }
+  .quickSuggestionMeta {
+    display: none;
+  }
+  .greetingSub {
+    white-space: normal;
+  }
+}

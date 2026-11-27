@@ -1,0 +1,24 @@
+/* Space Map (Figma 1592:143788): under the band, the plan takes the width and the 385px desk list
+   sits on the right, both filling the panel's height. */
+.tab {
+  display: grid;
+  flex: 1 0 auto;
+  grid-template-columns: minmax(0, 1fr) 385px;
+  grid-template-rows: minmax(0, 1fr);
+  height: 0;
+  /* Short screens scroll the panel rather than squash the plan. */
+  min-height: 440px;
+  border-top: 1px solid #e3e8ef;
+}
+.message {
+  margin: 0;
+  padding: 24px;
+  color: #697586;
+  font-size: var(--fs-1);
+  line-height: 20px;
+}
+@media (max-width: 960px) {
+  .tab {
+    grid-template-columns: minmax(0, 1fr) 320px;
+  }
+}

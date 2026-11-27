@@ -1,0 +1,87 @@
+/* Figma 1580:133491: two groups 20px apart; a 14px heading over a #e3e8ef rule; 40px items, 8px apart. */
+.menu {
+  /* Stays in view as the page scrolls, 32px from the top of the window. */
+  position: sticky;
+  top: 32px;
+  display: flex;
+  flex: none;
+  flex-direction: column;
+  align-self: flex-start;
+  gap: var(--sp-10);
+  width: 199px;
+}
+
+/* Stacked above the canvas on narrow screens: it scrolls away with the page. */
+@media (max-width: 900px) {
+  .menu {
+    position: static;
+  }
+}
+
+.group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-8);
+}
+
+.heading {
+  margin: 0;
+  /* Figma's rule is an inside stroke: 18px text + 8px padding = 26px. */
+  padding: 0 var(--sp-4) 7px;
+  border-bottom: 1px solid #e3e8ef;
+  color: #697586;
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+  line-height: 18px;
+}
+
+.items {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-4);
+  width: 100%;
+  height: 40px;
+  padding: var(--sp-4);
+  border: none;
+  border-radius: 5px;
+  background: transparent;
+  color: #697586;
+  font-family: inherit;
+  font-size: var(--fs-2);
+  font-weight: var(--fw-bold);
+  line-height: 20px;
+  text-align: left;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.item:hover {
+  background: #eef2f6;
+  color: #364152;
+}
+.item:focus-visible {
+  outline: 2px solid #5b4fff;
+  outline-offset: 2px;
+}
+.itemActive,
+.itemActive:hover {
+  background: #121212;
+  color: var(--inverse);
+}
+
+.icon {
+  display: inline-block;
+  flex: none;
+  background-color: currentColor;
+  -webkit-mask: var(--icon) center / contain no-repeat;
+  mask: var(--icon) center / contain no-repeat;
+}

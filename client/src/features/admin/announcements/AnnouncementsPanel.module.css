@@ -1,0 +1,87 @@
+/* Admin → Announcement → List (Figma 1580:128800). Columns are 52 / 180 / 108 / 108 / 180 / status /
+   136 (actions) with 32px gaps, inset 24px from the canvas edge; rows are 68px. */
+
+/* ---------- header controls ---------- */
+.searchFilter {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-6);
+}
+
+/* ---------- table ---------- */
+.table {
+  overflow-x: auto;
+}
+.headRow,
+.row {
+  display: grid;
+  grid-template-columns: 52px 180px 108px 108px 180px minmax(93px, 1fr) 136px;
+  column-gap: var(--sp-16, 32px);
+  align-items: center;
+  min-width: 1095px;
+  padding: 0 23px;
+}
+.headRow {
+  height: 30px;
+  border-top: 1px solid #e3e8ef;
+  border-bottom: 1px solid #e3e8ef;
+  background: #f8fafc;
+  color: #697586;
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+  line-height: 18px;
+}
+/* 16px above the 36px actions, 15px below, then the 1px rule: 68px. */
+.row {
+  padding-top: var(--sp-8);
+  padding-bottom: 15px;
+  border-bottom: 1px solid #eef2f6;
+}
+.row:hover {
+  background: #fcfcfd;
+}
+.id {
+  color: #4b5565;
+  font-size: var(--fs-2);
+  font-weight: var(--fw-medium);
+  line-height: 20px;
+}
+.title,
+.cell {
+  overflow: hidden;
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+  line-height: 18px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.title {
+  color: #000;
+}
+.cell {
+  color: #3d3d3d;
+}
+
+.badge_active {
+  background: #dbfde1;
+  color: #125522;
+}
+.badge_scheduled {
+  background: #ffffe7;
+  color: #125522;
+}
+.badge_archived {
+  background: #fdd;
+  color: #b10303;
+}
+.badge_completed {
+  padding: var(--sp-2) var(--sp-4);
+  background: #eef2f6;
+  color: #4b5565;
+}
+
+.actions {
+  display: flex;
+  gap: var(--sp-7);
+  justify-self: end;
+}

@@ -1,0 +1,4 @@
+/* A building's spaces: ID, floor, booked of total, status, then the eye. */
+.cols {
+  grid-template-columns: 120px 96px 72px minmax(0, 1fr) 36px;
+}

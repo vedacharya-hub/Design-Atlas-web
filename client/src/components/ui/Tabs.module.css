@@ -1,0 +1,30 @@
+.tabs {
+  display: flex;
+  gap: var(--sp-2);
+  padding: var(--sp-2);
+  background: var(--inactive);
+  border-radius: var(--radius-3);
+}
+
+.trigger {
+  flex: 1;
+  height: 32px;
+  border: none;
+  border-radius: var(--radius-3);
+  background: transparent;
+  color: var(--fg-secondary);
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.trigger:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.active {
+  background: var(--ink);
+  color: var(--inverse);
+}

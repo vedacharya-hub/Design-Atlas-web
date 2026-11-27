@@ -1,0 +1,28 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background: var(--inverse);
+}
+
+.subHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--sp-8) var(--sp-12);
+}
+
+.title {
+  margin: 0;
+  font-family: var(--font-title);
+  font-size: 28px;
+  font-weight: var(--fw-regular);
+}
+
+.stage {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  border-top: 1px solid var(--gray-200);
+}

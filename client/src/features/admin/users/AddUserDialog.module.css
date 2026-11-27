@@ -1,0 +1,576 @@
+/* Add User (Figma 10227:235348 / 10227:235639 / 3015:296180): a 558 × 920 white dialog centred
+   over the page dimmed with black at 40%. Header and step bar on top, the step's form scrolling in
+   the middle, Cancel/Back and Next/Create along the bottom. */
+
+.backdrop {
+  position: fixed;
+  inset: 0;
+  /* Above the Iris launcher (300), like the user details panel. */
+  z-index: 400;
+  display: grid;
+  place-items: center;
+  padding: 16px;
+  background: rgba(0, 0, 0, 0.4);
+  animation: fadeIn 0.2s ease backwards;
+}
+.dialog {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: min(558px, 100%);
+  height: min(920px, calc(100vh - 32px));
+  overflow: hidden;
+  border-radius: 8px;
+  background: var(--inverse);
+  animation: dialogIn 0.28s cubic-bezier(0.22, 0.8, 0.24, 1) backwards;
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes dialogIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.98);
+  }
+}
+
+/* ---------- header: 16px down, 44px of text; the step bar starts at 76px ---------- */
+.head {
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-8);
+  padding: 16px 24px;
+}
+.headText {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+  min-width: 0;
+}
+.title {
+  margin: 0;
+  color: #000;
+  font-size: 18px;
+  font-weight: var(--fw-medium);
+  line-height: 22px;
+}
+.subtitle {
+  margin: 0;
+  color: #697586;
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+  line-height: 18px;
+}
+.close {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 1px solid #e3e8ef;
+  border-radius: 40px;
+  background: transparent;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.close:hover {
+  background: #f8fafc;
+}
+
+/* ---------- step bar: #eef2f6, step name, a #cdd5df rule, "1/2 Steps" ---------- */
+.steps {
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: var(--sp-4);
+  height: 40px;
+  padding: var(--sp-4) 24px;
+  background: #eef2f6;
+}
+.stepName {
+  color: #202939;
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+  line-height: 18px;
+  white-space: nowrap;
+}
+.stepLine {
+  flex: 1;
+  min-width: 0;
+  height: 0;
+  border-top: 1px solid #cdd5df;
+}
+.stepCount {
+  color: #697586;
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+  line-height: 18px;
+  white-space: nowrap;
+}
+.stepNumber {
+  color: #121926;
+  font-size: 20px;
+  line-height: 24px;
+}
+
+/* ---------- body: 20px below the step bar, 24px between sections ---------- */
+.body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 24px;
+  min-height: 0;
+  padding: 20px 24px 24px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  animation: stepIn 0.26s ease backwards;
+}
+@keyframes stepIn {
+  from {
+    opacity: 0;
+    transform: translateX(12px);
+  }
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+/* Figma draws the 1px line just above its position, so it eats into the gap before it. */
+.rule {
+  flex: none;
+  height: 0;
+  margin: -1px -24px 0;
+  border: none;
+  border-top: 1px solid #eef2f6;
+}
+.note {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+  color: #697586;
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+  line-height: 18px;
+}
+.note p {
+  margin: 0;
+}
+.error {
+  margin: 0;
+  padding: var(--sp-5) var(--sp-6);
+  border-radius: 8px;
+  background: #fef3f2;
+  color: #b42318;
+  font-size: var(--fs-1);
+  line-height: 18px;
+}
+.inlineLink {
+  padding: 0;
+  border: none;
+  background: none;
+  color: inherit;
+  font: inherit;
+  font-weight: var(--fw-bold);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* ---------- photo: 80px, the pencil badge at 48/48 ---------- */
+.avatarWrap {
+  position: relative;
+  flex: none;
+  width: 80px;
+  height: 80px;
+}
+.avatar {
+  display: block;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.avatarEdit {
+  position: absolute;
+  top: 48px;
+  left: 48px;
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid #cdd5df;
+  border-radius: 40px;
+  background: #364152;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.avatarEdit:hover {
+  background: #202939;
+}
+
+/* ---------- membership chips ---------- */
+.membership {
+  position: relative;
+}
+.chipInput {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-4);
+  cursor: pointer;
+}
+.chipInput:focus-visible {
+  border-color: #121212;
+}
+.chipPlaceholder {
+  flex: 1;
+  color: #202939;
+}
+.chipChevron {
+  flex: none;
+  margin-right: -2px;
+}
+.chip {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  gap: var(--sp-2);
+  height: 24px;
+  padding: var(--sp-2) var(--sp-3);
+  border-radius: 4px;
+  background: #eef2f6;
+  color: #4b5565;
+  font-size: var(--fs-0);
+  font-weight: var(--fw-bold);
+  line-height: 16px;
+  white-space: nowrap;
+}
+.chipRemove {
+  display: grid;
+  place-items: center;
+  width: 16px;
+  height: 16px;
+  padding: 0;
+  border: none;
+  border-radius: 3px;
+  background: none;
+  cursor: pointer;
+}
+.chipRemove:hover {
+  background: #e3e8ef;
+}
+.menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  left: 0;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  padding: var(--sp-2);
+  border: 1px solid #e3e8ef;
+  border-radius: 8px;
+  background: var(--inverse);
+  box-shadow: 0 12px 32px rgba(13, 18, 28, 0.12);
+}
+.menuItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-6);
+  padding: var(--sp-4) var(--sp-5);
+  border: none;
+  border-radius: 6px;
+  background: transparent;
+  font-family: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.menuItem:hover,
+.menuItem:focus-visible,
+.menuItem[aria-selected='true'] {
+  outline: none;
+  background: #f8fafc;
+}
+.menuChips {
+  display: flex;
+  gap: var(--sp-2);
+}
+.menuLabel {
+  color: #4b5565;
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+  line-height: 18px;
+}
+
+/* ---------- step 2: the key card, 40px down, then the hot stamps 40px below ---------- */
+.bodyCard {
+  gap: 40px;
+  padding-top: 40px;
+}
+.bodyCard .note {
+  margin-top: -16px;
+}
+.cardIntro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+}
+.cardFor {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-3);
+  max-width: 100%;
+  text-align: center;
+}
+.cardForLabel {
+  color: #697586;
+  font-size: var(--fs-2);
+  font-weight: var(--fw-medium);
+  line-height: 26px;
+}
+.cardForName {
+  color: #121926;
+  font-size: 22px;
+  font-weight: var(--fw-bold);
+  line-height: 26px;
+  overflow-wrap: anywhere;
+}
+.cardState {
+  padding: var(--sp-2) var(--sp-4);
+  border-radius: 4px;
+  background: #eef2f6;
+  color: #697586;
+  font-size: var(--fs-2);
+  font-weight: var(--fw-bold);
+  line-height: 20px;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+.cardStateReady {
+  background: #dbfde1;
+  color: #125522;
+}
+.stamps {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* The card tilts toward the pointer (--rx/--ry), with a glare that follows it (--mx/--my) and a
+   shine that sweeps across once per hover. */
+.cardStage {
+  perspective: 800px;
+}
+.bigCard {
+  position: relative;
+  width: 253px;
+  height: 140.46px;
+  overflow: hidden;
+  border-radius: 12.73px;
+  background: linear-gradient(180deg, #333 0%, #000 100%);
+  box-shadow: 0 3.385px 13.538px rgba(0, 0, 0, 0.08);
+  transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) scale(var(--lift, 1));
+  transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.4s ease;
+  will-change: transform;
+}
+.bigCard:hover {
+  --lift: 1.05;
+  box-shadow: 0 24px 40px -14px rgba(0, 0, 0, 0.45), 0 3.385px 13.538px rgba(0, 0, 0, 0.08);
+  transition: transform 0.14s ease-out, box-shadow 0.4s ease;
+}
+.bigCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 253px;
+  height: 140.03px;
+  background: url('/admin/user/keycard-texture.png') center / cover no-repeat;
+}
+.bigCard::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at var(--mx, 50%) var(--my, 50%), rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0) 55%);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+.bigCard:hover::after {
+  opacity: 1;
+}
+.bigCardLogo {
+  position: absolute;
+  top: 61.1px;
+  left: 82.7px;
+  display: block;
+}
+.bigCardShine {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, rgba(255, 255, 255, 0) 35%, rgba(255, 255, 255, 0.16) 50%, rgba(255, 255, 255, 0) 65%);
+  transform: translateX(-120%);
+  pointer-events: none;
+}
+.bigCard:hover .bigCardShine {
+  animation: shine 1.1s ease forwards;
+}
+@keyframes shine {
+  to {
+    transform: translateX(120%);
+  }
+}
+
+/* ---------- footer: 68px, a soft shadow upward ---------- */
+.foot {
+  position: relative;
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: space-between;
+  height: 68px;
+  padding: 0 24px;
+  background: var(--inverse);
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.04);
+}
+.secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  padding: 0 23px;
+  border: 1px solid #e3e8ef;
+  border-radius: 92px;
+  background: #f8fafc;
+  color: #000;
+  font-family: inherit;
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+  line-height: 18px;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.secondary:hover {
+  background: #eef2f6;
+}
+.primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-2);
+  width: 120px;
+  height: 44px;
+  padding: var(--sp-6) var(--sp-8);
+  border: 1px solid #cdd5df;
+  border-radius: 200px;
+  background: #000;
+  color: var(--inverse);
+  font-family: inherit;
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+  line-height: 18px;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+.primary:hover:not(:disabled) {
+  background: #202939;
+}
+/* Next stays grey until every required field is filled. */
+.primary:disabled {
+  border-color: #cdd5df;
+  background: #cdd5df;
+  cursor: not-allowed;
+}
+.primaryHug {
+  width: auto;
+}
+.close:focus-visible,
+.secondary:focus-visible,
+.primary:focus-visible,
+.avatarEdit:focus-visible,
+.chipRemove:focus-visible,
+.inlineLink:focus-visible {
+  outline: 2px solid #5b4fff;
+  outline-offset: 2px;
+}
+
+/* ---------- success: a 64px green check and the message, centred; closes after 2s ---------- */
+.success {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 24px;
+}
+.successBadge {
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  border: 7px solid #b9f9c4;
+  border-radius: 50%;
+  background: linear-gradient(146.15deg, #11a830 2.74%, #12872a 100%);
+  animation: pop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) backwards;
+}
+.successText {
+  margin: 0;
+  color: #000;
+  font-size: 22px;
+  font-weight: var(--fw-medium);
+  line-height: 26px;
+  text-align: center;
+  animation: rise 0.4s ease 0.12s backwards;
+}
+@keyframes pop {
+  from {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+}
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .backdrop,
+  .dialog,
+  .body,
+  .successBadge,
+  .successText {
+    animation: none;
+  }
+  .bigCard:hover {
+    --lift: 1;
+  }
+  .bigCard:hover .bigCardShine {
+    animation: none;
+  }
+}
+@media (max-width: 560px) {
+  .grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

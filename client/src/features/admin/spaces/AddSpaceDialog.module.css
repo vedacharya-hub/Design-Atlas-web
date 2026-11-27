@@ -1,0 +1,62 @@
+/* Add New Space (Figma 3189:94333): the Add New Team shell at 522px. Fields start 20px under the
+   rule and sit 20px apart, the footer 34px below the last one. */
+.dialog {
+  width: min(522px, 100%);
+}
+.body {
+  padding-bottom: 34px;
+}
+
+/* 102px, #f8fafc, dashed #697586, 12px corners: the folder over "Click to Upload Floor Plan". */
+.drop,
+.picked {
+  display: flex;
+  flex: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-2);
+  height: 102px;
+  border: 1px dashed #697586;
+  border-radius: 12px;
+  background: #f8fafc;
+}
+.drop {
+  width: 100%;
+  padding: 0 var(--sp-8);
+  font-family: inherit;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+.drop:hover,
+.dropOver {
+  border-color: #121926;
+  background: #eef2f6;
+}
+.drop:disabled {
+  cursor: progress;
+}
+.drop:focus-visible {
+  outline: 2px solid #5b4fff;
+  outline-offset: 2px;
+}
+.drop img {
+  object-fit: cover;
+}
+.dropText {
+  color: #697586;
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+  line-height: 18px;
+}
+.dropText strong {
+  color: #121926;
+  font-weight: var(--fw-bold);
+}
+
+/* Floor Number and Leasing Area, 20px apart. */
+.pair {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}

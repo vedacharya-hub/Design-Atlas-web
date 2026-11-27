@@ -1,0 +1,79 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-12);
+}
+
+.loyaltyBanner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-10);
+  padding: var(--sp-10) var(--sp-12);
+  border-radius: var(--radius-4);
+  background: linear-gradient(120deg, var(--gray-50) 0%, var(--gray-100) 100%);
+  border: 1px solid var(--gray-200);
+}
+
+.bannerTitle {
+  margin: 0 0 var(--sp-2);
+  font-size: var(--fs-2);
+  font-weight: var(--fw-medium);
+}
+
+.bannerSub {
+  margin: 0;
+  font-size: var(--fs-0);
+  color: var(--fg-tertiary);
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-8);
+}
+
+.sectionHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.sectionTitle {
+  margin: 0;
+  font-size: var(--fs-2);
+  font-weight: var(--fw-medium);
+}
+
+.cards {
+  display: flex;
+  gap: var(--sp-8);
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-2);
+  width: 100px;
+  height: 100px;
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-4);
+}
+
+.cardIcon {
+  width: 22px;
+  height: 22px;
+  color: var(--cobalt-600);
+}
+
+.cardValue {
+  font-size: var(--fs-2);
+  font-weight: var(--fw-bold);
+}
+
+.cardLabel {
+  font-size: var(--fs-0);
+  color: var(--fg-tertiary);
+}

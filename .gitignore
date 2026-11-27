@@ -1,0 +1,17 @@
+# Dependencies (reinstalled with npm install)
+node_modules/
+
+# Build output (rebuilt with npm run build)
+client/dist/
+client/dist-iris/
+*.tsbuildinfo
+
+# What the demo server writes while it runs (zones drawn in Space Zones)
+server/data/space-zones.json
+
+# Local machine, editor and assistant settings
+.DS_Store
+.claude/settings.local.json
+.env
+.env.*
+*.log

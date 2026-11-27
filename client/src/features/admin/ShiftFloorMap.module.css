@@ -1,0 +1,85 @@
+.map {
+  position: relative;
+  height: 420px;
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-4);
+  background: var(--gray-50);
+  overflow: hidden;
+}
+
+.stage {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 576px;
+  height: 561px;
+  transform: translate(-50%, -50%) scale(0.72);
+  transform-origin: center center;
+}
+
+.floor {
+  width: 100%;
+  height: 100%;
+  user-select: none;
+  pointer-events: none;
+}
+
+.seat {
+  position: absolute;
+  width: 11px;
+  height: 11px;
+  padding: 0;
+  transform: translate(-50%, -50%);
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 50%;
+  background: var(--gray-300);
+  cursor: default;
+  transition: transform 0.1s ease;
+}
+
+.seat.editable {
+  cursor: pointer;
+}
+.seat.editable:hover {
+  transform: translate(-50%, -50%) scale(1.6);
+}
+
+.assigned {
+  width: 14px;
+  height: 14px;
+  z-index: 2;
+}
+
+.legend {
+  position: absolute;
+  left: var(--sp-8);
+  bottom: var(--sp-8);
+  display: flex;
+  gap: var(--sp-8);
+  font-size: var(--fs-0);
+  color: var(--fg-secondary);
+}
+.legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-3);
+}
+.legend i {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+.dotMuted {
+  background: var(--gray-300);
+}
+
+.hint {
+  position: absolute;
+  right: var(--sp-8);
+  bottom: var(--sp-8);
+  padding: var(--sp-2) var(--sp-6);
+  border-radius: var(--radius-pill);
+  background: var(--ink);
+  color: var(--inverse);
+  font-size: var(--fs-0);
+}

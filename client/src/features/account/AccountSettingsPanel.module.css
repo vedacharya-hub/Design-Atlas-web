@@ -1,0 +1,136 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  justify-content: flex-end;
+  background: rgba(18, 25, 38, 0.4);
+  animation: fadeIn 0.2s ease;
+}
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  width: 70vw;
+  max-width: 1040px;
+  min-width: 420px;
+  height: 100%;
+  background: var(--inverse);
+  box-shadow: -12px 0 32px rgba(0, 0, 0, 0.18);
+  overflow: hidden;
+  animation: slideIn 0.25s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideIn {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
+
+.banner {
+  position: relative;
+  height: 200px;
+  flex: 0 0 auto;
+  background: linear-gradient(120deg, var(--cobalt-600) 0%, var(--ink) 100%);
+}
+
+.closeBtn {
+  position: absolute;
+  top: var(--sp-8);
+  right: var(--sp-8);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.16);
+  color: var(--inverse);
+  cursor: pointer;
+}
+.closeBtn:hover {
+  background: rgba(255, 255, 255, 0.28);
+}
+
+.identity {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--sp-8);
+  padding: 0 var(--sp-12) var(--sp-10);
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.avatarWrap {
+  margin-top: -48px;
+  border-radius: 50%;
+  box-shadow: 0 0 0 4px var(--inverse);
+  flex: 0 0 auto;
+}
+
+.identityText {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+  padding-bottom: var(--sp-3);
+  min-width: 0;
+}
+
+.nameRow {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+}
+
+.name {
+  margin: 0;
+  font-size: var(--fs-6);
+  font-weight: var(--fw-bold);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.verifiedIcon {
+  width: 18px;
+  height: 18px;
+  flex: 0 0 auto;
+}
+
+.email {
+  font-size: var(--fs-1);
+  color: var(--fg-tertiary);
+}
+
+.accountTypePill {
+  margin-left: auto;
+  margin-bottom: var(--sp-3);
+  padding: var(--sp-3) var(--sp-8);
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--stroke);
+  font-size: var(--fs-0);
+  font-weight: var(--fw-medium);
+  white-space: nowrap;
+  flex: 0 0 auto;
+}
+
+.tabsRow {
+  padding: var(--sp-8) var(--sp-12) 0;
+}
+
+.body {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: var(--sp-10) var(--sp-12) var(--sp-12);
+}
+
+.loading {
+  color: var(--fg-tertiary);
+  font-size: var(--fs-1);
+  padding: var(--sp-12) 0;
+}

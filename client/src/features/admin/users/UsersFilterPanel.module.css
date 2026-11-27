@@ -1,0 +1,239 @@
+/* Filters (Figma 8825:279955): a 490px panel, 12px in from the right of the page dimmed with black
+   at 40%. The header's rule sits at 68px; the fields start 20px under it, 24px apart and 20px in
+   from the sides; Clear all and Save run along a 68px footer. */
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 400;
+  background: rgba(0, 0, 0, 0.4);
+  animation: fadeIn 0.25s ease backwards;
+}
+.backdropOut {
+  animation: fadeOut 0.22s ease forwards;
+}
+.panel {
+  position: fixed;
+  top: 12px;
+  right: 12px;
+  bottom: 12px;
+  z-index: 401;
+  display: flex;
+  flex-direction: column;
+  width: min(490px, calc(100vw - 24px));
+  overflow: hidden;
+  border-radius: 12px;
+  background: var(--inverse);
+  outline: none;
+  animation: panelIn 0.34s cubic-bezier(0.22, 0.8, 0.24, 1) backwards;
+}
+.panelOut {
+  animation: panelOut 0.24s cubic-bezier(0.4, 0, 1, 1) forwards;
+}
+@keyframes panelIn {
+  from {
+    transform: translateX(calc(100% + 12px));
+  }
+}
+@keyframes panelOut {
+  to {
+    transform: translateX(calc(100% + 12px));
+  }
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+  }
+}
+
+/* 14 + 40 + 13, then the 1px rule: 68px. */
+.head {
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-8);
+  padding: 14px 20px 13px;
+  border-bottom: 1px solid #e3e8ef;
+}
+.title {
+  margin: 0;
+  color: #000;
+  font-size: 18px;
+  font-weight: var(--fw-medium);
+  line-height: 22px;
+}
+.close {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 1px solid #cdd5df;
+  border-radius: 92px;
+  background: var(--inverse);
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.close:hover {
+  background: #f8fafc;
+}
+
+.body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: var(--sp-12);
+  min-height: 0;
+  padding: 20px 20px 24px;
+  overflow-y: auto;
+}
+/* The design's filter inputs: a darker 24% black edge and 14px values. */
+.body select {
+  border-color: rgba(0, 0, 0, 0.24);
+  color: #000;
+  font-size: var(--fs-1);
+  line-height: 18px;
+}
+.body select:focus {
+  border-color: #121212;
+}
+
+/* Status / Membership: the label, 8px, then the radios 16px apart. */
+.radios {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+  min-width: 0;
+}
+.radiosLabel {
+  margin: 0;
+  color: #000;
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+  line-height: 18px;
+}
+.radioRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-6) var(--sp-8);
+}
+.radio {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  color: #000;
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+  line-height: 18px;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.radio input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+.radioMark {
+  position: relative;
+  flex: none;
+  width: 20px;
+  height: 20px;
+}
+.radioMark::before,
+.radioMark::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border-radius: 360px;
+  transform: translate(-50%, -50%);
+}
+.radioMark::before {
+  width: 16px;
+  height: 16px;
+  border: 1px solid rgba(0, 0, 0, 0.24);
+}
+.radioMark::after {
+  width: 12px;
+  height: 12px;
+  background: #000;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.4);
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+.radio input:checked + .radioMark::after {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+.radio input:focus-visible + .radioMark::before {
+  outline: 2px solid #5b4fff;
+  outline-offset: 2px;
+}
+
+.foot {
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 20px;
+  background: var(--inverse);
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.04);
+}
+.secondary,
+.primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  padding: 0 24px;
+  border: 1px solid #e3e8ef;
+  border-radius: 92px;
+  font-family: inherit;
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+  line-height: 18px;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background 0.15s ease, opacity 0.15s ease;
+}
+.secondary {
+  background: #f8fafc;
+  color: #000;
+}
+.secondary:hover:not(:disabled) {
+  background: #eef2f6;
+}
+.secondary:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+.primary {
+  gap: var(--sp-2);
+  border-color: #000;
+  background: #000;
+  color: var(--inverse);
+}
+.primary:hover {
+  background: #202939;
+}
+.close:focus-visible,
+.secondary:focus-visible,
+.primary:focus-visible {
+  outline: 2px solid #5b4fff;
+  outline-offset: 2px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .backdrop,
+  .backdropOut,
+  .panel,
+  .panelOut {
+    animation-duration: 0.01s;
+  }
+}

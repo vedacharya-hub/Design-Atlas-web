@@ -1,0 +1,187 @@
+/* Space Zones' plan (Figma 1598:90456, 3039:106709, 1604:187751): Space Map's canvas, with the
+   zones as tinted rectangles under the desks' dots. --k (1 / zoom, on the stage) keeps edges and
+   handles the same size on screen at any zoom. */
+/* Doubled to win over Space Map's "focus add" pointer: here it's a plain + to drag from. */
+.canvas.canvas[data-mode='add'] .plan {
+  cursor: crosshair;
+}
+.canvas[data-mode='add'] .zone {
+  cursor: not-allowed;
+}
+.plan {
+  user-select: none;
+}
+.mode {
+  min-width: 140px;
+}
+
+/* ---------- zones: the colour's 200 at ~55%, with its 700 edge ---------- */
+.zone {
+  position: absolute;
+  z-index: 1;
+  box-sizing: border-box;
+  border: calc(1.5px * var(--k, 1)) solid var(--edge);
+  background: var(--fill);
+  outline: none;
+  transition: box-shadow 0.15s ease, background 0.15s ease;
+}
+.canvas[data-mode='view'] .zone {
+  cursor: pointer;
+}
+.canvas[data-mode='move'] .zone {
+  cursor: move;
+}
+.zoneHot,
+.zoneSelected {
+  z-index: 2;
+  box-shadow: 0 0 0 calc(3px * var(--k, 1)) color-mix(in srgb, var(--edge) 22%, transparent);
+}
+.zone:focus-visible {
+  z-index: 2;
+  box-shadow: 0 0 0 calc(2px * var(--k, 1)) #5b4fff;
+}
+.zoneActive {
+  z-index: 3;
+  transition: none;
+}
+/* Being drawn, or waiting for its details: dashed. */
+.zoneDraft {
+  z-index: 3;
+  border-style: dashed;
+  pointer-events: none;
+}
+
+/* Move Zone: grab a side to resize it one way, a corner for two. */
+.edgeT,
+.edgeR,
+.edgeB,
+.edgeL {
+  position: absolute;
+  z-index: 1;
+}
+.edgeT,
+.edgeB {
+  right: calc(6px * var(--k, 1));
+  left: calc(6px * var(--k, 1));
+  height: calc(10px * var(--k, 1));
+  cursor: ns-resize;
+}
+.edgeT {
+  top: calc(-6px * var(--k, 1));
+}
+.edgeB {
+  bottom: calc(-6px * var(--k, 1));
+}
+.edgeL,
+.edgeR {
+  top: calc(6px * var(--k, 1));
+  bottom: calc(6px * var(--k, 1));
+  width: calc(10px * var(--k, 1));
+  cursor: ew-resize;
+}
+.edgeL {
+  left: calc(-6px * var(--k, 1));
+}
+.edgeR {
+  right: calc(-6px * var(--k, 1));
+}
+.corner {
+  position: absolute;
+  z-index: 2;
+  box-sizing: border-box;
+  width: calc(10px * var(--k, 1));
+  height: calc(10px * var(--k, 1));
+  border: calc(1.5px * var(--k, 1)) solid var(--edge);
+  border-radius: calc(2px * var(--k, 1));
+  background: var(--inverse);
+  opacity: 0;
+  transition: opacity 0.12s ease;
+}
+/* A bigger target than the square. */
+.corner::before {
+  content: '';
+  position: absolute;
+  inset: calc(-4px * var(--k, 1));
+}
+.zoneSelected .corner,
+.zone:hover .corner,
+.zoneActive .corner {
+  opacity: 1;
+}
+.cornerTL {
+  top: calc(-6px * var(--k, 1));
+  left: calc(-6px * var(--k, 1));
+  cursor: nwse-resize;
+}
+.cornerTR {
+  top: calc(-6px * var(--k, 1));
+  right: calc(-6px * var(--k, 1));
+  cursor: nesw-resize;
+}
+.cornerBL {
+  bottom: calc(-6px * var(--k, 1));
+  left: calc(-6px * var(--k, 1));
+  cursor: nesw-resize;
+}
+.cornerBR {
+  right: calc(-6px * var(--k, 1));
+  bottom: calc(-6px * var(--k, 1));
+  cursor: nwse-resize;
+}
+
+/* ---------- the desks: green when free, red when kept for someone; the zones take the clicks ---------- */
+.dot {
+  position: absolute;
+  z-index: 4;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #1dca40;
+  box-shadow: 0 0 0 1px var(--inverse);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+.dotTaken {
+  background: #d70000;
+}
+
+/* ---------- tips ---------- */
+.zoneTip {
+  position: absolute;
+  z-index: 10;
+  height: 26px;
+  padding: 4px 10px;
+  transform: translate(-50%, -100%);
+}
+.drawTip {
+  position: absolute;
+  z-index: 10;
+  height: 26px;
+  padding: 4px 10px;
+}
+/* "Drag a Section to Create Zone" (3039:106804): two lines, the arrow pointing up at the pointer. */
+.addTip {
+  flex-direction: column;
+  align-items: flex-start;
+}
+.addTipArrow {
+  width: 16px;
+  height: 8.5px;
+  margin: 0 0 -1px 14px;
+  transform: rotate(180deg);
+}
+.addTipText {
+  width: 122px;
+  height: auto;
+  padding: 8px 12px;
+  font-weight: var(--fw-bold);
+  white-space: normal;
+  text-align: center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .zone,
+  .corner {
+    transition: none;
+  }
+}

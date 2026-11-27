@@ -1,0 +1,146 @@
+/* Shared by the Spaces and Credits canvases: floor summary, underlined tabs and the tab body. */
+.summary {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-12);
+  padding: var(--sp-8) 23px var(--sp-8) 19px;
+  border-top: 1px solid #eef2f6;
+}
+
+.summaryText {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+  min-width: 220px;
+}
+
+.building {
+  font-size: var(--fs-2);
+  font-weight: var(--fw-medium);
+}
+
+.sub {
+  color: var(--fg-tertiary);
+  font-size: var(--fs-0);
+}
+
+.meta {
+  display: flex;
+  gap: var(--sp-12);
+  padding-left: var(--sp-12);
+  border-left: 1px solid var(--gray-200);
+}
+
+.metaCol {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+}
+
+.metaLabel {
+  color: var(--fg-tertiary);
+  font-size: var(--fs-0);
+  letter-spacing: 0.4px;
+}
+
+.metaValue {
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+}
+
+.badge {
+  margin-left: auto;
+  padding: var(--sp-2) var(--sp-3);
+  border-radius: 4px;
+  background: #dbfde1;
+  color: #125522;
+  font-size: var(--fs-0);
+  font-weight: var(--fw-bold);
+  line-height: 16px;
+}
+
+.tabsRow {
+  display: flex;
+  gap: var(--sp-10);
+  padding: 0 23px 0 19px;
+  border-top: 1px solid #eef2f6;
+  border-bottom: 1px solid #e3e8ef;
+  background: #f8fafc;
+}
+
+.tabBtn {
+  position: relative;
+  height: 42px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: var(--fg-tertiary);
+  font-family: inherit;
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+  cursor: pointer;
+}
+.tabBtn:hover {
+  color: var(--fg-primary);
+}
+
+.tabBtnActive {
+  color: var(--fg-primary);
+  font-weight: var(--fw-bold);
+}
+.tabBtnActive::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  bottom: -1px;
+  left: 0;
+  height: 2px;
+  background: var(--ink);
+}
+
+.body {
+  flex: 1;
+  min-height: 0;
+  padding: var(--sp-12) 23px var(--sp-12) 19px;
+}
+
+/* ---------- sections without a design yet ---------- */
+.comingSoon {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-4);
+  padding: 64px var(--sp-12);
+  border-top: 1px solid #eef2f6;
+  text-align: center;
+}
+
+.comingSoonIcon {
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  margin-bottom: var(--sp-4);
+  border: 1px solid #e3e8ef;
+  border-radius: 50%;
+  background: #f8fafc;
+  color: #697586;
+}
+
+.comingSoonTitle {
+  margin: 0;
+  color: #000;
+  font-family: var(--font-title);
+  font-size: 22px;
+  font-weight: var(--fw-regular);
+  line-height: 26px;
+}
+
+.comingSoonText {
+  margin: 0;
+  color: #697586;
+  font-size: var(--fs-1);
+  line-height: 20px;
+}

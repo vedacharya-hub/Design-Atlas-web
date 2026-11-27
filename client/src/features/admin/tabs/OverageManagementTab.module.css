@@ -1,0 +1,147 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-10);
+}
+
+.configBox {
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-4);
+  overflow: hidden;
+}
+
+.enableRow {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--sp-12);
+  padding: var(--sp-10) var(--sp-12);
+}
+
+.enableTitle {
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+  margin-bottom: var(--sp-2);
+}
+
+.enableDesc {
+  margin: 0;
+  max-width: 560px;
+  font-size: var(--fs-0);
+  color: var(--fg-tertiary);
+}
+
+.configBody {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.25s ease;
+}
+
+.configBodyOpen {
+  max-height: 800px;
+}
+
+.configBodyInner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-10);
+  padding: var(--sp-10) var(--sp-12) var(--sp-12);
+  border-top: 1px solid var(--gray-200);
+}
+
+.limitRow {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--sp-8);
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+  flex: 1;
+  max-width: 260px;
+  font-size: var(--fs-0);
+  color: var(--fg-tertiary);
+}
+.field input {
+  height: 40px;
+  padding: 0 var(--sp-6);
+  border: 1px solid var(--stroke);
+  border-radius: var(--radius-3);
+  font-size: var(--fs-1);
+  font-family: inherit;
+  color: var(--fg-primary);
+}
+
+.errorHint {
+  color: var(--seat-unavailable-strong);
+  font-weight: var(--fw-medium);
+}
+
+.infoNote {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sp-3);
+  padding: var(--sp-6) var(--sp-8);
+  border-radius: var(--radius-3);
+  background: var(--gray-50);
+  color: var(--fg-secondary);
+  font-size: var(--fs-0);
+}
+.infoNote svg {
+  flex: none;
+  margin-top: 1px;
+  color: var(--fg-tertiary);
+}
+
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-3);
+  padding: var(--sp-12) var(--sp-8);
+  border: 1px dashed var(--gray-300);
+  border-radius: var(--radius-4);
+  color: var(--fg-tertiary);
+  text-align: center;
+}
+.emptyState p {
+  margin: 0;
+  color: var(--fg-primary);
+  font-weight: var(--fw-medium);
+}
+.emptyState span {
+  font-size: var(--fs-0);
+}
+
+.formTitle {
+  margin: 0 0 var(--sp-8);
+  font-size: var(--fs-2);
+  font-weight: var(--fw-medium);
+}
+
+.confirmHead {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-4);
+  margin-bottom: var(--sp-4);
+}
+
+.confirmIcon {
+  display: inline-flex;
+  flex: none;
+  color: var(--seat-unavailable-strong);
+}
+
+.confirmBody {
+  margin: 0 0 var(--sp-8);
+  font-size: var(--fs-1);
+  color: var(--fg-secondary);
+}
+
+.formActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--sp-4);
+}

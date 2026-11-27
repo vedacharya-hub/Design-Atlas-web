@@ -1,0 +1,253 @@
+/* Measurements from Figma 9702:312303 / card 9702:312356 — the home page's room card at 0.832 scale,
+   on the dark Iris panel. Positions are Figma's minus the 0.832px inside border. */
+.section {
+  display: flex;
+  flex: none;
+  flex-direction: column;
+  gap: var(--sp-7);
+  align-self: stretch;
+  min-width: 0;
+  animation: roomsIn 0.25s ease;
+}
+
+@keyframes roomsIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-8);
+  min-height: 52px;
+}
+.headText {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+  min-width: 0;
+}
+.title {
+  margin: 0;
+  color: var(--inverse);
+  font-family: var(--font-title);
+  font-size: 20px;
+  font-weight: var(--fw-regular);
+  line-height: 24px;
+}
+.subtitle {
+  margin: 0;
+  color: #697586;
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+  line-height: 18px;
+}
+
+.arrows {
+  display: flex;
+  flex: none;
+  gap: var(--sp-7);
+}
+/* 44px like Figma, where the 1px border sits inside the 12px padding box. */
+.arrow {
+  display: inline-flex;
+  padding: 11px;
+  border: 1px solid #d1d1d1;
+  border-radius: var(--radius-pill);
+  background: transparent;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.arrow:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+/* The exported arrow is drawn black for light pages; invert it for the dark panel. */
+.arrow img {
+  filter: invert(1);
+}
+.arrowPrev img {
+  transform: scaleX(-1);
+}
+
+/* Bleeds to the panel's right edge like the Figma frame, where the last card is cut off. */
+.rail {
+  display: flex;
+  gap: var(--sp-7);
+  margin: 0 calc(-1 * var(--sp-8)) 0 0;
+  padding: 0 var(--sp-8) 0 0;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  list-style: none;
+}
+.rail::-webkit-scrollbar {
+  display: none;
+}
+
+.card {
+  position: relative;
+  flex: none;
+  width: 218px;
+  height: 278px;
+  overflow: hidden;
+  border: 0.832px solid #cdd5df;
+  border-radius: 10px;
+  background: #0d121c;
+  box-shadow: 0 3.33px 13.32px rgba(0, 0, 0, 0.08);
+  color: var(--inverse);
+  scroll-snap-align: start;
+}
+.pic {
+  position: absolute;
+  top: -0.83px;
+  left: -0.83px;
+  width: 218px;
+  height: 150.65px;
+  overflow: hidden;
+}
+.pic img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 230.63px;
+  height: 156.43px;
+  max-width: none;
+  object-fit: cover;
+}
+.edge {
+  position: absolute;
+  top: 123.19px;
+  left: -0.83px;
+  width: 231.39px;
+  height: 26.64px;
+}
+/*
+ * Figma's band behind the details: 64% black over a 4.16px backdrop blur, from y 103.21 to the
+ * bottom, softened by a 16.65px layer blur. Browsers can't blur a backdrop-filtered layer, so the
+ * blur's falloff is drawn as a mask instead: 50% at each edge of the band, fading over ±2σ (33px).
+ */
+.shade {
+  --edge: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  top: 69.91px;
+  bottom: 0;
+  left: -0.83px;
+  width: 218.07px;
+  background: rgba(0, 0, 0, 0.64);
+  -webkit-backdrop-filter: blur(4.16px);
+  backdrop-filter: blur(4.16px);
+  -webkit-mask-image:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.02) 0, rgba(0, 0, 0, 0.06) 8px, rgba(0, 0, 0, 0.15) 16px, rgba(0, 0, 0, 0.29) 24px, var(--edge) 33.3px, rgba(0, 0, 0, 0.68) 41px, rgba(0, 0, 0, 0.84) 50px, rgba(0, 0, 0, 0.93) 58px, rgba(0, 0, 0, 0.98) 66.6px, #000 80px, #000 calc(100% - 45px), rgba(0, 0, 0, 0.98) calc(100% - 33.3px), rgba(0, 0, 0, 0.84) calc(100% - 16.65px), var(--edge) 100%),
+    linear-gradient(90deg, var(--edge) 0, rgba(0, 0, 0, 0.84) 16.65px, rgba(0, 0, 0, 0.98) 33.3px, #000 45px, #000 calc(100% - 45px), rgba(0, 0, 0, 0.98) calc(100% - 33.3px), rgba(0, 0, 0, 0.84) calc(100% - 16.65px), var(--edge) 100%);
+  mask-image:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.02) 0, rgba(0, 0, 0, 0.06) 8px, rgba(0, 0, 0, 0.15) 16px, rgba(0, 0, 0, 0.29) 24px, var(--edge) 33.3px, rgba(0, 0, 0, 0.68) 41px, rgba(0, 0, 0, 0.84) 50px, rgba(0, 0, 0, 0.93) 58px, rgba(0, 0, 0, 0.98) 66.6px, #000 80px, #000 calc(100% - 45px), rgba(0, 0, 0, 0.98) calc(100% - 33.3px), rgba(0, 0, 0, 0.84) calc(100% - 16.65px), var(--edge) 100%),
+    linear-gradient(90deg, var(--edge) 0, rgba(0, 0, 0, 0.84) 16.65px, rgba(0, 0, 0, 0.98) 33.3px, #000 45px, #000 calc(100% - 45px), rgba(0, 0, 0, 0.98) calc(100% - 33.3px), rgba(0, 0, 0, 0.84) calc(100% - 16.65px), var(--edge) 100%);
+  -webkit-mask-composite: source-in;
+  mask-composite: intersect;
+}
+
+.body {
+  position: absolute;
+  top: 150.65px;
+  left: 12.49px;
+  display: flex;
+  flex-direction: column;
+  gap: 13.32px;
+  width: 191.44px;
+}
+.meta {
+  display: flex;
+  flex-direction: column;
+  gap: 6.66px;
+}
+.line {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-2);
+}
+.muted {
+  overflow: hidden;
+  color: #9aa4b2;
+  font-size: 13.32px;
+  font-weight: var(--fw-medium);
+  line-height: 16.65px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.name {
+  overflow: hidden;
+  font-size: 16.65px;
+  font-weight: var(--fw-medium);
+  line-height: 19.98px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.seat {
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: 3.33px;
+  color: #e3e8ef;
+  font-size: 13.32px;
+  font-weight: var(--fw-medium);
+  line-height: 16.65px;
+  white-space: nowrap;
+}
+.credits {
+  flex: none;
+  font-family: var(--font-title);
+  font-size: 13.32px;
+  line-height: 16.65px;
+  white-space: nowrap;
+}
+
+/* "Component 4": white pill with a 0.83px #9AA4B2 inside stroke, 33.65px tall. */
+.select {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 33.65px;
+  padding: 0 13.32px;
+  border: 0.832px solid #9aa4b2;
+  border-radius: 166.47px;
+  background: var(--inverse);
+  color: var(--ink);
+  font-family: inherit;
+  font-size: 13.32px;
+  font-weight: var(--fw-medium);
+  line-height: 16.65px;
+  cursor: pointer;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+.select:active:not(:disabled) {
+  transform: scale(0.97);
+}
+.select:disabled {
+  cursor: default;
+  opacity: 0.45;
+}
+.selectBooked,
+.selectBooked:disabled {
+  border-color: #502f83;
+  background: #502f83;
+  color: var(--inverse);
+  opacity: 1;
+}
+
+.heart {
+  position: absolute;
+  top: 9.16px;
+  left: 172.29px;
+  display: flex;
+  padding: 8.32px;
+  border: none;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+}
+.heart[aria-pressed='true'] {
+  background: #e5484d;
+}

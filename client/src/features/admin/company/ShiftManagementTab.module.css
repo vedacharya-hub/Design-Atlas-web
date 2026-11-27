@@ -1,0 +1,126 @@
+/* Shift Management (Figma 3124:197371): a card 20px under the tabs with a 56px #f8fafc header
+   (All Shifts, Add Shift), a 32px column header, 68px rows (ID 120, name 160, timings 168,
+   status 148, 32px apart, 16px in) and a note at the foot. */
+.wrap {
+  padding: 19px 19px 32px 18px;
+}
+.card {
+  overflow: hidden;
+  border: 1px solid #eef2f6;
+  border-radius: 8px;
+  background: var(--inverse);
+}
+.head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-8);
+  min-height: 56px;
+  padding: 7px 16px;
+  border-bottom: 1px solid #e3e8ef;
+  background: #f8fafc;
+}
+.headText {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+  min-width: 0;
+}
+.title {
+  margin: 0;
+  color: #121926;
+  font-size: var(--fs-2);
+  font-weight: var(--fw-medium);
+  line-height: 20px;
+}
+.subtitle {
+  margin: 0;
+  color: #4b5565;
+  font-size: var(--fs-0);
+  font-weight: var(--fw-regular);
+  line-height: 16px;
+}
+/* "Add Shift +": a 32px black pill, 12px text. */
+.add {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  gap: var(--sp-2);
+  height: 32px;
+  padding: 0 12px;
+  border: none;
+  border-radius: 92px;
+  background: #000;
+  color: var(--inverse);
+  font-family: inherit;
+  font-size: var(--fs-0);
+  font-weight: var(--fw-medium);
+  line-height: 16px;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.add:hover:not(:disabled) {
+  background: #202939;
+}
+.add:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+.add:focus-visible {
+  outline: 2px solid #5b4fff;
+  outline-offset: 2px;
+}
+.cols {
+  display: grid;
+  grid-template-columns: 120px 160px 168px 148px minmax(140px, 1fr);
+  column-gap: 32px;
+  align-items: center;
+  padding: 0 16px;
+}
+.headRow {
+  height: 32px;
+  border-bottom: 1px solid #e3e8ef;
+  background: #f8fafc;
+  color: #697586;
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+  line-height: 18px;
+}
+.row {
+  min-height: 68px;
+  border-bottom: 1px solid #eef2f6;
+}
+.name {
+  overflow: hidden;
+  color: #121926;
+  font-size: var(--fs-2);
+  font-weight: var(--fw-medium);
+  line-height: 20px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.timings {
+  color: #4b5565;
+  font-size: var(--fs-2);
+  font-weight: var(--fw-medium);
+  line-height: 20px;
+  white-space: nowrap;
+}
+.actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 16px;
+}
+.note {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  margin: 0;
+  padding: 8px 6px;
+  color: #4b5565;
+  font-size: var(--fs-1);
+  font-weight: var(--fw-regular);
+  line-height: 18px;
+}

@@ -1,0 +1,721 @@
+/* Interactive chat widgets for desk booking. Surfaces use the Figma "Glass" effect shared with the
+   AI bubble (4% fill, 3.5px backdrop blur, rim lit from the top-left). */
+.office,
+.calendar,
+.summary,
+.desk,
+.dayList,
+.changeFrom,
+.changeTo {
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.04);
+  -webkit-backdrop-filter: blur(3.5px);
+  backdrop-filter: blur(3.5px);
+  box-shadow:
+    inset 1px 1px 0 rgba(255, 255, 255, 0.08),
+    inset -1px -1px 0 rgba(255, 255, 255, 0.06),
+    inset -2px -4px 6px -2px rgba(255, 255, 255, 0.025);
+  color: var(--inverse);
+}
+.office,
+.calWrap,
+.summary,
+.desks {
+  animation: widgetIn 0.25s ease;
+}
+
+@keyframes widgetIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------- office card (Figma 9946:235737) ---------- */
+.office {
+  flex: none;
+  align-self: flex-start;
+  max-width: 100%;
+  padding: var(--sp-5) var(--sp-6);
+}
+.officeHeader {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+.officePhoto {
+  position: relative;
+  flex: none;
+  width: 80px;
+  height: 80px;
+  overflow: hidden;
+  border-radius: 4px;
+  background: #e3e8ef;
+}
+.officePhoto > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.officeLogo {
+  position: absolute;
+  top: 42px;
+  left: 42px;
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  overflow: hidden;
+  border-radius: 50%;
+  background: #f6f6f6;
+}
+.officeLogo img {
+  width: 31.385px;
+  height: 31.385px;
+  object-fit: cover;
+}
+.officeText {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--sp-4);
+  min-width: 0;
+}
+.officeLines {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+  font-size: var(--fs-2);
+  line-height: 20px;
+}
+.officeTitle {
+  font-weight: var(--fw-bold);
+}
+.officeBuilding {
+  color: #e7e7e7;
+  font-weight: var(--fw-medium);
+}
+.officeBadge {
+  display: inline-flex;
+  align-items: center;
+  height: 24px;
+  padding: 4px 6px;
+  border-radius: 4px;
+  background: #dbfde1;
+  color: #125522;
+  font-size: var(--fs-0);
+  font-weight: var(--fw-bold);
+  line-height: 16px;
+}
+/* Booking cards (Figma 9961:239115) use the compact 20px badge. */
+.officeHeaderDesk .officeBadge {
+  height: 20px;
+  padding: 0 var(--sp-2);
+}
+
+/* ---------- calendar (Figma 9946:235600) ---------- */
+.calWrap {
+  display: flex;
+  flex: none;
+  flex-direction: column;
+  align-self: flex-start;
+  gap: var(--sp-6);
+  max-width: 100%;
+}
+.calendar {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+  width: 321px;
+  max-width: 100%;
+  padding: var(--sp-5) var(--sp-6);
+}
+/* Notch pointing up at the office card above. */
+.calPointer {
+  position: absolute;
+  top: -7.5px;
+  left: 29px;
+  display: grid;
+  place-items: center;
+  width: 21px;
+  height: 21px;
+}
+.calPointer img {
+  transform: rotate(-135deg);
+}
+.calHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.calMonth {
+  font-size: 16.139px;
+  font-weight: var(--fw-bold);
+  line-height: 21.518px;
+}
+.calNav {
+  display: flex;
+  gap: 5.38px;
+}
+.calNavBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid #202939;
+  border-radius: 92px;
+  background: rgba(255, 255, 255, 0.04);
+  cursor: pointer;
+}
+.calNavBtn:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.1);
+}
+.calNavBtn:disabled {
+  cursor: default;
+  opacity: 0.35;
+}
+/* Weekday row and day grid form one block, like the Figma "Days" frame. */
+.calBody {
+  display: flex;
+  flex-direction: column;
+}
+.calWeekdays,
+.calDays {
+  display: grid;
+  grid-template-columns: repeat(7, 43px);
+  justify-content: center;
+}
+.calWeekdays span {
+  display: grid;
+  place-items: center;
+  height: 43px;
+  color: #e3e8ef;
+  font-family: Inter, var(--font-body);
+  font-size: 9.414px;
+  font-weight: 600;
+  font-feature-settings: 'lnum' 1, 'tnum' 1;
+}
+/* 0.672px cell borders that collapse into a single line between neighbours. */
+.calDays {
+  border-top: 0.672px solid #364152;
+  border-left: 0.672px solid #364152;
+}
+.calCell {
+  display: grid;
+  place-items: center;
+  height: 43px;
+  padding: 0;
+  border: none;
+  border-right: 0.672px solid #364152;
+  border-bottom: 0.672px solid #364152;
+  background: transparent;
+  color: var(--inverse);
+  font-family: Inter, var(--font-body);
+  font-size: 9.414px;
+  font-weight: 400;
+  font-feature-settings: 'lnum' 1, 'tnum' 1;
+}
+.calDay {
+  position: relative;
+  cursor: pointer;
+  transition: background 0.12s ease;
+}
+.calDay:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.1);
+}
+.calDay:disabled {
+  color: #4b5565;
+  cursor: default;
+}
+/* Today keeps a small dot under the number, selected or not. */
+.calToday {
+  font-weight: 600;
+}
+.calToday::after {
+  content: '';
+  position: absolute;
+  bottom: 7px;
+  left: 50%;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: currentColor;
+  transform: translateX(-50%);
+}
+.calSelected,
+.calSelected:disabled {
+  background: var(--inverse);
+  box-shadow: inset 0 0 0 0.672px #cdd5df;
+  color: var(--ink);
+}
+.calCurrent,
+.calCurrent:disabled {
+  color: #9aa4b2;
+  text-decoration: line-through;
+  background: rgba(255, 255, 255, 0.06);
+}
+.calFoot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.calCount {
+  font-size: var(--fs-2);
+  font-weight: var(--fw-medium);
+  line-height: 20px;
+}
+.calApply {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 32px;
+  padding: 0 12px;
+  border: 1px solid #cdd5df;
+  border-radius: 92px;
+  background: var(--inverse);
+  color: var(--ink);
+  font-family: inherit;
+  font-size: var(--fs-0);
+  font-weight: var(--fw-medium);
+  line-height: 16px;
+  cursor: pointer;
+}
+.calApply:disabled {
+  cursor: default;
+  opacity: 0.45;
+}
+
+/* "Previous date → New date" above the reschedule calendar. */
+.change {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-4);
+  width: 321px;
+  max-width: 100%;
+}
+.change img {
+  flex: none;
+}
+/* Same frosted glass as the calendar below them. */
+.changeFrom,
+.changeTo {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+  padding: var(--sp-4) var(--sp-5);
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+  line-height: 18px;
+}
+.changeFrom small,
+.changeTo small {
+  color: #9aa4b2;
+  font-size: 11px;
+  line-height: 14px;
+}
+.changeFrom {
+  color: #9aa4b2;
+  text-decoration: line-through;
+  text-decoration-color: rgba(154, 164, 178, 0.6);
+}
+.changeFrom small {
+  text-decoration: none;
+}
+.changeTo {
+  border: 1px dashed rgba(255, 255, 255, 0.24);
+  color: #9aa4b2;
+}
+.changeToSet {
+  border: 1px solid #cdd5df;
+  color: var(--inverse);
+}
+
+/* ---------- desk choices ---------- */
+/* One horizontally scrolling row: four desks, then "Choose seats manually". */
+.desks {
+  display: grid;
+  flex: none;
+  grid-auto-columns: 176px;
+  grid-auto-flow: column;
+  gap: var(--sp-6);
+  margin-right: calc(-1 * var(--sp-8));
+  padding: 2px var(--sp-8) 2px 0;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x proximity;
+  scrollbar-width: none;
+}
+.desks > * {
+  scroll-snap-align: start;
+}
+.desks::-webkit-scrollbar {
+  display: none;
+}
+.desk {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+  min-width: 0;
+  padding: var(--sp-6);
+}
+.deskChosen {
+  box-shadow: inset 0 0 0 1px #6f4fbf, 0 0 12px rgba(91, 79, 255, 0.35);
+}
+.deskTag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  align-self: flex-start;
+  max-width: 100%;
+  margin-bottom: var(--sp-2);
+  padding: 2px var(--sp-3);
+  overflow: hidden;
+  border-radius: 4px;
+  background: rgba(213, 228, 255, 0.12);
+  color: #d5e4ff;
+  font-size: 11px;
+  font-weight: var(--fw-medium);
+  line-height: 14px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.deskTagFavourite {
+  background: rgba(229, 72, 77, 0.18);
+  color: #ffc9cb;
+}
+.deskTagRecent {
+  background: rgba(80, 47, 131, 0.55);
+  color: #e9ddff;
+}
+.heart {
+  color: #ff6b70;
+}
+.deskName {
+  font-family: var(--font-title);
+  font-size: 28px;
+  line-height: 32px;
+}
+.deskMeta {
+  color: #cdd5df;
+  font-size: 13px;
+  font-weight: var(--fw-medium);
+  line-height: 16px;
+}
+.deskFeatures {
+  min-height: 32px;
+  color: #9aa4b2;
+  font-size: var(--fs-0);
+  line-height: 16px;
+}
+.deskSelect {
+  margin-top: auto;
+  padding: 8.32px 13.32px;
+  border: none;
+  border-radius: 999px;
+  background: var(--inverse);
+  color: var(--ink);
+  font-family: inherit;
+  font-size: 13.32px;
+  font-weight: var(--fw-medium);
+  line-height: 16.65px;
+  cursor: pointer;
+}
+.deskSelect:disabled {
+  cursor: default;
+  opacity: 0.45;
+}
+.deskChosen .deskSelect:disabled {
+  background: #502f83;
+  color: var(--inverse);
+  opacity: 1;
+}
+.deskManual {
+  border: 1px dashed rgba(255, 255, 255, 0.24);
+  background: transparent;
+  box-shadow: none;
+}
+.deskManual .deskSelect {
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  background: transparent;
+  color: var(--inverse);
+}
+.manualIcon {
+  display: grid;
+  grid-template-columns: repeat(3, 8px);
+  gap: 3px;
+  margin: 2px 0 var(--sp-3);
+}
+.manualIcon i {
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.35);
+}
+.manualIcon i:nth-child(5) {
+  background: var(--inverse);
+}
+.manualTitle {
+  font-size: var(--fs-2);
+  font-weight: var(--fw-medium);
+  line-height: 20px;
+}
+
+/* ---------- choose date for reschedule / cancellation (Figma 9961:239853) ---------- */
+.dayList {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+/* Long lists (a day of time slots) scroll inside the card: four and a half rows show. */
+.dayListScroll {
+  max-height: 333px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.24) transparent;
+}
+.dayRow {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-4);
+  width: 100%;
+  padding: var(--sp-4) var(--sp-10);
+  border: none;
+  background: transparent;
+  color: var(--inverse);
+  font-family: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.12s ease;
+}
+/* Inside stroke in Figma: drawn over the row rather than adding to its 74px. */
+.dayRow + .dayRow {
+  box-shadow: inset 0 1px 0 #202939;
+}
+.dayRow:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.04);
+}
+.dayRow:disabled {
+  cursor: default;
+}
+.dayTile {
+  display: flex;
+  flex: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 58px;
+  border: 1px solid #697586;
+  border-radius: 8px;
+  background: #121926;
+}
+.dayTile small {
+  color: #cdd5df;
+  font-size: var(--fs-0);
+  font-weight: var(--fw-medium);
+  line-height: 16px;
+}
+.dayTile b {
+  font-size: 18px;
+  font-weight: var(--fw-bold);
+  line-height: 22px;
+}
+/* "PM" over "10:30" has to fit the same 48px tile. */
+.dayTileTime b {
+  font-size: var(--fs-2);
+}
+.dayName {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+  line-height: 18px;
+}
+.dayName small {
+  color: #9aa4b2;
+  font-size: var(--fs-0);
+  line-height: 16px;
+}
+/* 16px ring; the picked day fills with a 12px dot. */
+.radio {
+  position: relative;
+  flex: none;
+  width: 20px;
+  height: 20px;
+}
+.radio::before,
+.radio::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+.radio::before {
+  width: 16px;
+  height: 16px;
+  box-sizing: border-box;
+  border: 1px solid var(--inverse);
+}
+.radioOn::after {
+  width: 12px;
+  height: 12px;
+  background: var(--inverse);
+}
+.rowBadge {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  height: 20px;
+  padding: 0 var(--sp-2);
+  border-radius: 4px;
+  font-size: var(--fs-0);
+  font-weight: var(--fw-bold);
+  line-height: 16px;
+}
+.rowBadgeCancelled {
+  background: #fdd;
+  color: #b10303;
+}
+/* Same badge shape, in the OFFICE badge's family, for the slot already booked. */
+.rowBadgeCurrent {
+  background: #e3e8ef;
+  color: #202939;
+}
+
+/* ---------- summary card (Figma 9961:239115 / 9961:239950) ---------- */
+.summary {
+  display: flex;
+  flex: none;
+  flex-direction: column;
+  gap: var(--sp-8);
+  align-self: flex-start;
+  width: min(380px, 100%);
+  padding: var(--sp-5) var(--sp-6);
+}
+.summaryBody {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-6);
+}
+.summaryTitle {
+  margin: 0;
+  font-family: var(--font-title);
+  font-size: var(--fs-2);
+  font-weight: var(--fw-regular);
+  line-height: 20px;
+}
+/* A zero-height line in Figma, so it adds no height to the stack. */
+.summaryRule {
+  width: 100%;
+  height: 0;
+  margin: 0 0 -1px;
+  border: none;
+  border-top: 1px solid #4b5565;
+}
+.summaryChange {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-5);
+  font-family: var(--font-title);
+  font-size: 18px;
+  line-height: 24px;
+}
+.summaryChange > span:first-child {
+  color: #9aa4b2;
+  text-decoration: line-through;
+  text-decoration-color: rgba(154, 164, 178, 0.6);
+}
+.summaryChangeTo {
+  color: var(--inverse);
+}
+.summaryRows {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-6);
+  margin: 0;
+}
+.summaryRows > div {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--sp-8);
+}
+.summaryRows dt,
+.summaryRows dd {
+  margin: 0;
+  font-size: var(--fs-2);
+  font-weight: var(--fw-medium);
+  line-height: 20px;
+}
+.summaryRows dt {
+  flex: none;
+}
+.summaryRows dd {
+  text-align: right;
+}
+/* Two equal buttons: secondary on the left, primary CTA on the right. */
+.summaryActions {
+  display: flex;
+  gap: var(--sp-6);
+}
+.summarySecondary,
+.summaryPrimary {
+  display: inline-flex;
+  flex: 1 1 0;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  height: 36px;
+  padding: var(--sp-4) var(--sp-8);
+  border-radius: 92px;
+  font-family: inherit;
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+  line-height: 18px;
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+.summarySecondary {
+  border: 1px solid transparent;
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--inverse);
+}
+.summarySecondary:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.1);
+}
+.summaryPrimary {
+  border: 1px solid #cdd5df;
+  background: var(--inverse);
+  color: var(--ink);
+}
+.summaryDanger {
+  border-color: #e5484d;
+  background: #e5484d;
+  color: var(--inverse);
+}
+.summarySecondary:active:not(:disabled),
+.summaryPrimary:active:not(:disabled) {
+  transform: scale(0.97);
+}
+.summarySecondary:disabled,
+.summaryPrimary:disabled {
+  cursor: default;
+  opacity: 0.4;
+}
+/* Once answered, the chosen button stays lit so the thread shows what was decided. */
+.summaryChosen:disabled {
+  opacity: 1;
+  box-shadow: 0 0 0 2px #6f4fbf;
+}

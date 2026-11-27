@@ -1,0 +1,48 @@
+/* 20px from the canvas's top-left (19px inside its 1px border), 46px tall, then 16px to the table. */
+.header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-8) var(--sp-12);
+  min-height: 46px;
+  padding: 19px 23px 0 19px;
+  margin-bottom: var(--sp-8);
+}
+
+.headerDivided {
+  margin-bottom: 0;
+  padding-right: 19px;
+  padding-bottom: var(--sp-10);
+  border-bottom: 1px solid #eef2f6;
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+  min-width: 0;
+}
+
+.title {
+  margin: 0;
+  color: #000;
+  font-family: var(--font-title);
+  font-size: 22px;
+  font-weight: var(--fw-regular);
+  line-height: 26px;
+}
+
+.description {
+  margin: 0;
+  color: #4b5565;
+  font-size: var(--fs-0);
+  font-weight: var(--fw-regular);
+  line-height: 16px;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-12);
+}

@@ -1,0 +1,76 @@
+/* Teams / Department / Business Unit (Figma 1578:126972, 1578:127078, 1578:127166). They reuse the
+   All Users table (header row, 68px rows, ID tag, badges, ⋯) with each level's fixed columns,
+   28px apart, starting 12px in; the ⋯ sits 12px from the right. */
+.table > [role='row'] {
+  min-width: max-content;
+  padding-left: 11px;
+}
+/* 36px tall like the ⋯ button, so rows come to 16 + 36 + 16 = 68px. */
+.cols {
+  display: grid;
+  flex: none;
+  grid-template-columns: var(--org-cols);
+  column-gap: 28px;
+  align-items: center;
+  min-height: 36px;
+  margin-right: 28px;
+}
+.table .actions {
+  width: 63px;
+  padding-right: 11px;
+}
+.name {
+  overflow: hidden;
+  color: #000;
+  font-size: var(--fs-1);
+  font-weight: var(--fw-bold);
+  line-height: 18px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* "Department: Engineering ×" next to the title after drilling down from the level above. */
+.titleRow {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-4);
+}
+.scope {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  height: 24px;
+  padding: var(--sp-2) var(--sp-2) var(--sp-2) var(--sp-4);
+  border-radius: 4px;
+  background: #eef2f6;
+  color: #4b5565;
+  font-size: var(--fs-0);
+  font-weight: var(--fw-bold);
+  line-height: 16px;
+  white-space: nowrap;
+}
+.scopeClear {
+  display: grid;
+  place-items: center;
+  width: 16px;
+  height: 16px;
+  padding: 0;
+  border: none;
+  border-radius: 3px;
+  background: none;
+  cursor: pointer;
+}
+.scopeClear:hover {
+  background: #e3e8ef;
+}
+.scopeClear:focus-visible {
+  outline: 2px solid #5b4fff;
+  outline-offset: 1px;
+}
+
+.filterLabel {
+  color: #121926;
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+  line-height: 18px;
+}

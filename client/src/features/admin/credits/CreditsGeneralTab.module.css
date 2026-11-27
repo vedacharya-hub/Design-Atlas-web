@@ -1,0 +1,107 @@
+/* Credits → General (Figma 1607:206217): 24px under the tabs, five equal cards 16px apart, then
+   the two usage bars side by side, 32px apart, 24px below. */
+.general {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 23px 23px 32px 19px;
+}
+.stats {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 16px;
+  margin: 0;
+}
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+  padding: 7px 15px;
+  border: 1px solid #e3e8ef;
+  border-radius: 8px;
+  background: var(--inverse);
+}
+.statLabel {
+  overflow: hidden;
+  color: #4b5565;
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+  line-height: 18px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.statValue {
+  margin: 0;
+  color: #000;
+  font-size: 20px;
+  font-weight: var(--fw-medium);
+  line-height: 24px;
+}
+.bars {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 32px;
+}
+.usage {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+  min-width: 0;
+}
+.usageTitle {
+  margin: 0;
+  color: #121926;
+  font-size: var(--fs-1);
+  font-weight: var(--fw-bold);
+  line-height: 18px;
+}
+.foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-6);
+}
+/* "380" at 20px, "/500 Used" at 14px. */
+.count {
+  margin: 0;
+  color: #121926;
+  font-size: var(--fs-1);
+  font-weight: var(--fw-regular);
+  line-height: 18px;
+  white-space: nowrap;
+}
+.count strong {
+  font-size: 20px;
+  font-weight: var(--fw-medium);
+  line-height: 24px;
+}
+.meta {
+  margin: 0;
+  color: #697586;
+  font-size: var(--fs-0);
+  line-height: 16px;
+  text-align: right;
+}
+.meta strong {
+  color: #121926;
+  font-weight: var(--fw-bold);
+}
+.link {
+  padding: 0;
+  border: none;
+  background: none;
+  color: #3659f5;
+  font-family: inherit;
+  font-size: var(--fs-0);
+  font-weight: var(--fw-medium);
+  line-height: 16px;
+  cursor: pointer;
+}
+.link:hover {
+  text-decoration: underline;
+}
+.link:focus-visible {
+  outline: 2px solid #5b4fff;
+  outline-offset: 2px;
+}

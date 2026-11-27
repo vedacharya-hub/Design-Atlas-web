@@ -1,0 +1,40 @@
+/* Create Role (Figma 8349:200956): the Add New Team shell at 628px with a 16px title over a 12px
+   note, the rule at 68px; the fields 16px under it and 16px apart, the permissions 20px below. */
+.dialog {
+  width: min(628px, 100%);
+}
+.head {
+  padding: 14px 24px 13px;
+}
+.title {
+  margin: 0;
+  color: #000;
+  font-size: var(--fs-2);
+  font-weight: var(--fw-medium);
+  line-height: 20px;
+}
+.subtitle {
+  margin: 0;
+  color: #697586;
+  font-size: var(--fs-0);
+  font-weight: var(--fw-medium);
+  line-height: 16px;
+}
+.close {
+  border-color: #e3e8ef;
+}
+.body {
+  padding: 16px 24px 24px;
+}
+.fields {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+/* "Create ✓": 12px of padding above and below, 16px at the sides, the check 4px after. */
+.create {
+  gap: var(--sp-2);
+  height: 42px;
+  padding: 0 15px;
+  border-radius: 200px;
+}

@@ -1,0 +1,536 @@
+/* My Bookings (Figma 1445:45934): a white header (24px down, the WeWork Serif heading, then the
+   filters and the Created By / For Me tabs), and the bookings 28px below, by month and then by day.
+   Each day is a card: the weekday and date in a 71px column, then 132px rows. */
+.page {
+  --gutter: max(64px, calc((100% - 1312px) / 2));
+  min-height: 100%;
+  background: var(--inverse);
+}
+
+/* ---------- header ---------- */
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  padding: 24px var(--gutter) 16px;
+  background: var(--inverse);
+  filter: drop-shadow(0 4px 14px rgba(99, 94, 111, 0.07));
+}
+.heading {
+  margin: 0;
+  color: #000;
+  font-family: var(--font-title);
+  font-size: var(--fs-6);
+  font-weight: var(--fw-regular);
+  line-height: 28px;
+  letter-spacing: -0.5px;
+}
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.dropdown {
+  position: relative;
+}
+.dropdownBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 40px;
+  padding: 0 18px 0 24px;
+  border: 1px solid #cdd5df;
+  border-radius: 100px;
+  background: var(--inverse);
+  color: #000;
+  font-family: inherit;
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+  line-height: 18px;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+.dropdownBtn:hover {
+  background: #f8fafc;
+}
+.dropdownBtnOn {
+  border-color: #121926;
+}
+.chevronUp {
+  transform: rotate(180deg);
+}
+.dropdownMenu {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  z-index: 30;
+  display: flex;
+  flex-direction: column;
+  min-width: 220px;
+  margin: 0;
+  padding: 4px;
+  border: 1px solid #e3e8ef;
+  border-radius: 8px;
+  background: var(--inverse);
+  box-shadow: 0 12px 32px rgba(13, 18, 28, 0.12);
+  list-style: none;
+}
+.dropdownItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  padding: 9px 10px;
+  border: none;
+  border-radius: 6px;
+  background: none;
+  color: #121926;
+  font-family: inherit;
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+  line-height: 18px;
+  text-align: left;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.dropdownItem:hover,
+.dropdownItem:focus-visible {
+  outline: none;
+  background: #f8fafc;
+}
+.dropdownItemOn {
+  font-weight: var(--fw-bold);
+}
+
+/* Created By Me / Created For Me: Figma "Tabs", 300 × 40. */
+.tabs {
+  display: flex;
+  gap: 4px;
+  width: 300px;
+  height: 40px;
+  padding: 4px;
+  border-radius: 12px;
+  background: #eef2f6;
+}
+.tab {
+  flex: 1 1 0;
+  padding: 4px 12px 4px 8px;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  color: #888;
+  font-family: inherit;
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+  line-height: 18px;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.tab:hover:not(.tabOn) {
+  background: rgba(255, 255, 255, 0.6);
+}
+.tabOn {
+  background: #000;
+  color: var(--inverse);
+  font-weight: var(--fw-bold);
+  filter: drop-shadow(0 6px 3px rgba(0, 0, 0, 0.08));
+}
+.dropdownBtn:focus-visible,
+.tab:focus-visible,
+.view:focus-visible,
+.guestBtn:focus-visible,
+.faceAdd:focus-visible,
+.clear:focus-visible {
+  outline: 2px solid #5b4fff;
+  outline-offset: 2px;
+}
+
+/* ---------- list ---------- */
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 28px var(--gutter) 64px;
+  /* The rows keep the design's widths; narrower windows scroll them sideways. */
+  overflow-x: auto;
+}
+.month {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-width: 1250px;
+}
+.monthLabel {
+  margin: 0 0 4px;
+  color: #697586;
+  font-size: var(--fs-2);
+  font-weight: var(--fw-medium);
+  line-height: 20px;
+}
+.day {
+  display: flex;
+  /* clip, not hidden: hidden would stop the status column below pinning to the list's edge. */
+  overflow: clip;
+  border: 1px solid #e3e8ef;
+  border-radius: 8px;
+  background: var(--inverse);
+  box-shadow: 0 4px 24px #eef2f6;
+}
+.dayDate {
+  display: flex;
+  flex: none;
+  flex-direction: column;
+  align-items: center;
+  width: 71px;
+  padding-top: 16px;
+  border-right: 1px solid #e3e8ef;
+}
+.weekday {
+  color: #697586;
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+  line-height: 18px;
+}
+.dayNumber {
+  color: #202939;
+  font-size: 32px;
+  font-weight: var(--fw-medium);
+  line-height: 36px;
+}
+.dayRows {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+}
+
+/* ---------- a booking: 16 + 100 + 16 ---------- */
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 16px;
+  border-bottom: 1px solid #e3e8ef;
+  background: var(--inverse);
+}
+.row:last-child {
+  border-bottom: none;
+}
+/* Cancelled: the design's diagonal bands, and the photo and faces in greyscale. */
+.rowCancelled {
+  background-image: repeating-linear-gradient(-61deg, rgba(227, 232, 239, 0.4) 0 22px, transparent 22px 40px);
+}
+.rowCancelled .thumb,
+.rowCancelled .stack {
+  filter: grayscale(1);
+}
+.rowMain {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  min-width: 0;
+  align-self: stretch;
+}
+/* Meeting rooms: the photo 16px from the name, the columns 24px apart. */
+.row_meeting-room .rowMain {
+  gap: 24px;
+}
+.row_meeting-room .thumb {
+  margin-right: -8px;
+}
+/* Team desks: the members 50px after "Booked by". */
+.row_team-desks .people {
+  margin-left: 30px;
+}
+.thumb {
+  position: relative;
+  flex: none;
+  width: 180px;
+  height: 100px;
+  overflow: hidden;
+  border-radius: 4px;
+  background: #e3e8ef;
+}
+.thumb img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+/* Team desks have no photo: the design's red and blue artwork. */
+.thumbArt {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(60% 80% at 15% 25%, #ff3b30 0%, transparent 60%), radial-gradient(70% 90% at 80% 70%, #5ac8fa 0%, transparent 65%), #1b2bd6;
+}
+.badge {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  height: 24px;
+  padding: 4px 6px;
+  border-radius: 4px;
+  font-size: var(--fs-0);
+  font-weight: var(--fw-bold);
+  line-height: 16px;
+  white-space: nowrap;
+}
+.badgeSpace {
+  position: absolute;
+  bottom: 8px;
+  left: 8px;
+  background: #dbfde1;
+  color: #125522;
+}
+.badgeTag {
+  background: #eef2f6;
+  color: #364152;
+}
+.info {
+  display: flex;
+  flex: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+  width: 230px;
+}
+.title,
+.location {
+  margin: 0;
+  overflow: hidden;
+  color: #000;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.title {
+  font-size: 18px;
+  font-weight: var(--fw-bold);
+  line-height: 22px;
+}
+.location {
+  font-size: var(--fs-2);
+  font-weight: var(--fw-medium);
+  line-height: 20px;
+}
+.tags {
+  display: flex;
+  gap: 4px;
+}
+/* "Booked for" / "Booked by" / credits: a label, then lines 12px apart, from 9px down. */
+.col {
+  display: flex;
+  flex: none;
+  flex-direction: column;
+  align-self: flex-start;
+  gap: 12px;
+  margin-top: 9px;
+}
+.colSide {
+  width: 139px;
+}
+.row_office-desk .colWhen {
+  width: 237px;
+}
+.row_team-desks .colWhen {
+  width: 200px;
+}
+.colLabel {
+  color: #4b5565;
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+  line-height: 18px;
+  white-space: nowrap;
+}
+/* Keeps the credits level with the first "Booked for" line. */
+.colLabelBlank {
+  visibility: hidden;
+}
+.line {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #000;
+  font-size: var(--fs-2);
+  font-weight: var(--fw-medium);
+  line-height: 20px;
+  white-space: nowrap;
+}
+.line img {
+  flex: none;
+}
+.line_credits {
+  color: #136825;
+  font-weight: var(--fw-bold);
+}
+.line_creditsSoft {
+  color: #12872a;
+}
+
+/* Attendees / members: right of a rule, the label and then the faces. */
+.people {
+  display: flex;
+  flex: none;
+  flex-direction: column;
+  align-self: stretch;
+  gap: 16px;
+  padding: 9px 24px 0;
+  border-left: 1px solid #cdd5df;
+}
+.stack {
+  display: flex;
+  align-items: center;
+}
+.face {
+  position: relative;
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  margin-right: -17px;
+  overflow: hidden;
+  border: 0.75px solid rgba(0, 0, 0, 0.08);
+  border-radius: 9999px;
+  color: var(--inverse);
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+  line-height: 18px;
+}
+.face:last-child {
+  margin-right: 0;
+}
+.face img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.faceMore {
+  background: rgba(0, 0, 0, 0.64);
+}
+.faceAdd {
+  padding: 0;
+  background: rgba(0, 0, 0, 0.64);
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.faceAdd:hover {
+  background: rgba(0, 0, 0, 0.8);
+}
+/* "+ Guest": only on a meeting room you booked that hasn't started. */
+.guestBtn {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 78px;
+  height: 40px;
+  padding: 0 4px 0 0;
+  border: 0.75px solid rgba(0, 0, 0, 0.08);
+  border-radius: 9999px;
+  background: rgba(0, 0, 0, 0.64);
+  color: var(--inverse);
+  font-family: inherit;
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+  line-height: 18px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.guestBtn:hover {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.rowEnd {
+  position: sticky;
+  right: 0;
+  z-index: 1;
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: 24px;
+}
+/* When the list is narrower than the rows, the status and eye stay in view at its right edge,
+   on a white backing that the rest of the row slides under. */
+.list:not(.listFits) .rowEnd {
+  margin: -16px -16px -16px 0;
+  padding: 16px 16px 16px 24px;
+  align-self: stretch;
+  background: linear-gradient(to right, rgba(255, 255, 255, 0), var(--inverse) 20px);
+}
+.status_active {
+  background: #dbfde1;
+  color: #125522;
+}
+.status_ongoing {
+  background: #e0eaff;
+  color: #1d39c4;
+}
+.status_completed {
+  background: #eef2f6;
+  color: #4b5565;
+}
+.status_cancelled {
+  background: #ffdddd;
+  color: #b10303;
+}
+.view {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  border: 1px solid #e3e8ef;
+  border-radius: 360px;
+  background: #f8fafc;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.view:hover {
+  background: #eef2f6;
+}
+
+.emptyBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+.empty {
+  margin: 0;
+  padding: 40px 0 0;
+  color: #697586;
+  font-size: var(--fs-1);
+  text-align: center;
+}
+.clear {
+  padding: 6px 10px;
+  border: none;
+  border-radius: 8px;
+  background: none;
+  color: #3659f5;
+  font-family: inherit;
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+  cursor: pointer;
+}
+.clear:hover {
+  background: rgba(54, 89, 245, 0.08);
+}
+
+@media (max-width: 1200px) {
+  .page {
+    --gutter: 24px;
+  }
+}

@@ -1,0 +1,7 @@
+.root {
+  height: 640px;
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-4);
+  overflow: hidden;
+  display: flex;
+}

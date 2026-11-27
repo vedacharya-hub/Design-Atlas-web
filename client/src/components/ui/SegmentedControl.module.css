@@ -1,0 +1,24 @@
+.wrap {
+  display: inline-flex;
+  padding: var(--sp-2);
+  background: var(--inactive);
+  border-radius: var(--radius-3);
+}
+
+.seg {
+  height: 32px;
+  padding: 0 var(--sp-8);
+  border: none;
+  border-radius: var(--radius-3);
+  background: transparent;
+  color: var(--fg-secondary);
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.active {
+  background: var(--ink);
+  color: var(--inverse);
+}

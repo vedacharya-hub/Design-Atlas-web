@@ -1,0 +1,602 @@
+/* Space Map's plan (Figma 1592:144218): white, the plan centred on a #f8fafc card with a #eef2f6
+   edge; Edit 24px in from the top right; the legend, zoom and zones 24px in from the bottom left. */
+.canvas {
+  position: relative;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+  background: var(--inverse);
+}
+.viewport {
+  position: absolute;
+  inset: 0;
+  cursor: grab;
+  touch-action: none;
+  overscroll-behavior: contain;
+}
+.panning {
+  cursor: grabbing;
+}
+/* Adding: the "focus add" mark is the pointer over the plan. */
+.canvas[data-mode='add'] .plan {
+  cursor: url('/admin/spaces/map/focus-add.svg') 9 9, crosshair;
+}
+.stage {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background: #f8fafc;
+  box-shadow: inset 0 0 0 1px #eef2f6;
+  transform-origin: center;
+  will-change: transform;
+}
+.stageAnimate {
+  transition: transform 0.3s cubic-bezier(0.22, 0.8, 0.24, 1);
+}
+.plan {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+}
+.planImage {
+  display: block;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* ---------- zones (drawn in Space Zones): under the desks, named in a tab on their top edge ---------- */
+.spaceZone {
+  position: absolute;
+  box-sizing: border-box;
+  border: calc(1.5px * var(--k, 1)) solid var(--edge);
+  background: var(--fill);
+  pointer-events: none;
+}
+/* The zone picked in the filter stands out; everything outside it fades back. */
+.spaceZoneOn {
+  border-width: calc(2.5px * var(--k, 1));
+}
+.faded {
+  opacity: 0.3;
+}
+.spaceZoneTag {
+  position: absolute;
+  /* Over the desks: the zone sets no stacking of its own. */
+  z-index: 2;
+  bottom: 100%;
+  left: calc(-1.5px * var(--k, 1));
+  /* No wider than the zone, so neighbours keep their own names. */
+  max-width: calc(100% + 3px * var(--k, 1));
+  overflow: hidden;
+  padding: calc(2px * var(--k, 1)) calc(6px * var(--k, 1));
+  border-radius: calc(4px * var(--k, 1)) calc(4px * var(--k, 1)) 0 0;
+  background: var(--edge);
+  color: #fff;
+  font-size: calc(11px * var(--k, 1));
+  font-weight: var(--fw-medium);
+  line-height: calc(14px * var(--k, 1));
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ---------- desks: green when free, red when kept for someone ---------- */
+.seat {
+  position: absolute;
+  z-index: 1;
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: #1dca40;
+  box-shadow: 0 0 0 1px var(--inverse);
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+/* A bigger target than the dot. */
+.seat::before {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+}
+.seatAssigned {
+  background: #d70000;
+}
+.seat:hover,
+.seatHot {
+  z-index: 2;
+  transform: translate(-50%, -50%) scale(1.5);
+}
+.seat:focus-visible {
+  z-index: 2;
+  outline: 2px solid #5b4fff;
+  outline-offset: 2px;
+}
+.seatSelected {
+  z-index: 3;
+  box-shadow: 0 0 0 1px var(--inverse), 0 0 0 3px #000;
+  transform: translate(-50%, -50%) scale(1.5);
+}
+/* Not saved yet: a blue ring. */
+.seatNew {
+  box-shadow: 0 0 0 1px var(--inverse), 0 0 0 2.5px #3659f5;
+}
+.canvas[data-mode='move'] .seat {
+  cursor: grab;
+}
+.canvas[data-mode='add'] .seat {
+  cursor: not-allowed;
+}
+.canvas[data-mode='move'] .seatDragging {
+  z-index: 4;
+  box-shadow: 0 0 0 1px var(--inverse), 0 4px 10px rgba(0, 0, 0, 0.3);
+  transform: translate(-50%, -50%) scale(1.8);
+  cursor: grabbing;
+  transition: none;
+}
+/* Where a new desk is going while its dialog is open. */
+.pending {
+  position: absolute;
+  z-index: 3;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #1dca40;
+  box-shadow: 0 0 0 1px var(--inverse), 0 0 0 2.5px #3659f5;
+  transform: translate(-50%, -50%);
+  animation: pulse 1.2s ease-in-out infinite;
+}
+@keyframes pulse {
+  50% {
+    box-shadow: 0 0 0 1px var(--inverse), 0 0 0 6px rgba(54, 89, 245, 0.25);
+  }
+}
+
+/* ---------- Edit (1592:150840): a 32px #f8fafc pill, the pencil and 12px "Edit" ---------- */
+.editBtn {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  height: 32px;
+  padding: 0 12px;
+  border: 1px solid #e3e8ef;
+  border-radius: 92px;
+  background: #f8fafc;
+  color: #000;
+  font-family: inherit;
+  font-size: var(--fs-0);
+  font-weight: var(--fw-medium);
+  line-height: 16px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.editBtn:hover {
+  background: #eef2f6;
+}
+
+/* ---------- editing: Move Seats / Add Seats (1595:94296), and Save (1595:94293) ---------- */
+.modes {
+  position: absolute;
+  top: 25px;
+  left: 18px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 4px;
+  border-radius: 8px;
+  background: #eef2f6;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.08));
+}
+.mode {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 30px;
+  min-width: 149px;
+  padding: 4px 12px 4px 8px;
+  border: none;
+  border-radius: 8px;
+  background: #eef2f6;
+  color: #697586;
+  font-family: inherit;
+  font-size: var(--fs-1);
+  font-weight: var(--fw-regular);
+  line-height: 18px;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.mode:hover:not(.modeOn):not(:disabled) {
+  background: #e3e8ef;
+  color: #364152;
+}
+.mode:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+.modeOn {
+  background: #000;
+  color: var(--inverse);
+  font-weight: var(--fw-medium);
+  filter: drop-shadow(0 6px 3px rgba(0, 0, 0, 0.08));
+}
+.topRight {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  display: flex;
+  gap: 8px;
+}
+.saveBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  height: 34px;
+  padding: 8px 12px;
+  border: 1px solid #e3e8ef;
+  border-radius: 200px;
+  background: #f8fafc;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  color: #121926;
+  font-family: inherit;
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+  line-height: 18px;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.saveBtn:hover:not(:disabled) {
+  background: #eef2f6;
+}
+.saveBtn:disabled {
+  cursor: progress;
+}
+.spinner {
+  width: 14px;
+  height: 14px;
+  margin: 2px;
+  border: 2px solid #cdd5df;
+  border-top-color: #121926;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ---------- bottom: the legend, then − 100% + and the zone (1592:144320) ---------- */
+.bar {
+  position: absolute;
+  bottom: 24px;
+  left: 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  max-width: calc(100% - 48px);
+}
+.barCentred {
+  left: 50%;
+  transform: translateX(-50%);
+}
+.legend {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0;
+  padding: 4px 8px 4px 0;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.85);
+  list-style: none;
+}
+.legend li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #000;
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+  line-height: 20px;
+  white-space: nowrap;
+}
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+.dotFree {
+  background: #1dca40;
+}
+.dotTaken {
+  background: #d70000;
+}
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.08));
+}
+.zoom {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.round {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid #cdd5df;
+  border-radius: 50%;
+  background: var(--inverse);
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.round:hover:not(:disabled) {
+  background: #f8fafc;
+}
+.round:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+.zoomValue {
+  min-width: 38px;
+  color: #202939;
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+  line-height: 20px;
+  text-align: center;
+}
+/* "All Zones": a 32px white pill; the real select lies invisibly over it. */
+.zone {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px;
+  min-width: 100px;
+  height: 32px;
+  padding: 0 12px 0 16px;
+  border: 1px solid #cdd5df;
+  border-radius: 360px;
+  background: var(--inverse);
+  cursor: pointer;
+}
+.zone:focus-within {
+  border-color: #121212;
+}
+.zoneText {
+  color: #000;
+  font-size: var(--fs-0);
+  font-weight: var(--fw-medium);
+  line-height: 16px;
+  white-space: nowrap;
+}
+.zoneSelect {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+/* ---------- a free desk's popover (1594:88590): white over green, "Assign Seat" ---------- */
+.pop,
+.card {
+  position: absolute;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid #cdd5df;
+  border-radius: 12px;
+  box-shadow: 0 0 36px 8px rgba(10, 13, 18, 0.1);
+  animation: popIn 0.16s ease-out backwards;
+}
+@keyframes popIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+}
+.pop {
+  min-width: 170px;
+  max-width: 240px;
+}
+.popHead {
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 12px 16px 8px;
+  background: var(--inverse);
+  color: #000;
+  font-size: var(--fs-1);
+  font-weight: var(--fw-bold);
+  line-height: 18px;
+  white-space: nowrap;
+}
+.popFoot {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px 12px;
+  background: #dbfde1;
+}
+/* The edit icon, left of the CTA: a 32px white circle. */
+.popEdit {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid #cdd5df;
+  border-radius: 50%;
+  background: var(--inverse);
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.popEdit:hover {
+  background: #f8fafc;
+}
+.popNote {
+  color: #125522;
+  font-size: var(--fs-0);
+  font-weight: var(--fw-medium);
+  line-height: 16px;
+}
+.popBtn {
+  flex: 1;
+  min-width: 0;
+  height: 32px;
+  padding: 0 12px;
+  border: none;
+  border-radius: 92px;
+  background: #000;
+  color: var(--inverse);
+  font-family: inherit;
+  font-size: var(--fs-0);
+  font-weight: var(--fw-medium);
+  line-height: 16px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.popBtn:hover {
+  background: #202939;
+}
+
+/* ---------- a permanent seat's hover card (1595:92634) ---------- */
+.card {
+  width: max-content;
+  min-width: 216px;
+  max-width: 280px;
+  pointer-events: none;
+}
+.cardHead {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 12px 16px 8px;
+  background: var(--inverse);
+}
+.cardFoot {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 8px 16px 12px;
+  background: #dbfde1;
+}
+.cardTitle,
+.cardPlace,
+.cardLabel,
+.cardName,
+.cardEmail {
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.cardTitle,
+.cardName {
+  color: #000;
+  font-size: var(--fs-1);
+  font-weight: var(--fw-bold);
+  line-height: 18px;
+}
+.cardPlace,
+.cardEmail {
+  color: #697586;
+  font-size: var(--fs-0);
+  font-weight: var(--fw-medium);
+  line-height: 16px;
+}
+.cardLabel {
+  margin-bottom: 2px;
+  color: #4b5565;
+  font-size: var(--fs-0);
+  font-weight: var(--fw-medium);
+  line-height: 16px;
+}
+
+/* ---------- dark tooltips: "Move the Space", and "Tap to add Space" with its arrow ---------- */
+.tip {
+  display: inline-flex;
+  align-items: center;
+  height: 30px;
+  padding: 6px 12px;
+  border-radius: 8px;
+  background: #0c111d;
+  box-shadow: 0 12px 16px -4px rgba(16, 24, 40, 0.08), 0 4px 6px -2px rgba(16, 24, 40, 0.03);
+  color: #fff;
+  font-size: var(--fs-0);
+  font-weight: var(--fw-medium);
+  line-height: 18px;
+  white-space: nowrap;
+  pointer-events: none;
+}
+.float {
+  position: absolute;
+  z-index: 10;
+}
+/* A desk's number, centred above it. */
+.labelTip {
+  height: 26px;
+  padding: 4px 10px;
+  transform: translate(-50%, -100%);
+  animation: fadeIn 0.12s ease-out backwards;
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+}
+.addTip {
+  position: absolute;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  pointer-events: none;
+}
+/* The arrow points down in the file; turned, it points back at the pointer. */
+.addTipArrow {
+  width: 16px;
+  height: 8.5px;
+  margin-right: -5px;
+  transform: rotate(90deg);
+}
+
+.round:focus-visible,
+.editBtn:focus-visible,
+.saveBtn:focus-visible,
+.mode:focus-visible,
+.popEdit:focus-visible,
+.popBtn:focus-visible {
+  outline: 2px solid #5b4fff;
+  outline-offset: 2px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .stageAnimate,
+  .seat,
+  .pop,
+  .card {
+    transition: none;
+    animation: none;
+  }
+  .pending,
+  .spinner {
+    animation: none;
+  }
+}

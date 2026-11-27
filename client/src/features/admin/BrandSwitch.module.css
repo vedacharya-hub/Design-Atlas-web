@@ -1,0 +1,52 @@
+/* "Switch", medium: a 37 × 20 track with 1px around an 18px thumb. */
+.switch {
+  display: flex;
+  flex: none;
+  align-items: center;
+  width: 37px;
+  height: 20px;
+  padding: 1px;
+  border: none;
+  border-radius: 100px;
+  background: #454545;
+  transition: background 0.15s ease;
+}
+.on {
+  background: #3659f5;
+}
+.button {
+  cursor: pointer;
+}
+.button:focus-visible {
+  outline: 2px solid #5b4fff;
+  outline-offset: 2px;
+}
+.thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+  transition: transform 0.18s cubic-bezier(0.22, 0.8, 0.24, 1);
+}
+.on .thumb {
+  transform: translateX(17px);
+}
+/* Can't be changed. */
+.disabled {
+  background: #cdd5df;
+  cursor: not-allowed;
+}
+/* Part on, part off. */
+.mixed {
+  background: #9fb0fa;
+}
+.mixed .thumb {
+  transform: translateX(8.5px);
+}
+@media (prefers-reduced-motion: reduce) {
+  .switch,
+  .thumb {
+    transition: none;
+  }
+}

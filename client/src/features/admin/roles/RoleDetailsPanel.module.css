@@ -1,0 +1,70 @@
+/* Role Details (Figma 3120:194062 General, 3120:194910 Permissions; edit view 3124:196388 /
+   3124:196131), on the user details panel's shell at 698px: a 124px #f8fafc band with the name,
+   the status and two 140px tabs, then the role's details and members, or its permissions. */
+.panel {
+  width: min(698px, calc(100vw - 24px));
+}
+.hero {
+  padding-bottom: 2px;
+}
+.heroRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-8);
+  min-height: 28px;
+  margin: 20px 24px 0;
+}
+.name {
+  min-width: 0;
+  margin: 0;
+  overflow: hidden;
+  color: #000;
+  font-size: 24px;
+  font-weight: var(--fw-medium);
+  line-height: 28px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.badge {
+  font-weight: var(--fw-bold);
+}
+.tab {
+  width: 140px;
+}
+
+/* ---------- General: the details 20px under the band, the members behind a full-width rule 24px below ---------- */
+.details {
+  margin-top: 20px;
+}
+.members {
+  margin-top: 24px;
+  padding: 23px 24px 24px;
+  border-top: 1px solid #e3e8ef;
+}
+
+/* ---------- Permissions: 20px under the band ---------- */
+.permissions {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 20px 24px 24px;
+}
+/* Services the company turned off, said once above the cards. */
+.restrictedNote {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sp-4);
+  margin: 0;
+  padding: var(--sp-6);
+  border: 1px solid #e3e8ef;
+  border-radius: 8px;
+  background: #f8fafc;
+  color: #4b5565;
+  font-size: var(--fs-1);
+  line-height: 18px;
+}
+.restrictedNote img {
+  flex: none;
+  margin-top: -1px;
+}

@@ -1,0 +1,19 @@
+/* Iris Bot: its size and stacking, the matte body shades and the ear lights' state colours. */
+:root {
+  --iris-size: 96px; /* on-screen width of the head */
+  --iris-z: 2147483000; /* always on top */
+  --iris-offset: 24px; /* distance from the viewport edges */
+
+  --iris-body-0: #38383b;
+  --iris-body-1: #232325;
+  --iris-body-2: #161617;
+  --iris-body-3: #0d0d0e;
+  --iris-bezel: #060607;
+  --iris-screen: #080809;
+
+  /* status light colours, in the ears */
+  --iris-listen: #8ff0c2; /* mint: listening / typing */
+  --iris-think: #8ab4ff; /* blue: searching / thinking */
+  --iris-success: #5fe3a1; /* green: answer ready */
+  --iris-error: #ff6b61; /* red: error */
+}

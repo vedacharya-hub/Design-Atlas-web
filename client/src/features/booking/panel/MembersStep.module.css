@@ -1,0 +1,124 @@
+.wrap {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+  padding-bottom: var(--sp-6);
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.sectionLabel {
+  font-size: var(--fs-0);
+  font-weight: var(--fw-medium);
+  letter-spacing: 0.3px;
+  color: var(--fg-tertiary);
+}
+
+.searchBox {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-4);
+  height: 44px;
+  padding: 0 var(--sp-6);
+  border: 1px solid var(--stroke);
+  border-radius: var(--radius-3);
+  color: var(--fg-secondary);
+}
+.searchBox input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-family: inherit;
+  font-size: var(--fs-1);
+}
+
+.results {
+  position: absolute;
+  z-index: 30;
+  top: 82px;
+  left: 0;
+  right: 0;
+  max-height: 220px;
+  overflow-y: auto;
+  margin: 0;
+  padding: var(--sp-2);
+  list-style: none;
+  background: var(--inverse);
+  border: 1px solid var(--stroke);
+  border-radius: var(--radius-3);
+  box-shadow: var(--shadow-card);
+}
+
+.result {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-4);
+  width: 100%;
+  padding: var(--sp-4);
+  border: none;
+  border-radius: var(--radius-3);
+  background: transparent;
+  cursor: pointer;
+  text-align: left;
+}
+.result:hover {
+  background: var(--gray-100);
+}
+.info {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.name {
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+}
+.team {
+  font-size: var(--fs-0);
+  color: var(--fg-tertiary);
+}
+.checkIcon {
+  color: var(--seat-available);
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-4);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-3);
+  padding: var(--sp-2) var(--sp-4) var(--sp-2) var(--sp-2);
+  border: 1px solid var(--stroke);
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+}
+.chipActive {
+  border-color: var(--ink);
+  box-shadow: 0 0 0 1px var(--ink);
+}
+.chipName {
+  font-size: var(--fs-0);
+  font-weight: var(--fw-medium);
+}
+.remove {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border: none;
+  border-radius: 50%;
+  background: var(--gray-100);
+  cursor: pointer;
+  color: var(--fg-secondary);
+}
+.remove:hover {
+  background: var(--gray-200);
+}

@@ -1,0 +1,385 @@
+/* Credit Overage Allocation (Figma 5876:230515, 5414:242598, 8636:304024): a card 30px under the
+   tabs. A 56px #f8fafc header with the switch; turned on, the usage 16px/24px in, then a card per
+   business unit with its departments (49px rows) and their teams (65px rows), and a note. */
+.wrap {
+  padding: 29px 19px 32px 18px;
+}
+.card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid #eef2f6;
+  border-radius: 8px;
+  background: var(--inverse);
+}
+.head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-8);
+  min-height: 56px;
+  padding: 7px 16px;
+  border-bottom: 1px solid #e3e8ef;
+  background: #f8fafc;
+}
+.headText {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+  min-width: 0;
+}
+.title {
+  margin: 0;
+  color: #121926;
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+  line-height: 18px;
+}
+.subtitle {
+  margin: 0;
+  color: #4b5565;
+  font-size: var(--fs-0);
+  font-weight: var(--fw-regular);
+  line-height: 16px;
+}
+.off {
+  margin: 0;
+  padding: 16px 24px;
+  color: #121926;
+  font-size: var(--fs-1);
+  font-weight: var(--fw-regular);
+  line-height: 18px;
+}
+
+/* ---------- the company pool: what's allocated to teams ---------- */
+.usage {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px 24px;
+}
+.usageHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-8);
+  min-height: 32px;
+}
+.usageTitle {
+  margin: 0;
+  color: #121926;
+  font-size: var(--fs-1);
+  font-weight: var(--fw-bold);
+  line-height: 18px;
+}
+.usageFoot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-6);
+}
+.count {
+  margin: 0;
+  color: #121926;
+  font-size: var(--fs-1);
+  line-height: 18px;
+  white-space: nowrap;
+}
+.count strong {
+  font-size: 20px;
+  font-weight: var(--fw-medium);
+  line-height: 24px;
+}
+.meta {
+  margin: 0;
+  color: #697586;
+  font-size: var(--fs-0);
+  line-height: 16px;
+}
+.meta strong {
+  color: #121926;
+  font-weight: var(--fw-bold);
+}
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.legend li {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  color: rgba(0, 0, 0, 0.6);
+  font-size: var(--fs-0);
+  font-weight: var(--fw-medium);
+  line-height: 16px;
+}
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+.dotAllocated {
+  background: #3659f5;
+}
+.dotFree {
+  background: #e3e8ef;
+}
+
+/* "Edit Limit", "Allocate", "Save": a 28px black pill, 12px text. */
+.pill {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  height: 28px;
+  padding: 0 12px;
+  border: none;
+  border-radius: 92px;
+  background: #000;
+  color: var(--inverse);
+  font-family: inherit;
+  font-size: var(--fs-0);
+  font-weight: var(--fw-medium);
+  line-height: 16px;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.pill:hover:not(:disabled) {
+  background: #202939;
+}
+.pill:disabled {
+  background: #cdd5df;
+  cursor: not-allowed;
+}
+.save {
+  width: 100px;
+}
+.textBtn {
+  flex: none;
+  padding: 0;
+  border: none;
+  background: none;
+  color: #4b5565;
+  font-family: inherit;
+  font-size: var(--fs-0);
+  font-weight: var(--fw-medium);
+  line-height: 16px;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.textBtn:hover:not(:disabled) {
+  color: #121926;
+  text-decoration: underline;
+}
+.pill:focus-visible,
+.textBtn:focus-visible,
+.deptToggle:focus-visible,
+.info:focus-visible {
+  outline: 2px solid #5b4fff;
+  outline-offset: 2px;
+}
+.editRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.hint {
+  color: #697586;
+  font-size: var(--fs-0);
+  font-weight: var(--fw-medium);
+  line-height: 16px;
+}
+
+/* ---------- business units, departments, teams ---------- */
+.units {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 8px 24px 0;
+}
+.unit {
+  overflow: hidden;
+  border: 1px solid #e3e8ef;
+  border-radius: 8px;
+  background: var(--inverse);
+}
+.unitHead {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  min-height: 32px;
+  padding: 0 12px;
+  border-bottom: 1px solid #e3e8ef;
+  background: #f8fafc;
+}
+.unitTotals {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-left: auto;
+  color: #202939;
+  font-size: var(--fs-0);
+  font-weight: var(--fw-medium);
+  line-height: 16px;
+  white-space: nowrap;
+}
+.unitTotals .figure,
+.unitTotals .muted {
+  font-size: var(--fs-0);
+  line-height: 16px;
+}
+.kind {
+  flex: none;
+  color: #697586;
+  font-size: var(--fs-0);
+  font-weight: var(--fw-medium);
+  line-height: 16px;
+  white-space: nowrap;
+}
+.name {
+  min-width: 0;
+  overflow: hidden;
+  color: #121926;
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+  line-height: 18px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-8);
+  min-height: 49px;
+  padding: 0 12px;
+  border-bottom: 1px solid #eef2f6;
+}
+.unit > div:last-child > :last-child,
+.unit > div:last-child > div:last-child > .row:last-child {
+  border-bottom: none;
+}
+.teamRow {
+  min-height: 65px;
+}
+.deptToggle {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  min-width: 0;
+  height: 32px;
+  padding: 0 var(--sp-2) 0 0;
+  border: none;
+  border-radius: 6px;
+  background: none;
+  font-family: inherit;
+  cursor: pointer;
+}
+.deptToggle .kind {
+  margin-right: 2px;
+}
+.chevron {
+  flex: none;
+  transform: rotate(-90deg);
+  transition: transform 0.18s ease;
+}
+.chevronOpen {
+  transform: none;
+}
+.right {
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: 12px;
+  white-space: nowrap;
+}
+.figure {
+  color: #202939;
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+  line-height: 18px;
+}
+.muted {
+  color: #697586;
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+  line-height: 18px;
+}
+.teamText {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-4);
+  min-width: 0;
+}
+.code {
+  flex: none;
+  color: #697586;
+  font-size: var(--fs-0);
+  font-weight: var(--fw-medium);
+  line-height: 16px;
+}
+.divider {
+  flex: none;
+  width: 1px;
+  height: 24px;
+  background: #e3e8ef;
+}
+.usedGroup {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.percent {
+  color: #000;
+  font-size: var(--fs-1);
+  font-weight: var(--fw-bold);
+  line-height: 18px;
+}
+.meter {
+  position: relative;
+  width: 100px;
+  height: 6px;
+  overflow: hidden;
+  border-radius: 2px;
+  background: #e3e8ef;
+}
+.meterFill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  border-radius: 2px;
+  background: #3659f5;
+  transition: width 0.3s ease;
+}
+.meterOver {
+  background: #d92d20;
+}
+.info {
+  display: grid;
+  border-radius: 50%;
+  cursor: help;
+}
+.right:has(.editRow) {
+  gap: 16px;
+}
+.note {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  margin: 8px 24px;
+  padding: 8px 6px;
+  color: #4b5565;
+  font-size: var(--fs-1);
+  font-weight: var(--fw-regular);
+  line-height: 18px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .chevron,
+  .meterFill {
+    transition: none;
+  }
+}

@@ -1,0 +1,188 @@
+.map {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  background: var(--gray-50);
+  overflow: hidden;
+}
+
+.viewport {
+  position: absolute;
+  inset: 0;
+  cursor: grab;
+  touch-action: none;
+}
+.viewport:active {
+  cursor: grabbing;
+}
+
+.stage {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 576px;
+  height: 561px;
+  transform-origin: center center;
+  will-change: transform;
+}
+
+.floor {
+  width: 100%;
+  height: 100%;
+  user-select: none;
+  pointer-events: none;
+}
+
+/* Legend */
+.legend {
+  position: absolute;
+  left: var(--sp-12);
+  bottom: var(--sp-8);
+  display: flex;
+  gap: var(--sp-10);
+  font-size: var(--fs-1);
+  color: var(--fg-secondary);
+}
+.legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-3);
+}
+.legend i {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+.dotGreen { background: var(--seat-available); }
+.dotRed { background: var(--seat-unavailable); }
+.dotYellow { background: var(--seat-partial); }
+
+/* Controls */
+.controls {
+  position: absolute;
+  left: 50%;
+  bottom: var(--sp-8);
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: var(--sp-6);
+}
+
+.zoomGroup {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-4);
+  height: 40px;
+  padding: 0 var(--sp-4);
+  background: var(--inverse);
+  border: 1px solid var(--stroke);
+  border-radius: var(--radius-pill);
+  box-shadow: var(--shadow-card);
+}
+.zoomGroup button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+  color: var(--fg-primary);
+}
+.zoomGroup button:hover {
+  background: var(--gray-100);
+}
+.zoomLabel {
+  min-width: 40px;
+  text-align: center;
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+}
+
+.search {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-4);
+  height: 40px;
+  padding: 0 var(--sp-6);
+  background: var(--inverse);
+  border: 1px solid var(--stroke);
+  border-radius: var(--radius-pill);
+  box-shadow: var(--shadow-card);
+  color: var(--fg-secondary);
+}
+.search input {
+  border: none;
+  outline: none;
+  font-size: var(--fs-1);
+  font-family: inherit;
+  width: 90px;
+}
+
+/* Zones (Admin → Space Zones), under the desks: yours in its colour, named in a tag at the top left;
+   the rest hatched grey with a dashed edge, and "Restricted zone" by the pointer on hover. */
+.zone {
+  position: absolute;
+  box-sizing: border-box;
+  border: 1.5px solid var(--edge);
+  background: var(--fill);
+}
+.zoneRestricted {
+  border: 1.5px dashed var(--gray-500);
+  background: repeating-linear-gradient(-45deg, rgba(105, 117, 134, 0.22) 0 4px, rgba(105, 117, 134, 0.07) 4px 9px);
+  cursor: not-allowed;
+}
+.zoneTag {
+  position: absolute;
+  /* Over the desks. */
+  z-index: 6;
+  bottom: 100%;
+  left: -1.5px;
+  /* No wider than the zone, so neighbours keep their own names. */
+  max-width: calc(100% + 3px);
+  overflow: hidden;
+  padding: 1px 5px;
+  border-radius: 4px 4px 0 0;
+  background: var(--edge);
+  color: #fff;
+  font-size: 9px;
+  font-weight: var(--fw-medium);
+  line-height: 12px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  pointer-events: none;
+}
+.zoneRestricted .zoneTag {
+  background: var(--gray-500);
+}
+.tip {
+  position: absolute;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  max-width: 220px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  background: #0c111d;
+  box-shadow: 0 12px 16px -4px rgba(16, 24, 40, 0.08), 0 4px 6px -2px rgba(16, 24, 40, 0.03);
+  color: #fff;
+  pointer-events: none;
+}
+.tipTitle {
+  font-size: var(--fs-0);
+  font-weight: var(--fw-bold);
+  line-height: 18px;
+}
+.tipText {
+  color: #cdd5df;
+  font-size: var(--fs-0);
+  line-height: 16px;
+}
+.legend .swatchRestricted {
+  border: 1px dashed var(--gray-500);
+  border-radius: 2px;
+  background: repeating-linear-gradient(-45deg, rgba(105, 117, 134, 0.35) 0 2px, transparent 2px 4px);
+}

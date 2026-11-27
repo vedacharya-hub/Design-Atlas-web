@@ -1,0 +1,934 @@
+/* Iris home: Workplace's light page, with Iris's own black surface (dot grid, liquid-metal mark,
+   red-to-blue composer rim) carrying the greeting and the Quick Iris shortcut. */
+.page {
+  --h-ground: #f5f6f9;
+  --h-surface: #ffffff;
+  --h-text: #121926;
+  --h-text-2: #4b5565;
+  --h-muted: #697586;
+  --h-faint: #9aa4b2;
+  --h-rule: #e3e8ef;
+  --h-rule-soft: #eef2f6;
+  --h-tile: #f2f3f7;
+  --h-link: #3659f5;
+  --h-danger: #d92d20;
+  --h-black: #000000;
+  --h-gutter: 24px;
+
+  min-height: 100%;
+  background: var(--h-ground);
+  color: var(--h-text);
+  font-family: var(--font-body);
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* ---------- top bar ---------- */
+.top {
+  position: sticky;
+  top: env(safe-area-inset-top, 0px);
+  z-index: 50;
+  border-bottom: 1px solid var(--h-rule);
+  background: rgba(245, 246, 249, 0.86);
+  backdrop-filter: blur(16px) saturate(160%);
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
+}
+.topInner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  max-width: 1232px;
+  height: 64px;
+  margin: 0 auto;
+  padding: 0 var(--h-gutter);
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+.brandMark {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  background: var(--h-black);
+  color: #fff;
+}
+.brandName {
+  font-size: 18px;
+  font-weight: var(--fw-medium);
+  letter-spacing: -0.01em;
+}
+.brandNote {
+  padding-left: 10px;
+  border-left: 1px solid var(--h-rule);
+  color: var(--h-muted);
+  font-size: var(--fs-1);
+  white-space: nowrap;
+}
+.topActions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.building {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 36px;
+  padding: 0 14px 0 10px;
+  border: 1px solid var(--h-rule);
+  border-radius: var(--radius-pill);
+  background: var(--h-surface);
+  color: var(--h-text-2);
+  font-size: var(--fs-1);
+  white-space: nowrap;
+}
+.building svg {
+  width: 16px;
+  height: 16px;
+}
+.quickBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  height: 36px;
+  padding: 0 6px 0 14px;
+  border: 1px solid var(--h-rule);
+  border-radius: var(--radius-pill);
+  background: var(--h-surface);
+  color: var(--h-text);
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+  white-space: nowrap;
+  cursor: pointer;
+  transition: border-color 0.15s ease;
+}
+.quickBtn:hover {
+  border-color: var(--h-faint);
+}
+.avatar {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 13px;
+  font-weight: var(--fw-medium);
+  letter-spacing: 0.02em;
+}
+
+/* Keyboard keys: small light caps in the top bar, large dark ones on the Quick Iris card. */
+.keys {
+  display: inline-flex;
+  gap: 4px;
+}
+.keys kbd {
+  min-width: 26px;
+  height: 24px;
+  padding: 0 7px;
+  border: 1px solid var(--h-rule);
+  border-radius: 6px;
+  background: var(--h-ground);
+  box-shadow: 0 1px 0 var(--h-rule);
+  color: var(--h-text-2);
+  font-family: inherit;
+  font-size: var(--fs-0);
+  font-weight: var(--fw-medium);
+  line-height: 22px;
+  text-align: center;
+}
+.keysDark {
+  gap: 8px;
+}
+.keysDark kbd {
+  min-width: 48px;
+  height: 44px;
+  padding: 0 14px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 10px;
+  background: linear-gradient(180deg, #2a2c33, #141519);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 3px 0 #000;
+  color: #fff;
+  font-size: 17px;
+  line-height: 42px;
+}
+
+/* ---------- page ---------- */
+.main {
+  max-width: 1232px;
+  margin: 0 auto;
+  padding: 24px var(--h-gutter) 0;
+}
+
+/* ---------- hero: the Iris surface ---------- */
+.hero {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 360px);
+  gap: 48px;
+  padding: 48px;
+  overflow: hidden;
+  border-radius: 32px;
+  background: var(--h-black);
+  color: #fff;
+}
+/* The panel's dot grid, fading out towards the top. */
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image: radial-gradient(circle at 2.265px 2.265px, rgba(227, 232, 242, 0.2) 2.265px, transparent 2.765px);
+  background-size: 28.88px 29.81px;
+  -webkit-mask-image: linear-gradient(to top, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.08));
+  mask-image: linear-gradient(to top, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.08));
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(ellipse 55% 60% at 8% 100%, rgba(255, 255, 255, 0.1), transparent 70%),
+    radial-gradient(ellipse 40% 50% at 100% 0%, rgba(47, 69, 255, 0.16), transparent 70%);
+}
+.heroMain {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.heroMark {
+  position: relative;
+  width: 44.7px;
+  height: 40px;
+  margin-bottom: 28px;
+}
+.heroMarkFallback,
+.heroMarkShader {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.heroMarkFallback {
+  color: #fff;
+}
+.eyebrow {
+  margin: 0;
+  color: var(--h-faint);
+  font-size: var(--fs-1);
+  letter-spacing: 0.02em;
+}
+.greeting {
+  margin: 8px 0 0;
+  font-size: 44px;
+  font-weight: var(--fw-medium);
+  line-height: 50px;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+.lede {
+  max-width: 54ch;
+  margin: 14px 0 0;
+  color: var(--gray-300);
+  font-size: 17px;
+  line-height: 26px;
+}
+
+/* Same rim as the Iris composer: half strength at rest, full when focused. */
+.composer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  max-width: 620px;
+  height: 56px;
+  margin-top: 32px;
+  padding: 0 8px 0 24px;
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.06);
+}
+.composer::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  padding: 1px;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #ff5757, #2f45ff);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  opacity: 0.55;
+  transition: opacity 0.2s ease;
+  pointer-events: none;
+}
+.composer:focus-within::before {
+  opacity: 1;
+}
+.composerInput {
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  padding: 0;
+  border: none;
+  outline: none;
+  background: none;
+  color: #fff;
+  font-family: inherit;
+  font-size: var(--fs-2);
+}
+.composerInput {
+  text-overflow: ellipsis;
+}
+.composerInput::placeholder {
+  color: var(--h-faint);
+}
+.composerSend {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: #fff;
+  color: var(--h-black);
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.composerSend:disabled {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--h-muted);
+  cursor: default;
+}
+.composerSend:focus-visible,
+.quickTry:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+.status {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  margin: 18px 0 0;
+  color: var(--h-faint);
+  font-size: 13px;
+  line-height: 18px;
+}
+.status span {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.status span::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #4b5565;
+}
+
+/* Quick Iris card */
+.quick {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 24px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02));
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+.quickLabel {
+  margin: 0;
+  color: var(--h-faint);
+  font-size: var(--fs-0);
+  font-weight: var(--fw-medium);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.quickTitle {
+  margin: 6px 0 0;
+  font-size: 20px;
+  font-weight: var(--fw-medium);
+  line-height: 26px;
+}
+.quickText {
+  margin: 0;
+  color: var(--gray-300);
+  font-size: var(--fs-1);
+  line-height: 21px;
+}
+/* A still of the quick bar: typed text, the caret, and the suggestion it would accept with Tab. */
+.quickDemo {
+  position: relative;
+  display: flex;
+  align-items: center;
+  align-self: stretch;
+  height: 44px;
+  padding: 0 18px;
+  border-radius: var(--radius-pill);
+  background: rgba(9, 10, 14, 0.7);
+  font-size: 15px;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.quickDemo::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  padding: 1px;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #ff5757, #2f45ff);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+}
+.quickDemoTyped {
+  color: #fff;
+}
+.quickDemoCaret {
+  width: 1.5px;
+  height: 18px;
+  margin: 0 1px;
+  background: #fff;
+  animation: caret 1.1s steps(1) infinite;
+}
+.quickDemoGhost {
+  color: var(--h-muted);
+}
+@keyframes caret {
+  50% {
+    opacity: 0;
+  }
+}
+.quickTry {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 40px;
+  margin-top: 4px;
+  padding: 0 14px 0 18px;
+  border: none;
+  border-radius: var(--radius-pill);
+  background: #fff;
+  color: var(--h-black);
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+  cursor: pointer;
+}
+.quickTry svg {
+  transition: transform 0.15s ease;
+}
+.quickTry:hover svg {
+  transform: translateX(2px);
+}
+
+/* ---------- sections ---------- */
+.section {
+  margin-top: 48px;
+}
+.sectionHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 4px 16px;
+  margin-bottom: 16px;
+}
+.sectionTitle {
+  margin: 0;
+  font-size: 22px;
+  font-weight: var(--fw-medium);
+  line-height: 28px;
+  letter-spacing: -0.01em;
+}
+.sectionNote {
+  margin: 0;
+  color: var(--h-muted);
+  font-size: var(--fs-1);
+}
+
+/* What Iris can do: one surface, three columns. */
+.capabilities {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  overflow: hidden;
+  border: 1px solid var(--h-rule);
+  border-radius: 20px;
+  background: var(--h-surface);
+}
+.group {
+  padding: 20px 12px 12px;
+}
+.group + .group {
+  border-left: 1px solid var(--h-rule-soft);
+}
+.groupHead {
+  padding: 0 12px 12px;
+}
+.groupLabel {
+  margin: 0;
+  color: var(--h-muted);
+  font-size: var(--fs-0);
+  font-weight: var(--fw-medium);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.groupBlurb {
+  margin: 4px 0 0;
+  color: var(--h-text-2);
+  font-size: var(--fs-1);
+  line-height: 20px;
+}
+.capList,
+.rows,
+.chats {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.capList {
+  display: grid;
+  gap: 2px;
+}
+.cap {
+  display: grid;
+  grid-template-columns: 40px minmax(0, 1fr) 20px;
+  gap: 12px;
+  align-items: center;
+  width: 100%;
+  padding: 10px 12px;
+  border: none;
+  border-radius: 12px;
+  background: none;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.cap:hover {
+  background: var(--h-ground);
+}
+.cap:focus-visible,
+.chat:focus-visible,
+.quickBtn:focus-visible,
+.chip:focus-visible,
+.textBtn:focus-visible {
+  outline: 2px solid var(--h-link);
+  outline-offset: 2px;
+}
+.capIcon {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: var(--h-tile);
+  color: var(--h-text);
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.cap:hover .capIcon {
+  background: var(--h-black);
+  color: #fff;
+}
+.capText {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+.capTitle {
+  font-size: 15px;
+  font-weight: var(--fw-medium);
+  line-height: 20px;
+}
+.capPrompt {
+  overflow: hidden;
+  color: var(--h-muted);
+  font-size: 13px;
+  line-height: 18px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.capArrow {
+  display: grid;
+  color: var(--h-faint);
+  transition: color 0.15s ease, transform 0.15s ease;
+}
+.cap:hover .capArrow {
+  color: var(--h-text);
+  transform: translateX(2px);
+}
+
+/* Coming up / Today */
+.split {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+  margin-top: 24px;
+}
+.panel {
+  min-width: 0;
+  padding: 20px 24px 8px;
+  border: 1px solid var(--h-rule);
+  border-radius: 20px;
+  background: var(--h-surface);
+}
+.panelHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 6px;
+}
+.panelTitle {
+  margin: 0;
+  font-size: 17px;
+  font-weight: var(--fw-medium);
+  line-height: 24px;
+}
+.textBtn {
+  flex: none;
+  margin: -6px -8px;
+  padding: 6px 8px;
+  border: none;
+  border-radius: 8px;
+  background: none;
+  color: var(--h-link);
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+  white-space: nowrap;
+  cursor: pointer;
+}
+.textBtn:hover {
+  background: rgba(54, 89, 245, 0.08);
+}
+.textBtnDanger {
+  color: var(--h-danger);
+}
+.textBtnDanger:hover {
+  background: rgba(217, 45, 32, 0.08);
+}
+.booking,
+.event {
+  display: grid;
+  gap: 16px;
+  align-items: center;
+  padding: 14px 0;
+}
+.booking + .booking,
+.event + .event {
+  border-top: 1px solid var(--h-rule-soft);
+}
+.booking {
+  grid-template-columns: 56px minmax(0, 1fr) auto;
+}
+.thumb {
+  width: 56px;
+  height: 56px;
+  border-radius: 12px;
+  object-fit: cover;
+}
+.thumbIcon {
+  display: grid;
+  place-items: center;
+  background: var(--h-tile);
+  color: var(--h-text);
+}
+.bookingText,
+.eventText {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+.kind {
+  color: var(--h-muted);
+  font-size: 11px;
+  font-weight: var(--fw-medium);
+  letter-spacing: 0.08em;
+  line-height: 14px;
+  text-transform: uppercase;
+}
+.rowTitle {
+  overflow: hidden;
+  font-size: 15px;
+  font-weight: var(--fw-medium);
+  line-height: 20px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.rowMeta {
+  color: var(--h-muted);
+  font-size: 13px;
+  line-height: 18px;
+}
+.bookingActions {
+  display: flex;
+  gap: 16px;
+}
+.event {
+  grid-template-columns: 72px minmax(0, 1fr) auto;
+}
+.eventEnded {
+  opacity: 0.55;
+}
+.eventTime {
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.state {
+  padding: 3px 9px;
+  border-radius: var(--radius-pill);
+  background: var(--h-tile);
+  color: var(--h-text-2);
+  font-size: var(--fs-0);
+  font-weight: var(--fw-medium);
+  line-height: 16px;
+  white-space: nowrap;
+}
+.stateLive {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(29, 202, 64, 0.12);
+  color: #0b7a24;
+}
+.stateLive::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #1dca40;
+}
+.stateEnded {
+  background: none;
+  color: var(--h-faint);
+}
+.empty {
+  margin: 0;
+  padding: 12px 0 16px;
+  color: var(--h-muted);
+  font-size: var(--fs-1);
+}
+.emptyBlock .empty {
+  padding-bottom: 12px;
+}
+.emptyActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+.chip {
+  height: 36px;
+  padding: 0 14px;
+  border: 1px solid var(--gray-300);
+  border-radius: var(--radius-pill);
+  background: var(--h-surface);
+  color: var(--h-text);
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+  cursor: pointer;
+  transition: border-color 0.15s ease;
+}
+.chip:hover {
+  border-color: var(--h-black);
+}
+
+/* Recent chats */
+.chats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+.chat {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+  height: 100%;
+  padding: 16px 18px;
+  border: 1px solid var(--h-rule);
+  border-radius: 16px;
+  background: var(--h-surface);
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 0.15s ease;
+}
+.chat:hover {
+  border-color: var(--h-faint);
+}
+.chatTop {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+}
+.chatTitle {
+  overflow: hidden;
+  font-size: 15px;
+  font-weight: var(--fw-medium);
+  line-height: 20px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.chatTime {
+  flex: none;
+  color: var(--h-muted);
+  font-size: var(--fs-0);
+}
+.chatPreview {
+  display: -webkit-box;
+  overflow: hidden;
+  color: var(--h-muted);
+  font-size: 13px;
+  line-height: 19px;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+/* ---------- footer ---------- */
+.foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px 24px;
+  max-width: 1232px;
+  margin: 56px auto 0;
+  padding: 20px var(--h-gutter) 104px;
+  color: var(--h-muted);
+  font-size: 13px;
+}
+.foot p {
+  margin: 0;
+}
+.confirm {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+  color: var(--h-text-2);
+}
+
+/* No Option/Alt key on a phone: the card explains the button instead. */
+.forTouch {
+  display: none;
+}
+@media (hover: none) and (pointer: coarse) {
+  .forKeyboard {
+    display: none;
+  }
+  .forTouch {
+    display: inline;
+  }
+}
+
+/* ---------- smaller screens ---------- */
+@media (max-width: 1040px) {
+  .hero {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 32px;
+  }
+  .quick {
+    max-width: 560px;
+  }
+  .capabilities {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .group + .group {
+    border-top: 1px solid var(--h-rule-soft);
+    border-left: none;
+  }
+  .split,
+  .chats {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+@media (max-width: 640px) {
+  .page {
+    --h-gutter: 16px;
+  }
+  .brandNote,
+  .building,
+  .quickBtn .keys {
+    display: none;
+  }
+  .quickBtn {
+    padding: 0 14px;
+  }
+  .hero {
+    padding: 28px 20px 24px;
+    border-radius: 24px;
+  }
+  .heroMark {
+    margin-bottom: 20px;
+  }
+  .greeting {
+    font-size: 32px;
+    line-height: 38px;
+  }
+  .lede {
+    font-size: var(--fs-2);
+    line-height: 24px;
+  }
+  .composer {
+    margin-top: 24px;
+    padding-left: 18px;
+  }
+  .quick {
+    padding: 20px;
+  }
+  .panel {
+    padding: 18px 16px 4px;
+  }
+  .booking {
+    grid-template-columns: 48px minmax(0, 1fr);
+  }
+  .thumb {
+    width: 48px;
+    height: 48px;
+  }
+  .bookingActions {
+    grid-column: 2;
+  }
+  .event {
+    grid-template-columns: 64px minmax(0, 1fr);
+  }
+  .event .state {
+    grid-column: 2;
+    justify-self: start;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .quickDemoCaret {
+    animation: none;
+  }
+}

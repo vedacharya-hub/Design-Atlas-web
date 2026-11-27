@@ -1,0 +1,838 @@
+/* Admin → Users → user details (Figma 1584:148102 / 1584:149941 / 1584:150638) and its edit view
+   (1584:150879): a 697px white panel 12px in from the right, top and bottom of the window, over the
+   page dimmed with black at 40%. The header stays put; everything under it scrolls. It sits above
+   the Iris launcher (300), which would otherwise cover the panel's bottom-right corner. */
+
+/* ---------- panel ---------- */
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 400;
+  background: rgba(0, 0, 0, 0.4);
+  animation: fadeIn 0.25s ease backwards;
+}
+.backdropOut {
+  animation: fadeOut 0.22s ease forwards;
+}
+.panel {
+  position: fixed;
+  top: 12px;
+  right: 12px;
+  bottom: 12px;
+  z-index: 401;
+  display: flex;
+  flex-direction: column;
+  width: min(697px, calc(100vw - 24px));
+  overflow: hidden;
+  border-radius: 8px;
+  background: var(--inverse);
+  outline: none;
+  /* Backwards only: a transform left behind would trap the fixed row menus inside the panel. */
+  animation: panelIn 0.34s cubic-bezier(0.22, 0.8, 0.24, 1) backwards;
+}
+.panelOut {
+  animation: panelOut 0.24s cubic-bezier(0.4, 0, 1, 1) forwards;
+}
+@keyframes panelIn {
+  from {
+    transform: translateX(calc(100% + 12px));
+  }
+}
+@keyframes panelOut {
+  to {
+    transform: translateX(calc(100% + 12px));
+  }
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .backdrop,
+  .backdropOut,
+  .panel,
+  .panelOut {
+    animation-duration: 0.01s;
+  }
+}
+
+/* ---------- header: 24px down, 44px of text, the #e3e8ef rule at 84px ---------- */
+.head {
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-8);
+  padding: 24px 24px 15px;
+  border-bottom: 1px solid #e3e8ef;
+}
+.headText {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+  min-width: 0;
+}
+.headTitle {
+  margin: 0;
+  color: #000;
+  font-size: 18px;
+  font-weight: var(--fw-medium);
+  line-height: 22px;
+}
+.headSub {
+  margin: 0;
+  overflow: hidden;
+  color: #697586;
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+  line-height: 18px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.headActions {
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: var(--sp-6);
+}
+.editBtn,
+.closeBtn {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 1px solid #e3e8ef;
+  border-radius: 40px;
+  background: transparent;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.closeBtn {
+  border-color: #cdd5df;
+  background: var(--inverse);
+}
+.editBtn:hover,
+.closeBtn:hover {
+  background: #f8fafc;
+}
+/* "[Core] Button", secondary: Save with a check. */
+.saveBtn {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-4);
+  height: 40px;
+  padding: 0 23px;
+  border: 1px solid #e3e8ef;
+  border-radius: 92px;
+  background: #f8fafc;
+  color: #000;
+  font-family: inherit;
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+  line-height: 18px;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.saveBtn:hover:not(:disabled) {
+  background: #eef2f6;
+}
+.saveBtn:disabled {
+  cursor: default;
+  opacity: 0.6;
+}
+/* Saving: the label and spinner say so, at full strength. */
+.saveBtn[data-status='saving']:disabled {
+  cursor: progress;
+  opacity: 1;
+}
+.editBtn:focus-visible,
+.closeBtn:focus-visible,
+.saveBtn:focus-visible,
+.avatarEdit:focus-visible,
+.tab:focus-visible,
+.locMore:focus-visible,
+.pageStep:focus-visible,
+.pageNumber:focus-visible,
+.statusButton:focus-visible {
+  outline: 2px solid #5b4fff;
+  outline-offset: 2px;
+}
+
+.body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+/* ---------- profile: #f8fafc, 166px, the gradient strip on top and the tabs along the bottom ---------- */
+.hero {
+  flex: none;
+  background: #f8fafc;
+}
+.strip {
+  height: 16px;
+  background: #e3e8ef url('/admin/user/strip.png') center / cover no-repeat;
+}
+.profile {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-8);
+  margin: 4px 24px 0;
+}
+.avatarWrap {
+  position: relative;
+  flex: none;
+  width: 88px;
+  height: 88px;
+}
+.avatar {
+  display: block;
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.avatarEdit {
+  position: absolute;
+  top: 56px;
+  left: 56px;
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid #cdd5df;
+  border-radius: 40px;
+  background: #364152;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.avatarEdit:hover {
+  background: #202939;
+}
+.identity {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-8);
+  min-width: 0;
+}
+.identityText {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+  min-width: 0;
+}
+.name {
+  overflow: hidden;
+  color: #000;
+  font-size: var(--fs-2);
+  font-weight: var(--fw-medium);
+  line-height: 20px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.email {
+  overflow: hidden;
+  color: #697586;
+  font-size: var(--fs-1);
+  font-weight: var(--fw-regular);
+  line-height: 18px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2);
+}
+.tag {
+  padding: var(--sp-2) var(--sp-4);
+  border-radius: 4px;
+  background: #eef2f6;
+  color: #4b5565;
+  font-size: var(--fs-2);
+  font-weight: var(--fw-medium);
+  line-height: 20px;
+  white-space: nowrap;
+}
+
+/* "Badge Core": 28px with 14px text in the profile, 24px with 12px bold caps on the key card. */
+.status {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-2);
+  height: 28px;
+  padding: var(--sp-2) var(--sp-4);
+  border-radius: 4px;
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+  line-height: 20px;
+  white-space: nowrap;
+}
+.statusSmall {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  height: 24px;
+  padding: var(--sp-2) var(--sp-3);
+  border-radius: 4px;
+  font-size: var(--fs-0);
+  font-weight: var(--fw-bold);
+  line-height: 16px;
+  white-space: nowrap;
+}
+.status_active {
+  background: #dbfde1;
+  color: #125522;
+}
+.status_inactive {
+  background: #ffdddd;
+  color: #b10303;
+}
+.statusSelect {
+  position: relative;
+  flex: none;
+}
+.statusButton {
+  border: none;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+/* ---------- tabs (Figma "Navigation - Tabs"): 40px of label, a 3px #121926 bar under the active one ---------- */
+.tabs {
+  display: flex;
+  margin-top: var(--sp-8);
+  padding-left: var(--sp-8);
+}
+.tab {
+  position: relative;
+  flex: none;
+  height: 42px;
+  padding: 0 var(--sp-6) 2px;
+  border: none;
+  background: none;
+  color: #4b5565;
+  font-family: inherit;
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+  line-height: 18px;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: color 0.15s ease;
+}
+.tab_general {
+  width: 128px;
+}
+.tab_associated {
+  width: 157px;
+}
+.tab:hover,
+.tabActive {
+  color: #121926;
+}
+.tabActive::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  bottom: -1.5px;
+  left: 0;
+  height: 3px;
+  background: #121926;
+}
+
+.error {
+  margin: var(--sp-8) 24px 0;
+  padding: var(--sp-5) var(--sp-6);
+  border-radius: 8px;
+  background: #fff1f1;
+  color: #b10303;
+  font-size: var(--fs-1);
+  line-height: 18px;
+}
+
+/* ---------- General: two columns 40px apart, full-width #eef2f6 rules between sections ---------- */
+.content {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 0 24px;
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px 40px;
+  margin: 0;
+  padding: 0 24px;
+}
+.item,
+.block {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+  min-width: 0;
+}
+.block {
+  gap: 7px;
+}
+.label {
+  color: #697586;
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+  line-height: 18px;
+}
+.value {
+  margin: 0;
+  color: #202939;
+  font-size: var(--fs-2);
+  font-weight: var(--fw-medium);
+  line-height: 20px;
+  overflow-wrap: anywhere;
+}
+.place {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+  margin: 0;
+}
+.address {
+  color: #697586;
+  font-size: var(--fs-1);
+  font-weight: var(--fw-regular);
+  line-height: 18px;
+}
+.membership {
+  margin: 0;
+  color: #202939;
+  font-size: var(--fs-2);
+  font-weight: var(--fw-bold);
+  line-height: 20px;
+}
+.rule {
+  flex: none;
+  width: 100%;
+  height: 0;
+  /* Figma draws the 1px line just above its position, inside the 20px before it. */
+  margin: 19px 0 20px;
+  border: none;
+  border-top: 1px solid #eef2f6;
+}
+
+/* ---------- key card ---------- */
+.keySection {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-6);
+  padding: 0 24px;
+}
+.keyRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+.keyCardGroup {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  min-width: 0;
+}
+.keyCard {
+  position: relative;
+  flex: none;
+  width: 163px;
+  height: 90.5px;
+  overflow: hidden;
+  border-radius: 8.2px;
+  background: linear-gradient(180deg, #333 0%, #000 100%);
+  box-shadow: 0 2.18px 8.72px rgba(0, 0, 0, 0.08);
+}
+.keyCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 163px;
+  height: 90.21px;
+  background: url('/admin/user/keycard-texture.png') center / cover no-repeat;
+}
+.keyCardLogo {
+  position: absolute;
+  top: 39.37px;
+  left: 53.28px;
+  display: block;
+}
+.stamps {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-6);
+  width: 147px;
+  margin: 0;
+}
+.stamps > div {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+}
+.stamps dt {
+  color: #697586;
+  font-size: var(--fs-0);
+  font-weight: var(--fw-medium);
+  line-height: 16px;
+}
+.stamps dd {
+  margin: 0;
+  color: #202939;
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+  line-height: 18px;
+  overflow-wrap: anywhere;
+}
+
+/* ---------- edit view: "Field" = label, 12px, 40px input; 20px between fields ---------- */
+.formGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+  padding: 0 24px;
+}
+.stampFields {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-6);
+  width: 287px;
+  min-width: 0;
+}
+
+/* ---------- location tables: 649px card, 24px in; search on the right ---------- */
+.locations {
+  display: flex;
+  flex-direction: column;
+  margin: 24px;
+  overflow: hidden;
+  border: 1px solid #eef2f6;
+  border-radius: 8px;
+  background: var(--inverse);
+}
+.locationsFill {
+  flex: 1 0 auto;
+}
+.locationsHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-8);
+  /* 12px from the card's outer edge on top; the table starts 64px down. */
+  padding: 11px 11px 12px;
+}
+.locationsText {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+  min-width: 0;
+}
+.locationsTitle {
+  margin: 0;
+  color: #000;
+  font-size: var(--fs-2);
+  font-weight: var(--fw-medium);
+  line-height: 20px;
+}
+.locationsDescription {
+  margin: 0;
+  color: #4b5565;
+  font-size: var(--fs-0);
+  font-weight: var(--fw-regular);
+  line-height: 16px;
+}
+/* The admin search, as on the Users tab: a 40px pill with the magnifier on the right. */
+.search {
+  display: flex;
+  flex: 0 1 284px;
+  align-items: center;
+  gap: var(--sp-6);
+  min-width: 180px;
+  height: 40px;
+  padding: 6px var(--sp-6) 6px var(--sp-8);
+  border: 1px solid rgba(0, 0, 0, 0.24);
+  border-radius: 999px;
+  background: var(--inverse);
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.04));
+  cursor: text;
+  transition: border-color 0.15s ease;
+}
+.search:focus-within {
+  border-color: #121212;
+}
+.search input {
+  flex: 1;
+  min-width: 0;
+  padding: 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: #000;
+  font-family: inherit;
+  font-size: var(--fs-1);
+  font-weight: var(--fw-regular);
+  line-height: 18px;
+}
+.search input::placeholder {
+  color: #6d6d6d;
+}
+.search img {
+  flex: none;
+}
+.locHead {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  height: 32px;
+  padding: 0 11px;
+  border-top: 1px solid #e3e8ef;
+  border-bottom: 1px solid #e3e8ef;
+  background: #f8fafc;
+  color: #697586;
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+  line-height: 18px;
+}
+.locHead > span:first-child,
+.locName {
+  flex: none;
+  width: 180px;
+}
+.locHead > span:nth-child(2),
+.locAddress {
+  flex: 0 1 204px;
+  min-width: 0;
+}
+/* 16 + 36 + 16, the last pixel being the rule. */
+.locRow {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  padding: 16px 11px 15px;
+  border-bottom: 1px solid #eef2f6;
+}
+/* Unpaged, the last row ends on the card's own border (Associated locations: 64 + 32 + 3 × 68 = 300). */
+.locRows:not(.locRowsPaged) > .locRow:last-child {
+  border-bottom: none;
+}
+.locName {
+  color: #000;
+  font-size: var(--fs-1);
+  font-weight: var(--fw-bold);
+  line-height: 18px;
+}
+.locAddress {
+  color: #697586;
+  font-size: var(--fs-0);
+  font-weight: var(--fw-medium);
+  line-height: 16px;
+}
+/* Turned off in Company Settings → Co-working Permissions: greyed, with a “Restricted” tag. */
+.locRowRestricted .locName,
+.locRowRestricted .locAddress {
+  color: #9aa4b2;
+}
+.locRestricted {
+  display: inline-flex;
+  align-items: center;
+  height: 20px;
+  margin-left: 6px;
+  padding: 0 6px;
+  border-radius: 4px;
+  background: #fee4e2;
+  color: #b42318;
+  font-size: 11px;
+  font-weight: var(--fw-bold);
+  line-height: 16px;
+  vertical-align: middle;
+  cursor: help;
+}
+.locActions {
+  position: relative;
+  flex: none;
+  margin-left: auto;
+}
+/* The row's ⋯ shows on hover or focus (it's at 0% opacity in the design's resting state). */
+.locMore {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 1px solid #e3e8ef;
+  border-radius: 360px;
+  background: #f8fafc;
+  opacity: 0;
+  cursor: pointer;
+  transition: opacity 0.15s ease, background 0.15s ease;
+}
+.locRow:hover .locMore,
+.locRowOpen .locMore,
+.locMore:focus-visible {
+  opacity: 1;
+}
+.locMore:hover {
+  background: #eef2f6;
+}
+.locEmpty {
+  margin: 0;
+  padding: 40px 24px;
+  color: #697586;
+  font-size: var(--fs-1);
+  text-align: center;
+}
+
+/* ---------- pagination: Previous, page numbers, Next; 15px off the bottom ---------- */
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-6);
+  margin-top: auto;
+  padding: 24px 11px 15px;
+}
+.pageStep {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-3);
+  height: 32px;
+  padding: var(--sp-3) var(--sp-4);
+  border: none;
+  border-radius: 4px;
+  background: none;
+  color: #4b5565;
+  font-family: inherit;
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+  line-height: 18px;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.pageStep:hover:not(:disabled) {
+  background: #f8fafc;
+}
+.pageStep:disabled {
+  cursor: default;
+  opacity: 0.4;
+}
+.pageNumbers {
+  display: flex;
+  gap: 2px;
+}
+.pageNumber {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 1px solid transparent;
+  border-radius: 9999px;
+  background: none;
+  color: #475467;
+  font-family: inherit;
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+  line-height: 18px;
+}
+button.pageNumber {
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+button.pageNumber:hover {
+  background: #f8fafc;
+}
+.pageNumberOn,
+button.pageNumberOn:hover {
+  border-color: #cdd5df;
+  background: #eef2f6;
+  color: #182230;
+}
+
+/* ---------- menus (status, location ⋯) ---------- */
+.menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  min-width: 180px;
+  padding: var(--sp-2);
+  border: 1px solid #e3e8ef;
+  border-radius: 8px;
+  background: var(--inverse);
+  box-shadow: 0 12px 32px rgba(13, 18, 28, 0.12);
+}
+.menuUp {
+  top: auto;
+  bottom: calc(100% + 6px);
+}
+.menuItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-6);
+  padding: var(--sp-4) var(--sp-5);
+  border: none;
+  border-radius: 6px;
+  background: transparent;
+  color: #121926;
+  font-family: inherit;
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+  line-height: 18px;
+  text-align: left;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.menuItem:hover,
+.menuItem:focus-visible {
+  outline: none;
+  background: #f8fafc;
+}
+.menuItemDanger {
+  color: #b10303;
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* Narrow windows: one column of details. */
+@media (max-width: 640px) {
+  .grid,
+  .formGrid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .keyRow,
+  .keyCardGroup,
+  .locationsHead {
+    flex-wrap: wrap;
+  }
+}

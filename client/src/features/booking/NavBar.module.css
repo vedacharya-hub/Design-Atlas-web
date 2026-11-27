@@ -1,0 +1,149 @@
+.nav {
+  background: var(--inverse);
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.top {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 73px;
+  padding: 0 var(--sp-12);
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.back {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-4);
+  height: 32px;
+  padding: 0 var(--sp-6);
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-pill);
+  background: var(--gray-100);
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+  color: var(--gray-800);
+  cursor: pointer;
+}
+
+.logo {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: block;
+  height: 28px;
+  width: auto;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-8);
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-4);
+  height: 32px;
+  padding: 0 var(--sp-6) 0 var(--sp-5);
+  border-radius: var(--radius-pill);
+  background: var(--gray-100);
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+  color: var(--gray-800);
+  white-space: nowrap;
+}
+
+.iconBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.avatarBtn {
+  position: relative;
+  display: inline-flex;
+  border: none;
+  padding: 0;
+  background: transparent;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.avatarBtn:hover {
+  box-shadow: 0 0 0 2px var(--gray-200);
+}
+
+.avatarIndicator {
+  position: absolute;
+  bottom: -2px;
+  right: -2px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--inverse);
+  box-shadow: 0 0 0 2px var(--inverse);
+}
+
+.tabs {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  height: 40px;
+  padding: 0 var(--sp-12);
+  overflow-x: auto;
+}
+
+.tab {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  height: 100%;
+  border: none;
+  background: transparent;
+  font-size: var(--fs-0);
+  font-weight: var(--fw-bold);
+  letter-spacing: 0.3px;
+  color: var(--gray-600);
+  cursor: pointer;
+  white-space: nowrap;
+}
+.tab:hover {
+  color: var(--gray-900);
+}
+/* Icons take the tab's colour, so they darken with it on hover and when active. */
+.tabIcon {
+  flex: none;
+  width: 16px;
+  height: 16px;
+  background: currentColor;
+  -webkit-mask: var(--icon) center / contain no-repeat;
+  mask: var(--icon) center / contain no-repeat;
+}
+
+.tabActive {
+  color: var(--gray-900);
+}
+.tabActive::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 6px;
+  background: var(--ink);
+}

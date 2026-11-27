@@ -1,0 +1,147 @@
+/* Department Details (Figma 1588:131829, edit view 1588:132059) and Business Unit Details
+   (1588:134995, edit view 1588:135204), on the user details panel's shell at the designs' 584px:
+   an 84px #f8fafc band with the name and status, the unit's details or its edit form, then the
+   units under it (a department's teams, a business unit's departments). */
+.panel {
+  width: min(584px, calc(100vw - 24px));
+}
+.hero {
+  padding-bottom: 20px;
+}
+.heroRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-8);
+  min-height: 28px;
+  margin: 20px 24px 0;
+}
+.name {
+  min-width: 0;
+  margin: 0;
+  overflow: hidden;
+  color: #000;
+  font-size: 24px;
+  font-weight: var(--fw-medium);
+  line-height: 28px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.details {
+  margin-top: 20px;
+}
+/* Editing: the fields one above the other, 24px apart, starting 20px under the band. */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 20px 24px 0;
+}
+
+/* ---------- the units under it ---------- */
+/* 24px under what's above, behind a rule with 24px more before the title. */
+.units {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 24px 24px 24px;
+  /* 24px from the rule's top, as the design measures it. */
+  padding-top: 23px;
+  border-top: 1px solid #e3e8ef;
+}
+/* Straight under the band, with no rule (a business unit's details). */
+.unitsBare {
+  margin-top: 20px;
+  padding-top: 0;
+  border-top: none;
+}
+/* Under the business unit's edit form: 20px, then the rule. */
+.unitsAfterForm {
+  margin-top: 20px;
+}
+.unitsTitle {
+  margin: 0;
+  color: #000;
+  font-family: var(--font-title);
+  font-size: 20px;
+  font-weight: var(--fw-regular);
+  line-height: 24px;
+}
+.unitsBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-8);
+}
+.unitCount {
+  color: #000;
+  font-size: var(--fs-2);
+  font-weight: var(--fw-medium);
+  line-height: 20px;
+  white-space: nowrap;
+}
+.card {
+  overflow: hidden;
+  border: 1px solid #eef2f6;
+  border-radius: 8px;
+  background: var(--inverse);
+}
+/* Columns 16px apart, 12px in from the card's edges, ⋯ on the right. */
+.headRow,
+.row {
+  display: grid;
+  column-gap: var(--sp-8);
+  align-items: center;
+  padding: 0 11px;
+}
+/* Teams: ID, team, members, status. */
+.teamCols {
+  grid-template-columns: 100px 120px 64px minmax(0, 1fr) 36px;
+}
+/* Departments: ID, department, status. */
+.departmentCols {
+  grid-template-columns: 100px 160px minmax(0, 1fr) 36px;
+}
+.headRow {
+  height: 32px;
+  border-bottom: 1px solid #e3e8ef;
+  background: #f8fafc;
+  color: #697586;
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+  line-height: 18px;
+  white-space: nowrap;
+}
+.row {
+  padding-top: 15px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid #eef2f6;
+}
+.row:last-child {
+  border-bottom: none;
+}
+.unitName {
+  overflow: hidden;
+  color: #000;
+  font-size: var(--fs-1);
+  font-weight: var(--fw-bold);
+  line-height: 18px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.members {
+  color: #000;
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+  line-height: 18px;
+}
+.actions {
+  justify-self: end;
+}
+.empty {
+  margin: 0;
+  padding: 32px 24px;
+  color: #697586;
+  font-size: var(--fs-1);
+  text-align: center;
+}

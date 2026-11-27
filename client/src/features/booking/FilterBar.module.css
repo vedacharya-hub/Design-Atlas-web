@@ -1,0 +1,6 @@
+.bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-6);
+  padding: 0 var(--sp-12) var(--sp-8);
+}

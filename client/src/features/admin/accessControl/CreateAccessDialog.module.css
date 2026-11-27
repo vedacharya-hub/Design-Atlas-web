@@ -1,0 +1,21 @@
+/* Create Access Control (Figma 3066:106945), on Create Role's 628px shell: the fields 20px under the
+   rule, then the search, the company offices and the co-working group, 32px apart. */
+.dialog {
+  height: min(960px, calc(100vh - 32px));
+}
+.body {
+  flex: 1;
+  gap: 32px;
+  padding: 20px 24px 32px;
+}
+/* The search: 40px, the full width, a soft shadow under it. */
+.search {
+  flex: none;
+  width: 100%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+}
+.coworking {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}

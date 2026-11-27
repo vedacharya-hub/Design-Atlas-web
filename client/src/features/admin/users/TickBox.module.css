@@ -1,0 +1,65 @@
+/* Checkbox, Large (Figma 9156:205634): 20px, the 16px box centred in it. */
+.tick {
+  position: relative;
+  display: block;
+  flex: none;
+  width: 20px;
+  height: 20px;
+}
+.input {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+.input:disabled {
+  cursor: default;
+}
+.visual {
+  display: grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 6px;
+}
+.visual img {
+  display: block;
+}
+.box {
+  width: 16px;
+  height: 16px;
+  border: 1px solid rgba(0, 0, 0, 0.24);
+  border-radius: 4px;
+  background: var(--inverse);
+  transition: border-color 0.15s ease;
+}
+.input:hover:not(:disabled) + .visual .box {
+  border-color: rgba(0, 0, 0, 0.48);
+}
+.input:focus-visible + .visual {
+  outline: 2px solid #5b4fff;
+  outline-offset: 1px;
+}
+.input:disabled + .visual {
+  opacity: 0.4;
+}
+/* Some of the rows shown are ticked: the filled box with a white dash. */
+.mixed {
+  position: relative;
+  border-color: #000;
+  background: #000;
+}
+.mixed::after {
+  content: '';
+  position: absolute;
+  top: 6px;
+  right: 3px;
+  left: 3px;
+  height: 2px;
+  border-radius: 1px;
+  background: var(--inverse);
+}

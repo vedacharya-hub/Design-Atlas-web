@@ -1,0 +1,586 @@
+/* Create New Event (Figma 1580:129122 / 1580:129250 / 1580:129346): a 522 × 920 dialog with 12px
+   corners over the page dimmed with black at 40%. The header (12px down, its rule at 68px), the
+   40px #eef2f6 step bar, the step's content scrolling 24px in from the sides, then a 68px footer
+   with Cancel/Back and Next/Create. */
+.backdrop {
+  position: fixed;
+  inset: 0;
+  /* Above the side panels (401), below the toasts. */
+  z-index: 420;
+  display: grid;
+  place-items: center;
+  padding: 16px;
+  background: rgba(0, 0, 0, 0.4);
+  animation: fadeIn 0.2s ease backwards;
+}
+.dialog {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: min(522px, 100%);
+  height: min(920px, calc(100vh - 32px));
+  overflow: hidden;
+  border-radius: 12px;
+  background: var(--inverse);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  animation: dialogIn 0.28s cubic-bezier(0.22, 0.8, 0.24, 1) backwards;
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes dialogIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.98);
+  }
+}
+
+/* ---------- header ---------- */
+.head {
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-8);
+  /* A 44px row 12px down, its rule at 68px. */
+  height: 68px;
+  padding: 0 24px;
+  border-bottom: 1px solid #e3e8ef;
+}
+.headText {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+  min-width: 0;
+}
+.title {
+  margin: 0;
+  color: #000;
+  font-size: var(--fs-2);
+  font-weight: var(--fw-medium);
+  line-height: 20px;
+}
+.subtitle {
+  margin: 0;
+  color: #697586;
+  font-size: var(--fs-0);
+  font-weight: var(--fw-medium);
+  line-height: 16px;
+}
+.close {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 1px solid #cdd5df;
+  border-radius: 92px;
+  background: var(--inverse);
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.close:hover:not(:disabled) {
+  background: #f8fafc;
+}
+
+/* ---------- step bar ---------- */
+.steps {
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: var(--sp-4);
+  height: 40px;
+  padding: 8px 24px;
+  background: #eef2f6;
+}
+.stepName {
+  color: #202939;
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+  line-height: 18px;
+  white-space: nowrap;
+}
+.stepLine {
+  flex: 1;
+  min-width: 0;
+  border-top: 1px solid #cdd5df;
+}
+.stepCount {
+  color: #697586;
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+  line-height: 18px;
+  white-space: nowrap;
+}
+.stepNumber {
+  color: #121926;
+  font-size: 20px;
+  line-height: 24px;
+}
+
+/* ---------- the step ---------- */
+.body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-height: 0;
+  padding: 20px 24px 24px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  animation: stepIn 0.26s ease backwards;
+}
+@keyframes stepIn {
+  from {
+    opacity: 0;
+    transform: translateX(12px);
+  }
+}
+/* Step 1: fields 14px apart, starting 16px under the step bar. */
+.bodyForm {
+  gap: 14px;
+  padding-top: 16px;
+}
+.pair {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+/* Step 2: the dashed drop area, then the images 16px below. */
+.bodyUpload {
+  gap: 16px;
+}
+.drop {
+  display: flex;
+  flex: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-2);
+  height: 111px;
+  border: 1px dashed #9aa4b2;
+  border-radius: 12px;
+  background: #f8fafc;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+.drop:hover {
+  background: #f4f6f9;
+}
+.dropActive,
+.dropActive:hover {
+  border-color: #11a830;
+  background: rgba(29, 202, 64, 0.06);
+}
+.drop:focus-visible {
+  outline: 2px solid #5b4fff;
+  outline-offset: 2px;
+}
+/* The folder art is cropped to its middle 73% (as in the design). */
+.folder {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  overflow: hidden;
+}
+.folder img {
+  position: absolute;
+  top: -18.1%;
+  left: -18.1%;
+  width: 136.21%;
+  max-width: none;
+  height: 136.21%;
+}
+.dropLine {
+  color: #697586;
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+  line-height: 18px;
+  text-align: center;
+}
+.dropLine strong {
+  color: #121926;
+  font-weight: var(--fw-bold);
+}
+.uploadNote,
+.uploadError {
+  margin: -8px 0 0;
+  font-size: var(--fs-0);
+  line-height: 16px;
+}
+.uploadNote {
+  color: #697586;
+}
+.uploadError {
+  color: #b42318;
+}
+.uploads {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.uploadsTitle {
+  margin: 0;
+  color: #697586;
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+  line-height: 18px;
+}
+.uploadList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.upload {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 8px 16px;
+  border: 1px solid #e3e8ef;
+  border-radius: 10px;
+  background: var(--inverse);
+  filter: drop-shadow(0 4px 7px #f8fafc);
+  animation: rise 0.24s ease backwards;
+}
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+}
+.thumb {
+  flex: none;
+  width: 48px;
+  height: 48px;
+  border-radius: 4px;
+  background: #f8fafc;
+  object-fit: cover;
+}
+.uploadName {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  color: #000;
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+  line-height: 18px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.progress {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  gap: 16px;
+  min-width: 0;
+}
+.bar {
+  flex: 1;
+  height: 4px;
+  overflow: hidden;
+  border-radius: 4px;
+  background: #cdd5df;
+}
+.barFill {
+  display: block;
+  height: 100%;
+  border-radius: 4px;
+  background: #3659f5;
+  transition: width 0.12s linear;
+}
+.percent {
+  min-width: 34px;
+  color: #364152;
+  font-size: var(--fs-0);
+  font-weight: var(--fw-bold);
+  line-height: 16px;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+.uploadActions {
+  display: flex;
+  flex: none;
+  gap: 12px;
+}
+.iconBtn {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 1px solid #e3e8ef;
+  border-radius: 360px;
+  background: #f8fafc;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.iconBtn:hover:not(:disabled) {
+  background: #eef2f6;
+}
+.iconBtn:disabled {
+  cursor: default;
+  opacity: 0.5;
+}
+
+/* Step 3: the members' event card, then their (inactive) buttons 32px below. */
+.bodyPreview {
+  gap: 32px;
+}
+.preview {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.previewText {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.previewHead {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.previewTitle {
+  margin: 0;
+  color: #000;
+  font-family: var(--font-title);
+  font-size: 20px;
+  font-weight: var(--fw-regular);
+  line-height: 24px;
+  overflow-wrap: anywhere;
+}
+.previewDescription {
+  margin: 0;
+  color: #697586;
+  font-size: var(--fs-2);
+  line-height: 20px;
+  white-space: pre-line;
+  overflow-wrap: anywhere;
+}
+.previewRow {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+.previewRowTop {
+  align-items: flex-start;
+}
+.previewIcon {
+  display: grid;
+  flex: none;
+  place-items: center;
+  padding: 8px;
+  border: 1px solid #eef2f6;
+}
+.previewStrong {
+  color: #202939;
+  font-size: var(--fs-2);
+  font-weight: var(--fw-medium);
+  line-height: 20px;
+}
+.previewPlace {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+  max-width: 378px;
+}
+.previewAddress {
+  color: #697586;
+  font-size: var(--fs-0);
+  line-height: 16px;
+}
+.previewCtas {
+  display: flex;
+  gap: 16px;
+  opacity: 0.8;
+}
+.previewSave,
+.previewRsvp {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 46px;
+  padding: 12px 16px;
+  border: 1px solid #e3e8ef;
+  border-radius: 200px;
+  background: #f8fafc;
+  color: #000;
+  font-size: var(--fs-2);
+  font-weight: var(--fw-medium);
+  line-height: 20px;
+}
+.previewRsvp {
+  border-color: #cdd5df;
+  background: #000;
+  color: #fff;
+}
+.saveError {
+  margin: -16px 0 0;
+  padding: var(--sp-5) var(--sp-6);
+  border-radius: 8px;
+  background: #fef3f2;
+  color: #b42318;
+  font-size: var(--fs-1);
+  line-height: 18px;
+}
+
+/* ---------- footer ---------- */
+.foot {
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: space-between;
+  height: 68px;
+  padding: 0 24px;
+  background: var(--inverse);
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.04);
+}
+.secondary,
+.primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-4);
+  height: 40px;
+  padding: 0 23px;
+  border: 1px solid #e3e8ef;
+  border-radius: 92px;
+  font-family: inherit;
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+  line-height: 18px;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+.secondary {
+  background: #f8fafc;
+  color: #000;
+}
+.secondary:hover:not(:disabled) {
+  background: #eef2f6;
+}
+.secondary:disabled {
+  cursor: default;
+  opacity: 0.6;
+}
+.primary {
+  border-color: #000;
+  background: #000;
+  color: var(--inverse);
+}
+.primary:hover:not(:disabled) {
+  background: #202939;
+}
+/* Next waits for the step to be complete. */
+.primary:disabled {
+  border-color: #cdd5df;
+  background: #cdd5df;
+  cursor: not-allowed;
+}
+/* Creating: still black, the check giving way to a white spinner. */
+.primary[aria-busy='true']:disabled {
+  border-color: #000;
+  background: #000;
+  cursor: progress;
+}
+.spinner {
+  width: 18px;
+  height: 18px;
+  margin: 1px;
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.close:focus-visible,
+.secondary:focus-visible,
+.primary:focus-visible,
+.iconBtn:focus-visible {
+  outline: 2px solid #5b4fff;
+  outline-offset: 2px;
+}
+
+/* ---------- success (Figma 1580:129447): the green check and the message, centred ---------- */
+.success {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 24px;
+}
+.successBadge {
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  border: 7px solid #b9f9c4;
+  border-radius: 50%;
+  background: linear-gradient(146.15deg, #11a830 2.74%, #12872a 100%);
+  animation: pop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) backwards;
+}
+.successText {
+  margin: 0;
+  color: #000;
+  font-size: 22px;
+  font-weight: var(--fw-medium);
+  line-height: 26px;
+  text-align: center;
+  animation: rise 0.4s ease 0.12s backwards;
+}
+@keyframes pop {
+  from {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+}
+
+/* ---------- a photo, full size ---------- */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  padding: 40px;
+  background: rgba(0, 0, 0, 0.8);
+  cursor: zoom-out;
+  animation: fadeIn 0.18s ease backwards;
+}
+.lightbox img {
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 8px;
+  object-fit: contain;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .backdrop,
+  .dialog,
+  .body,
+  .upload,
+  .successBadge,
+  .successText,
+  .lightbox {
+    animation-duration: 0.01s;
+  }
+  .spinner {
+    animation: none;
+  }
+}

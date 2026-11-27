@@ -1,0 +1,6 @@
+/* Show From and Show Until side by side, 12px apart (Figma 8825:278785). */
+.pair {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}

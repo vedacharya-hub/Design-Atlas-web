@@ -1,0 +1,97 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-12);
+}
+
+.statusBanner {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-8);
+  padding: var(--sp-8) var(--sp-10);
+  border-radius: var(--radius-4);
+  background: var(--gray-50);
+  border: 1px solid var(--gray-200);
+}
+.statusBanner > div:first-child {
+  flex: 1;
+}
+
+.statusIcon {
+  width: 28px;
+  height: 28px;
+  flex: 0 0 auto;
+}
+
+.statusTitle {
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+}
+
+.statusSub {
+  font-size: var(--fs-0);
+  color: var(--fg-tertiary);
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-8);
+}
+
+.sectionTitle {
+  margin: 0;
+  font-size: var(--fs-2);
+  font-weight: var(--fw-medium);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--sp-8);
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+}
+
+.fieldLabel {
+  font-size: var(--fs-0);
+  color: var(--fg-tertiary);
+}
+
+.input {
+  height: 40px;
+  padding: 0 var(--sp-6);
+  border: 1px solid var(--stroke);
+  border-radius: var(--radius-3);
+  font-size: var(--fs-1);
+  font-family: inherit;
+  color: var(--fg-primary);
+  background: var(--inverse);
+}
+.input:focus {
+  outline: 2px solid var(--cobalt-600);
+  outline-offset: 1px;
+}
+
+.readOnly {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  padding: 0 var(--sp-6);
+  border-radius: var(--radius-3);
+  background: var(--inactive);
+  color: var(--fg-secondary);
+  font-size: var(--fs-1);
+}
+
+.footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--sp-4);
+  padding-top: var(--sp-6);
+  border-top: 1px solid var(--gray-200);
+}

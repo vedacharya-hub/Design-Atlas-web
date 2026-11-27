@@ -1,0 +1,213 @@
+/* Event Details (Figma 1580:129926 General, 9931:283953 RSVP'd), on the user details panel's shell
+   at the design's 585px: a 120px #f8fafc band with the serif title, the status and the tabs, then
+   the photos and details, or who has RSVP'd. */
+.panel {
+  width: min(585px, calc(100vw - 24px));
+}
+.hero {
+  padding-bottom: 3px;
+}
+.heroRow {
+  display: flex;
+  /* The title's top lines up with the badge's, as in the design. */
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--sp-8);
+  min-height: 28px;
+  margin: 20px 24px 0;
+}
+.title {
+  min-width: 0;
+  margin: 0;
+  overflow: hidden;
+  color: #000;
+  font-family: var(--font-title);
+  font-size: 20px;
+  font-weight: var(--fw-regular);
+  line-height: 24px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.status_active {
+  background: #dbfde1;
+  color: #125522;
+}
+.status_scheduled {
+  background: #ffffe7;
+  color: #125522;
+}
+.status_completed {
+  background: #eef2f6;
+  color: #4b5565;
+}
+.status_archived {
+  background: #ffdddd;
+  color: #b10303;
+}
+.tabs {
+  margin-top: 11px;
+  padding-left: 24px;
+}
+.tab {
+  width: auto;
+}
+
+/* ---------- General: 20px under the band, 24px in ---------- */
+.general {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 18px;
+  padding: 20px 24px 22px;
+}
+.facts {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 2px 0 0;
+}
+.factPair {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+.fact {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+  min-width: 0;
+}
+.factLabel {
+  color: #697586;
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+  line-height: 18px;
+}
+.factValue,
+.factText {
+  margin: 0;
+  color: #202939;
+  font-weight: var(--fw-medium);
+  overflow-wrap: anywhere;
+}
+.factValue {
+  font-size: var(--fs-2);
+  line-height: 20px;
+}
+.factText {
+  font-size: var(--fs-1);
+  line-height: 18px;
+  white-space: pre-line;
+}
+.toggles {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+/* Delete sits at the bottom of the panel when the details are short. */
+.footer {
+  display: flex;
+  margin-top: auto;
+  padding-top: 24px;
+}
+.delete {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  height: 44px;
+  padding: 12px 16px;
+  border: 1px solid #cdd5df;
+  border-radius: 200px;
+  background: #f8fafc;
+  color: #121926;
+  font-family: inherit;
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+  line-height: 18px;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+.delete:hover {
+  border-color: #fda29b;
+  background: #fef3f2;
+}
+.delete:focus-visible {
+  outline: 2px solid #5b4fff;
+  outline-offset: 2px;
+}
+/* The delete question, above the panel (401). */
+.modalLayer {
+  position: relative;
+  z-index: 430;
+}
+
+/* ---------- RSVP'd ---------- */
+.rsvps {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 20px 24px 24px;
+}
+.rsvpBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-8);
+}
+.rsvpTools {
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: var(--sp-8);
+}
+.rsvpCount {
+  color: #000;
+  font-size: var(--fs-2);
+  font-weight: var(--fw-medium);
+  line-height: 20px;
+  white-space: nowrap;
+}
+.card {
+  overflow: hidden;
+  border: 1px solid #eef2f6;
+  border-radius: 8px;
+  background: var(--inverse);
+}
+/* ID, then the member: 12px in from the card's edges, 16px apart. */
+.headRow,
+.row {
+  display: grid;
+  grid-template-columns: 128px minmax(0, 1fr);
+  column-gap: var(--sp-8);
+  align-items: center;
+  padding: 0 11px;
+}
+.headRow {
+  height: 32px;
+  border-bottom: 1px solid #e3e8ef;
+  background: #f8fafc;
+  color: #697586;
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+  line-height: 18px;
+}
+/* 12 + 42 + 11, then the rule: 66px. */
+.row {
+  padding-top: 12px;
+  padding-bottom: 11px;
+  border-bottom: 1px solid #eef2f6;
+}
+.card:not(:has(nav)) .row:last-child {
+  border-bottom: none;
+}
+.empty {
+  margin: 0;
+  padding: 40px 24px;
+  color: #697586;
+  font-size: var(--fs-1);
+  text-align: center;
+}
+.pagination {
+  margin-top: 0;
+  padding: 20px 11px 22px;
+}

@@ -1,0 +1,43 @@
+/* Create New Zone (Figma 3039:112228) on the seat dialogs' shell: the banner's orb is the zone's
+   colour (3039:112245), and Zone Color shows it as a 24px swatch before the chevron (3039:112262). */
+.banner {
+  gap: 13px;
+}
+.orb {
+  flex: none;
+  box-sizing: border-box;
+  width: 32px;
+  height: 32px;
+  border: 2px solid var(--edge);
+  border-radius: 50%;
+  background: var(--fill);
+  box-shadow: 0 0 0 5px color-mix(in srgb, var(--edge) 10%, transparent);
+}
+.bannerText {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  min-width: 0;
+}
+.bannerSeats {
+  flex: none;
+  color: #697586;
+  font-size: var(--fs-0);
+  font-weight: var(--fw-medium);
+  line-height: 16px;
+}
+.colorSelect.colorSelect {
+  padding-right: 72px;
+}
+.swatch {
+  position: absolute;
+  top: 8px;
+  right: 40px;
+  box-sizing: border-box;
+  width: 24px;
+  height: 24px;
+  border: 2px solid var(--edge);
+  border-radius: 50%;
+  background: var(--fill);
+  pointer-events: none;
+}

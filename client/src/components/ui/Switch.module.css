@@ -1,0 +1,35 @@
+.track {
+  position: relative;
+  width: 37px;
+  height: 20px;
+  padding: 0;
+  border: none;
+  border-radius: var(--radius-pill);
+  background: var(--gray-300);
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.track:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.on {
+  background: var(--ink);
+}
+
+.thumb {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--inverse);
+  transition: transform 0.15s ease;
+}
+
+.on .thumb {
+  transform: translateX(17px);
+}

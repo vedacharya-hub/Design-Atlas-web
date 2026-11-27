@@ -1,0 +1,43 @@
+.step {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-6);
+}
+
+.headerRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.recurring {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-4);
+}
+
+.sectionLabel {
+  font-size: var(--fs-0);
+  font-weight: var(--fw-medium);
+  letter-spacing: 0.3px;
+  color: var(--fg-tertiary);
+}
+
+.fieldLabel {
+  font-size: var(--fs-0);
+  font-weight: var(--fw-medium);
+  letter-spacing: 0.3px;
+  color: var(--fg-tertiary);
+  margin-bottom: calc(-1 * var(--sp-3));
+}
+
+.field {
+  display: flex;
+  align-items: center;
+  height: 44px;
+  padding: 0 var(--sp-6);
+  border: 1px solid var(--stroke);
+  border-radius: var(--radius-3);
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+}

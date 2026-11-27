@@ -1,0 +1,41 @@
+/* “40/50 PO” (Figma 11487:240936, sized up): the used count bold at 16px, the total at 14px in grey,
+   then a 50 × 6 bar, 6px after it, filling in the brand blue. */
+.licences {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  gap: var(--sp-3);
+}
+.count {
+  color: var(--fg-secondary);
+  font-size: var(--fs-1);
+  font-weight: var(--fw-regular);
+  line-height: 18px;
+  white-space: nowrap;
+}
+.count strong {
+  color: #000;
+  font-size: var(--fs-2);
+  font-weight: var(--fw-bold);
+  line-height: 20px;
+}
+.track {
+  display: block;
+  width: 50px;
+  height: 6px;
+  overflow: hidden;
+  border-radius: 360px;
+  background: var(--gray-200);
+}
+.fill {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--cobalt-600);
+  transition: width 0.3s ease;
+}
+@media (prefers-reduced-motion: reduce) {
+  .fill {
+    transition: none;
+  }
+}

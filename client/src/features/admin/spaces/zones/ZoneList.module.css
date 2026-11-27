@@ -1,0 +1,220 @@
+/* The zones beside the map (Figma 3039:111640): 385px, "Space Zones" 16px down over a rule, then
+   the cards 16px in and 16px apart; with none yet, a note and Create Zone in the middle (1598:90456). */
+.list {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0;
+  border-left: 1px solid #e3e8ef;
+  background: var(--inverse);
+}
+.title {
+  flex: none;
+  margin: 0;
+  padding: 16px 16px 8px;
+  border-bottom: 1px solid #e3e8ef;
+  color: #000;
+  font-size: var(--fs-2);
+  font-weight: var(--fw-medium);
+  line-height: 20px;
+}
+
+.empty {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 24px;
+}
+.emptyText {
+  max-width: 249px;
+  margin: 0;
+  color: #697586;
+  font-size: var(--fs-0);
+  line-height: 16px;
+  text-align: center;
+}
+/* Create Zone (1604:189410): a 32px black pill, 12px medium. */
+.create {
+  height: 32px;
+  padding: 0 12px;
+  border: none;
+  border-radius: 92px;
+  background: #000;
+  color: var(--inverse);
+  font-family: inherit;
+  font-size: var(--fs-0);
+  font-weight: var(--fw-medium);
+  line-height: 16px;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.create:hover {
+  background: #202939;
+}
+
+.cards {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 16px;
+  min-height: 0;
+  margin: 0;
+  padding: 16px;
+  overflow-y: auto;
+  list-style: none;
+}
+/* A zone (3039:106834): 66px, 14px in, the 32px dot, then who it's for on the right and ⋮. */
+.card {
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: 8px;
+  padding-right: 14px;
+  border: 1px solid #e3e8ef;
+  border-radius: 8px;
+  background: var(--inverse);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+.card:hover {
+  background: #f8fafc;
+}
+.cardOn {
+  border-color: #9aa4b2;
+  background: #f8fafc;
+}
+.cardMain {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+  padding: 14px 0 14px 14px;
+  border: none;
+  border-radius: 8px 0 0 8px;
+  background: none;
+  font-family: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.dot {
+  flex: none;
+  box-sizing: border-box;
+  width: 32px;
+  height: 32px;
+  border: 2px solid var(--edge);
+  border-radius: 50%;
+  background: var(--fill);
+}
+.text,
+.unit {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+.text {
+  flex: 1;
+}
+.name,
+.seats,
+.unitName,
+.level {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.name {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #121926;
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+  line-height: 18px;
+}
+.unsaved {
+  flex: none;
+  padding: 0 6px;
+  border-radius: 4px;
+  background: #eef2f6;
+  color: #4b5565;
+  font-size: 11px;
+  font-weight: var(--fw-bold);
+  line-height: 16px;
+}
+.seats {
+  color: #4b5565;
+  font-size: var(--fs-1);
+  line-height: 18px;
+}
+.unit {
+  flex: none;
+  align-items: flex-end;
+  max-width: 140px;
+  text-align: right;
+}
+.level {
+  max-width: 100%;
+  color: #697586;
+  font-size: var(--fs-0);
+  line-height: 16px;
+}
+.unitName {
+  max-width: 100%;
+  color: #000;
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+  line-height: 18px;
+}
+.unitArchived {
+  color: #9aa4b2;
+}
+.unitMore {
+  color: #4b5565;
+  font-size: var(--fs-0);
+  font-weight: var(--fw-medium);
+  line-height: 16px;
+}
+.more {
+  position: relative;
+  flex: none;
+}
+.moreBtn {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: none;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.moreBtn:hover,
+.moreBtn[aria-expanded='true'] {
+  background: #e3e8ef;
+}
+
+.menu {
+  composes: menu from '../../users/UsersPanel.module.css';
+  min-width: 160px;
+}
+.menuItem {
+  composes: menuItem from '../../users/UsersPanel.module.css';
+}
+.menuItemDanger {
+  composes: menuItemDanger from '../../users/UsersPanel.module.css';
+}
+
+.create:focus-visible,
+.cardMain:focus-visible,
+.moreBtn:focus-visible {
+  outline: 2px solid #5b4fff;
+  outline-offset: 2px;
+}

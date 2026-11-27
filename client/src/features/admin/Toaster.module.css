@@ -1,0 +1,183 @@
+/* Toasts in Medusa UI's style (docs.medusajs.com/ui/components/toast), in a dark theme: a black
+   card with white text, a 1px ring and a soft two-step shadow, 8px corners, 12px in; a 20px icon column 8px from the text,
+   13px title and description, a 20px ✕. They stack in the bottom right corner, 24px in: the newest
+   in front, the two before it peeking out 12px apart and 5% smaller; hovering spreads them 12px
+   apart. */
+.stack {
+  position: fixed;
+  right: 24px;
+  /* Medusa's corner, lifted 12px clear of the Iris assistant button (56px, 24px in). */
+  bottom: 92px;
+  /* Above the side panels and dialogs (400–430). */
+  z-index: 470;
+  width: 440px;
+  max-width: calc(100vw - 48px);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  /* Only the toasts take the pointer, not the space around them. */
+  pointer-events: none;
+}
+.toast {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: max-content;
+  min-width: min(360px, 100%);
+  max-width: 100%;
+  transform-origin: bottom center;
+  pointer-events: auto;
+  transition:
+    transform 0.4s ease,
+    opacity 0.4s ease,
+    height 0.4s ease;
+}
+/* Keeps the pointer on the stack across the gaps when it's spread out. */
+.toast::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  bottom: 100%;
+  left: 0;
+  height: 14px;
+}
+/* Dark: a black card, a faint white edge so the cards behind it still show, a deeper shadow. */
+.card {
+  height: 100%;
+  overflow: hidden;
+  border-radius: 8px;
+  background: #000;
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.14),
+    0 4px 8px rgba(0, 0, 0, 0.16),
+    0 8px 16px rgba(0, 0, 0, 0.16);
+}
+.content {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px;
+  transition: opacity 0.4s ease;
+}
+.main {
+  display: grid;
+  flex: 1;
+  grid-template-columns: 20px 1fr;
+  column-gap: 8px;
+  align-items: start;
+  min-width: 0;
+}
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+}
+.icon_info {
+  color: #fff;
+}
+.icon_success {
+  color: #10b981;
+}
+.icon_warning {
+  color: #f97316;
+}
+.icon_error {
+  color: #f43f5e;
+}
+.icon_loading {
+  color: #60a5fa;
+}
+.icon_loading svg {
+  animation: spin 1s linear infinite;
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+}
+.text {
+  display: flex;
+  flex-direction: column;
+}
+.title {
+  color: #fff;
+  font-size: 13px;
+  font-weight: var(--fw-medium);
+  line-height: 20px;
+}
+/* White too, a little softer than the title. */
+.description {
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 13px;
+  font-weight: var(--fw-regular);
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+  text-wrap: pretty;
+}
+.description strong {
+  color: #fff;
+  font-weight: var(--fw-medium);
+}
+/* "Undo": text only, 13px. */
+.action {
+  align-self: flex-start;
+  padding: 0;
+  border: none;
+  border-radius: 4px;
+  background: transparent;
+  color: #fff;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: var(--fw-medium);
+  line-height: 20px;
+  cursor: pointer;
+  transition: color 0.15s ease;
+}
+.action:hover {
+  color: rgba(255, 255, 255, 0.7);
+}
+.close {
+  display: inline-grid;
+  flex: none;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  border: none;
+  border-radius: 6px;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.78);
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.close:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+}
+.close:active {
+  background: rgba(255, 255, 255, 0.2);
+}
+.action:focus-visible,
+.close:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 1px #000,
+    0 0 0 3px rgba(96, 165, 250, 0.8);
+}
+@media (prefers-reduced-motion: reduce) {
+  .toast,
+  .content {
+    transition-duration: 0.01s;
+  }
+  .icon_loading svg {
+    animation-duration: 2.4s;
+  }
+}

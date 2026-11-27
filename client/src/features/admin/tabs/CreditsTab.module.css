@@ -1,0 +1,54 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-10);
+  max-width: 720px;
+  padding: var(--sp-10) var(--sp-12);
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-4);
+}
+
+.cardTitle {
+  margin: 0;
+  font-size: var(--fs-2);
+  font-weight: var(--fw-medium);
+}
+
+.cardSub {
+  margin: calc(var(--sp-8) * -1) 0 0;
+  font-size: var(--fs-0);
+  color: var(--fg-tertiary);
+}
+
+.bars {
+  display: flex;
+  gap: var(--sp-12);
+}
+.bars > * {
+  flex: 1;
+  min-width: 0;
+}
+
+.statsRow {
+  display: flex;
+  gap: var(--sp-12);
+  padding-top: var(--sp-10);
+  border-top: 1px solid var(--gray-200);
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+}
+
+.statValue {
+  font-size: var(--fs-6);
+  font-weight: var(--fw-bold);
+  color: var(--fg-primary);
+}
+
+.statLabel {
+  font-size: var(--fs-0);
+  color: var(--fg-tertiary);
+}

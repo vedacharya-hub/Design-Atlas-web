@@ -1,0 +1,206 @@
+/* General Info & Permissions (Figma 7991:258087): 24px under the tabs, the logo (120px) over its
+   Upload pill, the name and domain 24px below with the pencil, then a rule 32px down and the
+   service groups 26px under it, 32px apart. Cards are 61px, square-cornered, 12px apart. */
+.general {
+  display: flex;
+  flex-direction: column;
+  padding: 22px 23px 40px 19px;
+}
+.identity {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+  padding-bottom: 32px;
+  border-bottom: 1px solid #e3e8ef;
+}
+.logoBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 139px;
+}
+.logo {
+  display: grid;
+  place-items: center;
+  width: 120px;
+  height: 120px;
+  margin-bottom: -8px;
+  overflow: hidden;
+  border-radius: 50%;
+  background: #d9d9d9;
+}
+.logoSet {
+  border: 1px solid #e3e8ef;
+  background: var(--inverse);
+}
+/* Inset so a wide logo clears the circle. */
+.logoSet img {
+  width: 100%;
+  height: 100%;
+  padding: 18px;
+  object-fit: contain;
+}
+.upload {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-4);
+  width: 100%;
+  height: 32px;
+  padding: 0 16px 0 12px;
+  border-radius: 27px;
+  background: #eef2f6;
+  color: #202939;
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+  line-height: 18px;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.upload:hover {
+  background: #e3e8ef;
+}
+.upload:focus-within {
+  outline: 2px solid #5b4fff;
+  outline-offset: 2px;
+}
+.uploadBusy {
+  cursor: progress;
+}
+.nameRow {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-width: 0;
+}
+.nameText {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+  min-width: 0;
+}
+.companyName {
+  margin: 0;
+  overflow: hidden;
+  color: #000;
+  font-family: var(--font-title);
+  font-size: 24px;
+  font-weight: var(--fw-regular);
+  letter-spacing: -0.5px;
+  line-height: 28px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.domain {
+  margin: 0;
+  color: #4b5565;
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+  line-height: 18px;
+}
+.pencil {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid #cdd5df;
+  border-radius: 92px;
+  background: #f8fafc;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.pencil:hover {
+  background: #eef2f6;
+}
+.pencil:focus-visible,
+.info:focus-visible {
+  outline: 2px solid #5b4fff;
+  outline-offset: 2px;
+}
+.nameForm {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 280px)) auto;
+  align-items: end;
+  gap: 16px;
+  width: 100%;
+}
+.nameActions {
+  display: flex;
+  gap: var(--sp-4);
+}
+
+.services {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  padding-top: 26px;
+}
+.group {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.groupHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-8);
+}
+.groupTitle {
+  margin: 0;
+  color: #697586;
+  font-size: var(--fs-0);
+  font-weight: var(--fw-medium);
+  line-height: 16px;
+}
+.info {
+  display: grid;
+  border-radius: 50%;
+  cursor: help;
+}
+/* The 16px between groups' rows is 12px within one: the second row sits 12px under the first. */
+.row {
+  display: grid;
+  gap: 12px;
+}
+.row + .row {
+  margin-top: -4px;
+}
+.card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-6);
+  min-width: 0;
+  min-height: 61px;
+  padding: 11px 12px 11px;
+  border: 1px solid #e3e8ef;
+  background: var(--inverse);
+}
+.cardShaded {
+  background: #f8fafc;
+}
+.cardText {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+  min-height: 37px;
+}
+.cardTitle {
+  color: #121926;
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+  line-height: 18px;
+}
+.cardNote {
+  color: #697586;
+  font-size: var(--fs-0);
+  font-weight: var(--fw-regular);
+  line-height: 16px;
+}

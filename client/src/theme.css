@@ -1,0 +1,100 @@
+/* ============================================================
+   WeWork Workplace — design tokens (from Figma get_variable_defs)
+   ============================================================ */
+:root {
+  /* Fonts. Apercu Pro / WeWork Serif are proprietary; drop the real
+     woff2 files into /public/fonts and add @font-face to use them.
+     Fallbacks keep the layout faithful in the meantime. */
+  --font-body: 'Apercu Pro', -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-title: 'WeWork Serif', Georgia, 'Times New Roman', serif;
+
+  --fs-0: 12px;
+  --fs-1: 14px;
+  --fs-2: 16px;
+  --fs-6: 24px;
+  --lh-1: 20px;
+
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-bold: 700;
+
+  /* Seat status */
+  --seat-available: #1dca40;   /* green/500  */
+  --seat-unavailable: #ff0000; /* red        */
+  --seat-unavailable-strong: #d70000;
+  --seat-partial: #ffd500;     /* yellow/500 */
+
+  /* Brand / interactive */
+  --ink: #000000;
+  --inverse: #ffffff;
+  --cobalt-600: #3659f5;
+  --accent-blue: #0000ff;
+  --fg-blue: #10169f;
+
+  /* Neutrals (gray-modern) */
+  --gray-50: #f8fafc;
+  --gray-100: #eef2f6;
+  --gray-200: #e3e8ef;
+  --gray-300: #cdd5df;
+  --gray-400: #9aa4b2;
+  --gray-500: #697586;
+  --gray-600: #4b5565;
+  --gray-800: #202939;
+  --gray-900: #121926;
+
+  /* Foreground */
+  --fg-primary: #000000;
+  --fg-secondary: #454545;
+  --fg-tertiary: #888888;
+
+  --stroke: #d5d4df;
+  --inactive: #f2f3f7;
+  --border-interactive: rgba(0, 0, 0, 0.64);
+
+  /* Credit limit bars */
+  --limit-primary: #f97316;
+  --limit-secondary: #3659f5;
+  --limit-track-stripe: var(--gray-300);
+
+  /* Spacing */
+  --sp-2: 4px;
+  --sp-3: 6px;
+  --sp-4: 8px;
+  --sp-5: 10px;
+  --sp-6: 12px;
+  --sp-7: 14px;
+  --sp-8: 16px;
+  --sp-10: 20px;
+  --sp-12: 24px;
+
+  /* Radius */
+  --radius-3: 8px;
+  --radius-4: 12px;
+  --radius-pill: 360px;
+
+  /* Elevation */
+  --shadow-card: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: var(--fs-1);
+  color: var(--fg-primary);
+  background: var(--inverse);
+  -webkit-font-smoothing: antialiased;
+}
+
+button {
+  font-family: inherit;
+}

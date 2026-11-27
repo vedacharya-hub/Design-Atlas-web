@@ -1,0 +1,52 @@
+/* "File type icon" (a 32 × 40 page in a 40px box, its type in 10px white bold) 9px from the name and
+   "1 Page • 24.2 MB"; the delete button 12px after. */
+.file {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-6);
+  min-width: 0;
+}
+.icon {
+  position: relative;
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+}
+.kind {
+  position: absolute;
+  right: 4px;
+  bottom: 1px;
+  left: 4px;
+  color: #fff;
+  font-size: 10px;
+  font-weight: var(--fw-bold);
+  line-height: 16px;
+  text-align: center;
+}
+.text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--sp-2);
+  min-width: 0;
+  max-width: 220px;
+  min-height: 42px;
+  margin-left: -3px;
+}
+.name {
+  overflow: hidden;
+  color: #000;
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+  line-height: 18px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.meta {
+  color: #697586;
+  font-size: var(--fs-0);
+  font-weight: var(--fw-medium);
+  line-height: 16px;
+}

@@ -1,0 +1,65 @@
+/* Add New Shift (Figma 3145:640716): the Add New Team shell at 444px, the rule at 76px; the name
+   20px under it, the two times 20px below, 188px each and 20px apart. */
+.dialog {
+  width: min(444px, 100%);
+}
+.head {
+  padding: 16px 24px 15px;
+}
+.close {
+  border-color: #e3e8ef;
+}
+.body {
+  padding: 20px 24px 41px;
+}
+.times {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+/* The input's frame with the time and a clock; the real input lies invisibly over it. */
+.time {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--sp-4);
+}
+.time:focus-within {
+  border-color: #121212;
+}
+.timeValue {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.timeInput {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: none;
+  opacity: 0;
+  cursor: pointer;
+}
+.timeInput::-webkit-calendar-picker-indicator {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+.help,
+.hint {
+  margin: -8px 0 0;
+  font-size: var(--fs-0);
+  line-height: 16px;
+}
+.help {
+  color: #b42318;
+}
+.hint {
+  color: #697586;
+}

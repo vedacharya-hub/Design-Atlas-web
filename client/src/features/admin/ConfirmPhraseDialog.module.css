@@ -1,0 +1,214 @@
+/* The type-to-confirm dialog (Archive team, Figma 11029:243301): a 434px card, 24px in, centred over
+   the page dimmed with black at 40% and above the side panels (401). The red badge, title and note,
+   the item's card, the phrase to type, then Cancel and the action side by side. */
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 420;
+  display: grid;
+  place-items: center;
+  padding: 16px;
+  background: rgba(0, 0, 0, 0.4);
+  animation: fadeIn 0.2s ease backwards;
+}
+.dialog {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: min(434px, 100%);
+  max-height: calc(100vh - 32px);
+  padding: 24px;
+  overflow-y: auto;
+  border-radius: 12px;
+  background: var(--inverse);
+  animation: dialogIn 0.26s cubic-bezier(0.22, 0.8, 0.24, 1) backwards;
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes dialogIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.98);
+  }
+}
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-8);
+}
+.head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 6px 8px;
+}
+.badge {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border: 7px solid #ffc0c0;
+  border-radius: 360px;
+  background: linear-gradient(146.15deg, #ff0000 2.74%, #d70000 100%);
+}
+.headText {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+  width: 100%;
+  text-align: center;
+}
+.title {
+  margin: 0;
+  color: #000;
+  font-size: 20px;
+  font-weight: var(--fw-medium);
+  line-height: 24px;
+  overflow-wrap: anywhere;
+}
+.note {
+  margin: 0;
+  color: #697586;
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+  line-height: 18px;
+}
+/* What else goes with it: the red error call-out. */
+.warning {
+  margin: 0;
+  padding: var(--sp-5) var(--sp-6);
+  border-radius: 8px;
+  background: #fef3f2;
+  color: #b42318;
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+  line-height: 18px;
+}
+.warning strong {
+  font-weight: var(--fw-bold);
+}
+.item {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--sp-6);
+  /* 46px with the border inside, as Figma strokes it. */
+  padding: 11px;
+  border: 1px solid #697586;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  color: #000;
+  font-size: 18px;
+  font-weight: var(--fw-bold);
+  line-height: 22px;
+}
+.itemName {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.itemMeta {
+  flex: none;
+  white-space: nowrap;
+}
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.label {
+  color: #000;
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+  line-height: 18px;
+  overflow-wrap: anywhere;
+  /* Trimmed to the letters, as the design sets it. */
+  text-box: trim-both cap alphabetic;
+}
+.label strong {
+  font-weight: var(--fw-bold);
+}
+.input {
+  width: 100%;
+  height: 40px;
+  padding: 6px 12px;
+  border: 1px solid #cdd5df;
+  border-radius: 8px;
+  background: var(--inverse);
+  color: #202939;
+  font-family: inherit;
+  font-size: var(--fs-2);
+  font-weight: var(--fw-regular);
+  line-height: 20px;
+  outline: none;
+  transition: border-color 0.15s ease;
+}
+.input::placeholder {
+  color: #9aa4b2;
+}
+.input:focus {
+  border-color: #121212;
+}
+.actions {
+  display: flex;
+  gap: 10px;
+}
+.cancel,
+.confirm {
+  display: inline-flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  padding: 8px 20px;
+  border: 1px solid #cdd5df;
+  border-radius: 92px;
+  font-family: inherit;
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+  line-height: 18px;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+.cancel {
+  background: #f8fafc;
+  color: #000;
+}
+.cancel:hover:not(:disabled) {
+  background: #eef2f6;
+}
+.confirm {
+  border-color: #000;
+  background: #000;
+  color: var(--inverse);
+}
+.confirm:hover:not(:disabled) {
+  background: #202939;
+}
+.cancel:disabled {
+  cursor: default;
+  opacity: 0.6;
+}
+.confirm:disabled {
+  border-color: #cdd5df;
+  background: #cdd5df;
+  cursor: not-allowed;
+}
+.cancel:focus-visible,
+.confirm:focus-visible {
+  outline: 2px solid #5b4fff;
+  outline-offset: 2px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .backdrop,
+  .dialog {
+    animation-duration: 0.01s;
+  }
+}

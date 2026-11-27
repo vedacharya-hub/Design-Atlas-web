@@ -1,0 +1,12 @@
+/* Admin → Access Control (Figma 1607:205373): a 240px search beside Create Access Control, then the
+   table straight under the header: ID, level, access locations and status, 32px apart, the eye and
+   archive on the right. */
+.search {
+  width: 240px;
+}
+.cols {
+  grid-template-columns: 120px 160px 168px 148px minmax(86px, 1fr);
+}
+.global {
+  color: #697586;
+}

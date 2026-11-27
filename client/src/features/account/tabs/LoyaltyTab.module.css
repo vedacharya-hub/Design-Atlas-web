@@ -1,0 +1,163 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-12);
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-6);
+}
+
+.buildingRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-8);
+  flex-wrap: wrap;
+}
+
+.buildingActions {
+  display: flex;
+  gap: var(--sp-4);
+}
+
+.card {
+  padding: var(--sp-10) var(--sp-12);
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-4);
+  background: var(--gray-50);
+}
+
+.cardTitle {
+  margin: 0 0 var(--sp-8);
+  font-size: var(--fs-2);
+  font-weight: var(--fw-medium);
+}
+
+.cardBody {
+  display: flex;
+  gap: var(--sp-12);
+}
+
+.cardCol {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+  min-width: 0;
+}
+
+.cardDivider {
+  width: 1px;
+  background: var(--gray-200);
+}
+
+.buildingName {
+  font-size: var(--fs-1);
+  font-weight: var(--fw-bold);
+}
+
+.address {
+  margin: 0;
+  font-size: var(--fs-0);
+  color: var(--fg-secondary);
+}
+
+.deskId {
+  font-size: var(--fs-0);
+}
+
+.contact {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+  margin-top: var(--sp-4);
+  font-size: var(--fs-0);
+  color: var(--fg-tertiary);
+}
+.contact a {
+  color: var(--cobalt-600);
+}
+
+.planName {
+  font-size: var(--fs-1);
+  font-weight: var(--fw-bold);
+}
+
+.planRow {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  font-size: var(--fs-0);
+  color: var(--fg-secondary);
+}
+
+.planIcon {
+  width: 14px;
+  height: 14px;
+  flex: 0 0 auto;
+}
+
+.monthsLeft {
+  color: var(--seat-unavailable-strong);
+  font-weight: var(--fw-medium);
+}
+
+.benefitsHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.exploreLink {
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+  color: var(--cobalt-600);
+  text-decoration: none;
+}
+.exploreLink:hover {
+  text-decoration: underline;
+}
+
+.benefits {
+  display: flex;
+  gap: var(--sp-12);
+  padding-bottom: var(--sp-8);
+}
+
+.benefit {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: var(--sp-6);
+}
+
+.benefitIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  flex: 0 0 auto;
+  border-radius: var(--radius-3);
+  background: var(--inverse);
+  border: 1px solid var(--gray-200);
+  color: var(--cobalt-600);
+}
+
+.benefitText {
+  margin: 0;
+  font-size: var(--fs-1);
+}
+
+.cta {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-8);
+  padding-top: var(--sp-8);
+  border-top: 1px solid var(--gray-200);
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+}

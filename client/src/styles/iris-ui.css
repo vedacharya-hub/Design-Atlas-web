@@ -1,0 +1,156 @@
+/*
+ * Tailwind, shadcn/ui and prompt-kit for Iris AI only. The rest of the app is CSS Modules, so:
+ * - no global preflight: a scoped reset sits under .iris-ui (and shadcn's portalled tooltips);
+ * - utilities are generated only from the shadcn components and the Iris AI folder;
+ * - shadcn's tokens (white theme, from the WeWork gray-modern palette) live on .iris-ui, not :root.
+ */
+@layer theme, base, components, utilities;
+@import 'tailwindcss/theme.css' layer(theme);
+@import 'tailwindcss/utilities.css' layer(utilities) source(none);
+@import 'tw-animate-css';
+@plugin '@tailwindcss/typography';
+@custom-variant dark (&:is(.dark *));
+@source '../components/shadcn';
+@source '../features/irisAi';
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+}
+
+.iris-ui,
+[data-slot='tooltip-content'] {
+  --radius: 0.75rem;
+  --background: #ffffff;
+  --foreground: #121926;
+  --card: #ffffff;
+  --card-foreground: #121926;
+  --popover: #ffffff;
+  --popover-foreground: #121926;
+  --primary: #000000;
+  --primary-foreground: #ffffff;
+  --secondary: #f8fafc;
+  --secondary-foreground: #121926;
+  --muted: #f8fafc;
+  --muted-foreground: #697586;
+  --accent: #eef2f6;
+  --accent-foreground: #121926;
+  --destructive: #d92d20;
+  --border: #e3e8ef;
+  --input: #cdd5df;
+  --ring: #9aa4b2;
+}
+
+/* Tailwind's preflight, kept inside Iris AI. */
+@layer base {
+  :where(.iris-ui, .iris-ui *, .iris-ui ::before, .iris-ui ::after, [data-slot='tooltip-content'], [data-slot='tooltip-content'] *) {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border: 0 solid var(--border);
+  }
+  :where(.iris-ui) :where(button, input, textarea, select) {
+    font: inherit;
+    letter-spacing: inherit;
+    color: inherit;
+    background-color: transparent;
+    border-radius: 0;
+  }
+  :where(.iris-ui) :where(button) {
+    cursor: pointer;
+  }
+  :where(.iris-ui) :where(textarea) {
+    resize: none;
+  }
+  :where(.iris-ui) :where(input, textarea)::placeholder {
+    color: var(--muted-foreground);
+    opacity: 1;
+  }
+  :where(.iris-ui) :where(h1, h2, h3, h4, h5, h6) {
+    font-size: inherit;
+    font-weight: inherit;
+  }
+  :where(.iris-ui) :where(img, svg, video, canvas) {
+    display: block;
+    vertical-align: middle;
+  }
+  :where(.iris-ui) :where(a) {
+    color: inherit;
+    text-decoration: inherit;
+  }
+  :where(.iris-ui) :where(:focus-visible) {
+    outline-color: var(--ring);
+  }
+}
+
+/* prompt-kit's loader and shimmer keyframes (its registry ships them as Tailwind v3 config). */
+@keyframes shimmer {
+  0% {
+    background-position: 200% 50%;
+  }
+  100% {
+    background-position: -200% 50%;
+  }
+}
+@keyframes typing {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translateY(-2px);
+    opacity: 1;
+  }
+}
+@keyframes loading-dots {
+  0%,
+  100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+@keyframes bounce-dots {
+  0%,
+  100% {
+    transform: scale(0.8);
+    opacity: 0.5;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+}
+@keyframes pulse-dot {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.5);
+    opacity: 1;
+  }
+}

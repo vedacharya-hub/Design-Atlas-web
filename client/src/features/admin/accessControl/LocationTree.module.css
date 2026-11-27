@@ -1,0 +1,146 @@
+/* The location lists (Figma 3066:106945, 3145:642807): a 14px heading with a rule, 14px above a card
+   with 1px #e3e8ef and 8px corners. The country is a 12px #f8fafc band; cities and buildings are
+   49px rows with #eef2f6 rules, 12px in, the switches on the right. */
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-width: 0;
+}
+.heading {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-4);
+  margin: 0;
+  color: #697586;
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+  line-height: 18px;
+  white-space: nowrap;
+}
+.heading::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: #e3e8ef;
+}
+.card {
+  overflow: hidden;
+  border: 1px solid #e3e8ef;
+  border-radius: 8px;
+  background: var(--inverse);
+}
+.country {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-6);
+  padding: 12px 11px;
+  border-bottom: 1px solid #e3e8ef;
+  background: #f8fafc;
+}
+.card > .country:last-child {
+  border-bottom: none;
+}
+.global {
+  border: 1px solid #e3e8ef;
+  border-radius: 8px;
+}
+.countryName,
+.count {
+  color: #697586;
+  font-size: var(--fs-0);
+  font-weight: var(--fw-medium);
+  line-height: 16px;
+  white-space: nowrap;
+}
+.right {
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: 12px;
+}
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-6);
+  min-height: 49px;
+  padding: 0 11px;
+  border-bottom: 1px solid #eef2f6;
+}
+.card > div:last-child > .row:last-child,
+.card > div:last-child > div > .row:last-child {
+  border-bottom: none;
+}
+.cityToggle {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  min-width: 0;
+  height: 32px;
+  padding: 0 var(--sp-2) 0 0;
+  border: none;
+  border-radius: 6px;
+  background: none;
+  font-family: inherit;
+  cursor: pointer;
+}
+.cityToggle:disabled {
+  cursor: default;
+}
+.cityToggle:focus-visible {
+  outline: 2px solid #5b4fff;
+  outline-offset: 2px;
+}
+.chevron {
+  flex: none;
+  transform: rotate(-90deg);
+  transition: transform 0.18s ease;
+}
+.chevronOpen {
+  transform: none;
+}
+.city {
+  color: #121926;
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+  line-height: 18px;
+  white-space: nowrap;
+}
+/* Buildings line up with their city's name: 12 + 20 + 4 in. */
+.building {
+  padding-left: 35px;
+}
+.buildingText {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-4);
+  min-width: 0;
+  font-size: var(--fs-1);
+  line-height: 18px;
+}
+.code {
+  flex: none;
+  color: #697586;
+  font-weight: var(--fw-medium);
+}
+.name {
+  overflow: hidden;
+  color: #09121f;
+  font-weight: var(--fw-regular);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.empty {
+  margin: 0;
+  padding: 24px;
+  color: #697586;
+  font-size: var(--fs-1);
+  text-align: center;
+}
+@media (prefers-reduced-motion: reduce) {
+  .chevron {
+    transition: none;
+  }
+}
