@@ -51,3 +51,4 @@ overlay the floor image exactly. Bookings persist in memory and flip seats to
 - The in-memory store is behind a simple module boundary; swap `server/src/data`
   for a real DB + auth without touching the API surface.
 - **Shared Desk** tab and the non-active nav tabs are static placeholders in this phase.
+# Design-Atlas-web
